@@ -196,3 +196,381 @@
  .card[data-mode="cadastro"] .name-field {
      display: flex;
  }
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+
+/* Parte dos filmes e Navbar */
+
+/* ===== Navbar ===== */
+.cinemark-nav {
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    padding: 10px 20px;
+}
+
+.cinemark-nav .navbar-brand {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: 700;
+    color: var(--accent-red);
+    font-size: 24px;
+}
+
+.cinemark-nav .nav-link {
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.cinemark-nav .nav-link:hover,
+.cinemark-nav .nav-link.active {
+    color: var(--accent-red);
+}
+
+/* ===== Página de filmes =====
+   Sobrescreve o "body { display:flex; ... }" do topo do arquivo
+   (regras da tela de login), que senão faz o nav e a section
+   virarem itens de flexbox lado a lado e centralizados. */
+.filmes-page {
+    display: block;
+    background-color: var(--bg-red-dark);
+    min-height: 100vh;
+    padding: 0;
+}
+
+.filmes-section {
+    padding: 40px 16px;
+}
+
+/* ===== Cards de filme (grade, se você ainda usar em outra página) ===== */
+.movie-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.movie-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.movie-card-img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+.movie-card-body {
+    padding: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-card-title {
+    color: var(--text-light);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    margin-bottom: 8px;
+}
+
+.movie-card-text {
+    color: var(--text-muted);
+    font-size: 14px;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.movie-btn {
+    border: 1.5px solid var(--accent-red-line);
+    color: var(--accent-red);
+    background: transparent;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    transition: background .15s ease;
+}
+
+.movie-btn:hover {
+    background: rgba(230, 57, 80, 0.08);
+    color: var(--accent-red);
+}
+
+/* ===== HERO BANNER (marketing / Club Black etc.) ===== */
+.hero-banner {
+    position: relative;
+    max-width: 1300px;
+    margin: 24px auto 0;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.hero-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.hero-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* Cada slide ocupa 100% da largura do banner, um por vez */
+.hero-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+}
+
+.hero-slide img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 21 / 7;
+    object-fit: cover;
+}
+
+.hero-arrows {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+/* Reaproveita o visual do .arrow-btn, só ajusta pra ficar por
+   cima da imagem com um fundo semi-transparente */
+.hero-arrow-btn {
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+}
+
+.hero-arrow-btn:hover {
+    background: var(--accent-red-line);
+}
+
+/* Bolinhas indicadoras (dots), ficam fora do banner, centralizadas embaixo */
+.hero-dots {
+    max-width: 1300px;
+    margin: 14px auto 0;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: #4a4243;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: width .2s ease, background .2s ease;
+}
+
+.hero-dot.active {
+    width: 24px;
+    background: var(--text-light);
+}
+
+@media (max-width: 768px) {
+    .hero-banner {
+        margin-top: 16px;
+        border-radius: 0;
+    }
+
+    .hero-slide img {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+
+/* ===== EM CARTAZ - Carrossel ===== */
+.em-cartaz {
+    background-color: #0d0b0c;
+    padding: 30px 40px 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.em-cartaz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.em-cartaz-header h2 {
+    color: var(--text-light);
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.em-cartaz-arrows {
+    display: flex;
+    gap: 8px;
+}
+
+.arrow-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: none;
+    background: #2a2224;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .15s ease, opacity .15s ease;
+}
+
+.arrow-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+    background: #2a2224;
+}
+
+.arrow-btn:hover {
+    background: var(--accent-red-line);
+}
+
+.em-cartaz-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 6px;
+}
+
+.em-cartaz-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* 4 cards completos + uma "espiadinha" do 5º na borda direita.
+   O número 4.15 é o que controla o tamanho da espiadinha:
+   - menor (ex: 4.1)  = espiadinha maior
+   - maior (ex: 4.3)  = espiadinha menor/mais discreta
+   Esse "4" tem que bater com CARDS_POR_PAGINA no java.js */
+.movie-poster-card {
+    position: relative;
+    flex: 0 0 auto;
+    width: calc((100% - (20px * 4)) / 4.15);
+    max-width: 220px;
+    scroll-snap-align: start;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+    cursor: pointer;
+    transition: transform .2s ease;
+}
+
+.movie-poster-card:hover {
+    transform: translateY(-6px);
+}
+
+.movie-poster-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    display: block;
+}
+
+.watch-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    color: var(--text-light);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    z-index: 2;
+}
+
+.movie-poster-info {
+    padding: 12px 4px 4px;
+}
+
+.movie-poster-info h5 {
+    color: var(--text-light);
+    font-size: 13.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 10px;
+    min-height: 35px;
+}
+
+.movie-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.movie-meta span:first-child {
+    color: var(--text-muted);
+    font-size: 12.5px;
+}
+
+.rating-badge {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    color: #fff;
+}
+
+/* Cores por classificação indicativa (padrão brasileiro) */
+.rating-livre { background: #2e9e3f; }
+.rating-10    { background: #4aa8d8; }
+.rating-12    { background: #e0b400; }
+.rating-14    { background: #e07a1e; }
+.rating-16    { background: #d9364f; }
+.rating-18    { background: #111; border: 1px solid #d9364f; }
+.rating-6     { background: #d63384; }
+
+/* ===== Responsivo (celular/tablet) ===== */
+@media (max-width: 768px) {
+    .em-cartaz {
+        padding: 20px 16px 28px;
+    }
+
+    .em-cartaz-track {
+        gap: 16px;
+    }
+
+    /* 2 cards completos + espiadinha do 3º no celular */
+    .movie-poster-card {
+        width: calc((100% - (16px * 2)) / 2.15);
+    }
+}

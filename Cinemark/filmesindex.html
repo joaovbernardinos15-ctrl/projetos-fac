@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cinemark - Filmes</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="filmes-page">
+    <nav class="navbar navbar-expand-lg cinemark-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="filmesindex.html">Cinemark</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Filmes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--Usa esse espaço aqui para fazer o marketing-->
+    <section class="hero-banner">
+      <div class="hero-track" id="heroTrack">
+        <!-- Preenchido dinamicamente pelo java.js (array "banners") -->
+      </div>
+
+      <div class="hero-arrows">
+        <button class="arrow-btn hero-arrow-btn" id="heroPrevBtn" aria-label="Anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <button class="arrow-btn hero-arrow-btn" id="heroNextBtn" aria-label="Próximo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Bolinhas indicadoras, fora do banner (embaixo dele) -->
+    <div class="hero-dots" id="heroDots"></div>
+
+    <section class="em-cartaz">
+      <div class="em-cartaz-header">
+        <h2>EM CARTAZ</h2>
+        <div class="em-cartaz-arrows">
+          <button class="arrow-btn" id="prevBtn" aria-label="Anterior">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button class="arrow-btn" id="nextBtn" aria-label="Próximo">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!--
+        IMPORTANTE: essa div fica vazia de propósito.
+        Quem preenche ela com os cards de filme é o java.js,
+        através da função renderFilmes().
+        Não escreva cards de filme aqui manualmente.
+      -->
+      <div class="em-cartaz-track" id="cartazTrack"></div>
+    </section>
+
+    <script src="./js/java.js"></script>
+  </body>
+</html>
