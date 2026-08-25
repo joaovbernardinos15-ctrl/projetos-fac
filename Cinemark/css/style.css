@@ -1,4 +1,4 @@
- :root {
+:root {
      --bg-red-dark: #5c0a0a;
      --bg-red-light: #c21818;
      --card-bg: #161213;
@@ -312,81 +312,90 @@ nav {
     color: var(--accent-red);
 }
 
-/* ===== HERO BANNER (marketing / Club Black etc.) ===== */
+/* ===== HERO BANNER (marketing / Club Black etc.) =====
+   Usa o componente Carousel do próprio Bootstrap (data-bs-*),
+   sem nenhum JavaScript escrito por nós. */
 .hero-banner {
     position: relative;
     max-width: 1300px;
     margin: 24px auto 0;
+}
+
+/* O border-radius/overflow fica só na imagem, não no carousel
+   inteiro, pra não cortar as bolinhas indicadoras que ficam
+   embaixo dela. */
+.hero-banner .carousel-inner {
     border-radius: 14px;
     overflow: hidden;
 }
 
-.hero-track {
-    display: flex;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-}
-
-.hero-track::-webkit-scrollbar {
-    display: none;
-}
-
-/* Cada slide ocupa 100% da largura do banner, um por vez */
-.hero-slide {
-    flex: 0 0 100%;
-    scroll-snap-align: start;
-}
-
-.hero-slide img {
+/* object-fit: contain (em vez de cover) porque agora temos banners
+   de proporções bem diferentes (um bem largo + vários verticais
+   tipo "story"). Com "contain" a imagem inteira sempre aparece,
+   sem cortar nada; o fundo escuro preenche o espaço vazio nas
+   laterais quando a imagem não preenche a largura toda. */
+.hero-banner .carousel-item img {
     width: 100%;
+    height: 460px;
     display: block;
-    aspect-ratio: 21 / 7;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: var(--card-bg);
 }
 
-.hero-arrows {
+/* Setas: o Bootstrap por padrão cobre a lateral inteira da
+   imagem com uma área de clique enorme e ícones próprios.
+   Aqui a gente troca pelo nosso .arrow-btn de sempre, dois
+   botões pequenos no canto inferior direito. */
+.hero-banner .carousel-control-prev,
+.hero-banner .carousel-control-next {
     position: absolute;
+    top: auto;
     bottom: 16px;
-    right: 16px;
-    display: flex;
-    gap: 8px;
-    z-index: 2;
-}
-
-/* Reaproveita o visual do .arrow-btn, só ajusta pra ficar por
-   cima da imagem com um fundo semi-transparente */
-.hero-arrow-btn {
+    width: 34px;
+    height: 34px;
+    opacity: 1;
     background: rgba(0, 0, 0, 0.55);
     backdrop-filter: blur(2px);
+    border-radius: 8px;
+    transition: background .15s ease;
 }
 
-.hero-arrow-btn:hover {
+.hero-banner .carousel-control-prev {
+    left: auto;
+    right: 60px;
+}
+
+.hero-banner .carousel-control-next {
+    right: 16px;
+}
+
+.hero-banner .carousel-control-prev:hover,
+.hero-banner .carousel-control-next:hover {
     background: var(--accent-red-line);
 }
 
-/* Bolinhas indicadoras (dots), ficam fora do banner, centralizadas embaixo */
-.hero-dots {
-    max-width: 1300px;
-    margin: 14px auto 0;
-    display: flex;
-    justify-content: center;
-    gap: 8px;
+/* Bolinhas indicadoras (dots): o Bootstrap por padrão as
+   posiciona flutuando por cima da imagem. Aqui a gente tira
+   do "position: absolute" pra elas ficarem embaixo do banner,
+   como no site original da Cinemark. */
+.hero-banner .carousel-indicators {
+    position: static;
+    margin: 14px 0 0;
 }
 
-.hero-dot {
+.hero-banner .carousel-indicators button {
     width: 8px;
     height: 8px;
     border-radius: 4px;
     background: #4a4243;
     border: none;
-    cursor: pointer;
+    opacity: 1;
     padding: 0;
+    text-indent: 0;
     transition: width .2s ease, background .2s ease;
 }
 
-.hero-dot.active {
+.hero-banner .carousel-indicators button.active {
     width: 24px;
     background: var(--text-light);
 }
@@ -394,16 +403,21 @@ nav {
 @media (max-width: 768px) {
     .hero-banner {
         margin-top: 16px;
+    }
+
+    .hero-banner .carousel-inner {
         border-radius: 0;
     }
 
-    .hero-slide img {
-        aspect-ratio: 4 / 3;
+    .hero-banner .carousel-item img {
+        height: 340px;
     }
 }
 
 
-/* ===== EM CARTAZ - Carrossel ===== */
+/* ===== EM CARTAZ - Carrossel =====
+   Usa o Carousel do Bootstrap: cada "página" (carousel-item)
+   contém uma linha (.movie-poster-row) com até 4 filmes. */
 .em-cartaz {
     background-color: #0d0b0c;
     padding: 30px 40px 40px;
@@ -444,41 +458,25 @@ nav {
     transition: background .15s ease, opacity .15s ease;
 }
 
-.arrow-btn:disabled {
-    opacity: 0.35;
-    cursor: default;
-    background: #2a2224;
-}
-
 .arrow-btn:hover {
     background: var(--accent-red-line);
 }
 
-.em-cartaz-track {
+/* Cada "página" do carrossel: uma linha com até 4 cards,
+   centralizados (senão ficam colados na esquerda quando a
+   tela é mais larga que os 4 cards juntos) */
+.movie-poster-row {
     display: flex;
+    justify-content: center;
     gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    padding-bottom: 6px;
 }
 
-.em-cartaz-track::-webkit-scrollbar {
-    display: none;
-}
-
-/* 4 cards completos + uma "espiadinha" do 5º na borda direita.
-   O número 4.15 é o que controla o tamanho da espiadinha:
-   - menor (ex: 4.1)  = espiadinha maior
-   - maior (ex: 4.3)  = espiadinha menor/mais discreta
-   Esse "4" tem que bater com CARDS_POR_PAGINA no java.js */
+/* 4 cards de largura igual por página. O "60px" é a soma dos
+   3 espaços (gap) de 20px entre os 4 cards da linha. */
 .movie-poster-card {
     position: relative;
-    flex: 0 0 auto;
-    width: calc((100% - (20px * 4)) / 4.15);
+    flex: 0 1 calc((100% - 60px) / 4);
     max-width: 220px;
-    scroll-snap-align: start;
     border-radius: 10px;
     overflow: hidden;
     background: var(--card-bg);
@@ -565,12 +563,15 @@ nav {
         padding: 20px 16px 28px;
     }
 
-    .em-cartaz-track {
+    /* No celular, cada página do carrossel exibe 2 cards por
+       linha (2x2), em vez de 4 numa linha só */
+    .movie-poster-row {
+        flex-wrap: wrap;
         gap: 16px;
     }
 
-    /* 2 cards completos + espiadinha do 3º no celular */
     .movie-poster-card {
-        width: calc((100% - (16px * 2)) / 2.15);
+        flex: 0 1 calc((100% - 16px) / 2);
+        max-width: none;
     }
 }

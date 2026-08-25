@@ -53,37 +53,85 @@
 
     <!--Usa esse espaço aqui para fazer o marketing-->
     <section class="hero-banner">
-      <div class="hero-track" id="heroTrack">
-        <!-- Preenchido dinamicamente pelo java.js (array "banners") -->
-      </div>
+      <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
 
-      <div class="hero-arrows">
-        <button class="arrow-btn hero-arrow-btn" id="heroPrevBtn" aria-label="Anterior">
+        <!-- Bolinhas indicadoras. Pra cada slide novo abaixo, copie
+             uma linha aqui trocando o número em data-bs-slide-to. -->
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#heroCarousel"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+        </div>
+
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <a href="#">
+              <img
+                src="./img/banner-club-black.png"
+                alt="Cinemark Club Black: 2 ingressos todo mês e até 25% off no snack bar"
+              />
+            </a>
+          </div>
+
+          <!--
+            Pra adicionar outro banner, copie o bloco acima (sem a
+            classe "active") e cole aqui embaixo. Não esqueça de
+            adicionar a bolinha correspondente lá em cima também.
+          -->
+        </div>
+
+        <button
+          class="carousel-control-prev arrow-btn"
+          type="button"
+          data-bs-target="#heroCarousel"
+          data-bs-slide="prev"
+        >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M15 18l-6-6 6-6" />
           </svg>
+          <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="arrow-btn hero-arrow-btn" id="heroNextBtn" aria-label="Próximo">
+        <button
+          class="carousel-control-next arrow-btn"
+          type="button"
+          data-bs-target="#heroCarousel"
+          data-bs-slide="next"
+        >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9 18l6-6-6-6" />
           </svg>
+          <span class="visually-hidden">Próximo</span>
         </button>
       </div>
     </section>
-
-    <!-- Bolinhas indicadoras, fora do banner (embaixo dele) -->
-    <div class="hero-dots" id="heroDots"></div>
 
     <section class="em-cartaz">
       <div class="em-cartaz-header">
         <h2>EM CARTAZ</h2>
         <div class="em-cartaz-arrows">
-          <button class="arrow-btn" id="prevBtn" aria-label="Anterior">
+          <button
+            class="arrow-btn"
+            type="button"
+            data-bs-target="#filmesCarousel"
+            data-bs-slide="prev"
+            aria-label="Anterior"
+          >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
-          <button class="arrow-btn" id="nextBtn" aria-label="Próximo">
+          <button
+            class="arrow-btn"
+            type="button"
+            data-bs-target="#filmesCarousel"
+            data-bs-slide="next"
+            aria-label="Próximo"
+          >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M9 18l6-6-6-6" />
             </svg>
@@ -92,14 +140,151 @@
       </div>
 
       <!--
-        IMPORTANTE: essa div fica vazia de propósito.
-        Quem preenche ela com os cards de filme é o java.js,
-        através da função renderFilmes().
-        Não escreva cards de filme aqui manualmente.
+        Cada "carousel-item" abaixo é uma PÁGINA do carrossel.
+        Pra adicionar um filme novo: cole um bloco ".movie-poster-card"
+        dentro da página que ainda não tem 4 filmes, ou crie uma
+        página nova (copie um "carousel-item" inteiro) se todas
+        já estiverem cheias.
       -->
-      <div class="em-cartaz-track" id="cartazTrack"></div>
-    </section>
+      <div id="filmesCarousel" class="carousel slide">
+        <div class="carousel-inner">
 
-    <script src="./js/java.js"></script>
+          <!-- Página 1 -->
+          <div class="carousel-item active">
+            <div class="movie-poster-row">
+
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-11e62ed3-b0b0-42ae-97b8-54b881bc2bee.png" alt="Homem-Aranha: Um Novo Dia" />
+                <div class="movie-poster-info">
+                  <h5>HOMEM-ARANHA: UM NOVO DIA</h5>
+                  <div class="movie-meta">
+                    <span>Ação · 145m</span>
+                    <span class="rating-badge rating-12">12</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-8ad878d5-f2a3-46d4-9f34-b07cf40b1541.png" alt="A Odisseia" />
+                <div class="movie-poster-info">
+                  <h5>A ODISSEIA</h5>
+                  <div class="movie-meta">
+                    <span>Aventura · 170m</span>
+                    <span class="rating-badge rating-14">14</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-36bc59f8-4d4f-41c9-aee9-dc6cee2a9784.png" alt="Sobrenatural: Agora Entre Nós" />
+                <div class="movie-poster-info">
+                  <h5>SOBRENATURAL: AGORA ENTRE NÓS</h5>
+                  <div class="movie-meta">
+                    <span>Terror · 105m</span>
+                    <span class="rating-badge rating-14">14</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-94f73a7f-62a1-44cb-a01a-2e32eaa87efc.png" alt="Patrulha Canina: Uma Aventura Dino" />
+                <div class="movie-poster-info">
+                  <h5>PATRULHA CANINA: UMA AVENTURA DINO</h5>
+                  <div class="movie-meta">
+                    <span>Animação · 90m</span>
+                    <span class="rating-badge rating-6">6</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Página 2 -->
+          <div class="carousel-item">
+            <div class="movie-poster-row">
+
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-75453a35-a69e-43bc-b312-b1d6a30cbfe7.png" alt="Só Por Uma Noite" />
+                <div class="movie-poster-info">
+                  <h5>SÓ POR UMA NOITE</h5>
+                  <div class="movie-meta">
+                    <span>Comédia · 105m</span>
+                    <span class="rating-badge rating-16">16</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-6ae2213a-1124-4e3b-94c0-9b0480aa6b82.png" alt="O Fim da Rua" />
+                <div class="movie-poster-info">
+                  <h5>O FIM DA RUA</h5>
+                  <div class="movie-meta">
+                    <span>Terror · 99m</span>
+                    <span class="rating-badge rating-14">14</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-4b578907-005f-4257-9448-684e6f52b1c4.png" alt="Colegas e o Herdeiro" />
+                <div class="movie-poster-info">
+                  <h5>COLEGAS E O HERDEIRO</h5>
+                  <div class="movie-meta">
+                    <span>Comédia · 85m</span>
+                    <span class="rating-badge rating-12">12</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-8270e450-9ede-4618-a15d-5f67292667cb.png" alt="Túmulo dos Vagalumes" />
+                <div class="movie-poster-info">
+                  <h5>TÚMULO DOS VAGALUMES</h5>
+                  <div class="movie-meta">
+                    <span>Drama · 88m</span>
+                    <span class="rating-badge rating-12">12</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Página 3 -->
+          <div class="carousel-item">
+            <div class="movie-poster-row">
+
+              <!--
+                TODO: não sei qual é o título/gênero/duração desse
+                filme (poster novo que achei na pasta /img sem estar
+                em nenhum carrossel ainda). Ajusta os dados abaixo.
+              -->
+              <div class="movie-poster-card">
+                <span class="watch-badge">ASSISTA AGORA</span>
+                <img src="./img/MoviePoster-1d439958-eb6d-4749-bd17-16e3caff4ce4.png" alt="Nome do Filme" />
+                <div class="movie-poster-info">
+                  <h5>NOME DO FILME</h5>
+                  <div class="movie-meta">
+                    <span>Gênero · 000m</span>
+                    <span class="rating-badge rating-livre">L</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
   </body>
 </html>
