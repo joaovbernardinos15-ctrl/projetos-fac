@@ -55,19 +55,6 @@
     <section class="hero-banner">
       <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6000">
 
-        <!-- Bolinhas indicadoras. Pra cada slide novo abaixo, copie
-             uma linha aqui trocando o número em data-bs-slide-to. -->
-        <div class="carousel-indicators">
-          <button
-            type="button"
-            data-bs-target="#heroCarousel"
-            data-bs-slide-to="0"
-            class="active"
-            aria-current="true"
-            aria-label="Slide 1"
-          ></button>
-        </div>
-
         <div class="carousel-inner">
           <div class="carousel-item active">
             <a href="#">
@@ -81,32 +68,17 @@
           <!--
             Pra adicionar outro banner, copie o bloco acima (sem a
             classe "active") e cole aqui embaixo. Não esqueça de
-            adicionar a bolinha correspondente lá em cima também.
+            adicionar a bolinha correspondente lá embaixo também.
           -->
         </div>
 
-        <button
-          class="carousel-control-prev arrow-btn"
-          type="button"
-          data-bs-target="#heroCarousel"
-          data-bs-slide="prev"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-          <span class="visually-hidden">Anterior</span>
-        </button>
-        <button
-          class="carousel-control-next arrow-btn"
-          type="button"
-          data-bs-target="#heroCarousel"
-          data-bs-slide="next"
-        >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-          <span class="visually-hidden">Próximo</span>
-        </button>
+        <!-- Setas e bolinhas indicadoras removidas de propósito:
+             enquanto o banner tiver só 1 slide, não existe "anterior"
+             ou "próximo" pra navegar. Se um dia adicionar um segundo
+             banner (outro .carousel-item lá em cima), aí sim volta a
+             fazer sentido colocar de novo um bloco .carousel-indicators
+             (depois do .carousel-inner) e os dois botões .arrow-btn
+             (carousel-control-prev / carousel-control-next) aqui. -->
       </div>
     </section>
 
