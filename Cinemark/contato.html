@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Cinemark</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body class="contato-page">
+    <nav class="navbar navbar-expand-lg cinemark-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="filmesindex.html">Cinemark</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="filmesindex.html">Filmes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="contato.html">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="contato-hero">
+      <h1>Fale Conosco</h1>
+      <p>Dúvidas, sugestões ou reclamações? A gente quer ouvir você.</p>
+    </header>
+
+    <main class="contato-wrap">
+
+      <!-- Formulário -->
+      <section class="contato-card">
+        <h2>Envie sua mensagem</h2>
+
+        <!--
+          TODO: essa página não tem backend/JS pra processar o
+          envio de fato. O jeito mais simples de fazer o formulário
+          "funcionar" sem servidor é trocar o "action" abaixo por
+          "mailto:seuemail@cinemark.com.br" — isso abre o programa
+          de e-mail do usuário com os dados preenchidos. Se no
+          futuro vocês tiverem um backend (PHP, Node etc.), é só
+          trocar o action pra URL certa.
+        -->
+        <form class="contato-form" action="#" method="post">
+
+          <div class="field">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <input type="text" name="nome" placeholder="Seu nome" required />
+          </div>
+
+          <div class="field">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M4 4h16v16H4z" />
+              <path d="M22 6l-10 7L2 6" />
+            </svg>
+            <input type="email" name="email" placeholder="Seu e-mail" required />
+          </div>
+
+          <div class="field">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+              <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z" />
+            </svg>
+            <input type="text" name="assunto" placeholder="Assunto" required />
+          </div>
+
+          <div class="field field-textarea">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M12 20h9" />
+              <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+            </svg>
+            <textarea name="mensagem" placeholder="Sua mensagem" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">ENVIAR MENSAGEM</button>
+        </form>
+      </section>
+
+      <!-- Informações de contato -->
+      <section class="contato-card">
+        <h2>Informações</h2>
+
+        <ul class="contato-info-list">
+          <li>
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <div>
+              <strong>Endereço</strong>
+              <span>Av. Exemplo, 1000 - Shopping Cinemark, Brasília - DF</span>
+            </div>
+          </li>
+
+          <li>
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1 .36 1.98.68 2.93a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.15-1.15a2 2 0 0 1 2.11-.45c.95.32 1.93.55 2.93.68A2 2 0 0 1 22 16.92z" />
+            </svg>
+            <div>
+              <strong>Telefone</strong>
+              <a href="tel:+5561998081510">(61) 99808-1510</a>
+            </div>
+          </li>
+
+          <li>
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+              <path d="M4 4h16v16H4z" />
+              <path d="M22 6l-10 7L2 6" />
+            </svg>
+            <div>
+              <strong>E-mail</strong>
+              <a href="mailto:contato@cinemark.com.br">contato@cinemark.com.br</a>
+            </div>
+          </li>
+
+          <li>
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            <div>
+              <strong>Horário de atendimento</strong>
+              <span>Todos os dias, das 10h às 23h</span>
+            </div>
+          </li>
+        </ul>
+
+        <div class="socials">
+          <a class="social-btn" href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#c1233b" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" />
+            </svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#c1233b" stroke-width="2">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+          </a>
+          <a class="social-btn" href="#" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#c1233b" stroke-width="2">
+              <path d="M4 4l16 16M20 4L4 20" />
+            </svg>
+          </a>
+        </div>
+
+        <!--
+          TODO: trocar a URL do "src" abaixo por um link real do
+          Google Maps (Compartilhar > Incorporar um mapa > copiar
+          o link de dentro do src="...") apontando pro endereço
+          real do cinema.
+        -->
+        <iframe
+          class="contato-map"
+          src="https://www.google.com/maps?q=Shopping%20Cinemark%20Brasilia&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Localização do Cinemark no mapa"
+        ></iframe>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      © 2026 Cinemark. Todos os direitos reservados.
+    </footer>
+</body>
+</html>

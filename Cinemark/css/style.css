@@ -336,7 +336,6 @@ nav {
    laterais quando a imagem não preenche a largura toda. */
 .hero-banner .carousel-item img {
     width: 100%;
-    margin-bottom: 35px;
     height: 460px;
     display: block;
     object-fit: contain;
@@ -423,7 +422,8 @@ nav {
     background-color: #0d0b0c;
     padding: 30px 40px 40px;
     max-width: 1300px;
-    margin: 0 auto;
+    margin: 30px auto 40px;
+    border-radius: 14px;
 }
 
 .em-cartaz-header {
@@ -576,3 +576,315 @@ nav {
         max-width: none;
     }
 }
+
+/* ===== Página de Contato =====
+   Reaproveita .field, .social-btn e .submit-btn (já existem lá em
+   cima, usados no login) pra manter os campos e botões com a
+   mesma cara em todo o site. */
+.contato-page {
+    display: block;
+    background-color: var(--bg-red-dark);
+    min-height: 100vh;
+    padding: 0;
+}
+
+.contato-hero {
+    background: radial-gradient(circle at 20% 20%, var(--bg-red-light) 0%, var(--bg-red-dark) 70%);
+    padding: 56px 16px 40px;
+    text-align: center;
+}
+
+.contato-hero h1 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.contato-hero p {
+    color: var(--text-light);
+    opacity: 0.85;
+    font-size: 15.5px;
+}
+
+.contato-wrap {
+    max-width: 1100px;
+    margin: -20px auto 60px;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+}
+
+.contato-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 32px 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.contato-card h2 {
+    color: var(--text-light);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 21px;
+    margin-bottom: 22px;
+}
+
+/* Textarea reaproveita a aparência do .field, mas o texto começa
+   no topo (align-items:flex-start) em vez de centralizado */
+.contato-form .field-textarea {
+    align-items: flex-start;
+}
+
+.contato-form textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+    font-size: 16px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 110px;
+}
+
+.contato-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* Lista de informações (endereço, telefone, e-mail, horário) */
+.contato-info-list {
+    list-style: none;
+    margin-bottom: 26px;
+}
+
+.contato-info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.contato-info-list svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    stroke: var(--accent-red);
+    fill: none;
+    margin-top: 2px;
+}
+
+.contato-info-list strong {
+    display: block;
+    color: var(--text-light);
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.contato-info-list span,
+.contato-info-list a {
+    color: var(--text-muted);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.contato-info-list a:hover {
+    color: var(--accent-red);
+    text-decoration: underline;
+}
+
+.contato-map {
+    width: 100%;
+    border: 0;
+    border-radius: 14px;
+    margin-top: 6px;
+    aspect-ratio: 4 / 3;
+}
+
+.site-footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 24px 16px 32px;
+}
+
+/* ===== Responsivo (celular/tablet) ===== */
+@media (max-width: 900px) {
+    .contato-wrap {
+        grid-template-columns: 1fr;
+        margin-top: -10px;
+    }
+
+    .contato-hero {
+        padding: 40px 16px 30px;
+    }
+
+    .contato-hero h1 {
+        font-size: 26px;
+    }
+}
+/* ===== Página "Todos os Filmes" ===== */
+.filmes-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 26px;
+}
+
+.filmes-topo h1 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--text-light);
+    font-size: 30px;
+}
+
+.busca-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--input-bg);
+    border: 1.5px solid var(--accent-red-line);
+    border-radius: 10px;
+    padding: 10px 14px;
+    max-width: 380px;
+    width: 100%;
+}
+
+.busca-field svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    stroke: var(--accent-red-line);
+    fill: none;
+}
+
+.busca-field input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+    font-size: 15px;
+}
+
+.busca-field input::placeholder {
+    color: var(--text-muted);
+}
+
+.genero-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.genero-btn {
+    background: transparent;
+    border: 1.5px solid var(--card-border);
+    color: var(--text-muted);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all .15s ease;
+}
+
+.genero-btn:hover {
+    border-color: var(--accent-red-line);
+    color: var(--text-light);
+}
+
+.genero-btn.active {
+    background: var(--accent-red-line);
+    border-color: var(--accent-red-line);
+    color: #fff;
+}
+
+.filmes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+ }
+ /* ===== Filtros 100% CSS (radio + :checked) ===== */
+.filtro-radio {
+    display: none;
+}
+
+.filmes-topo {
+    margin-bottom: 22px;
+}
+
+.filmes-topo h1 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--text-light);
+    font-size: 30px;
+}
+
+.genero-filtros,
+.letra-filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.letra-filtros {
+    margin-bottom: 30px;
+}
+
+.genero-btn,
+.letra-btn {
+    display: inline-block;
+    background: transparent;
+    border: 1.5px solid var(--card-border);
+    color: var(--text-muted);
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 7px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all .15s ease;
+    user-select: none;
+}
+
+.letra-btn {
+    padding: 7px 13px;
+    min-width: 36px;
+    text-align: center;
+}
+
+.genero-btn:hover,
+.letra-btn:hover {
+    border-color: var(--accent-red-line);
+    color: var(--text-light);
+}
+
+/* Destaca o botão do filtro de gênero ativo */
+#genero-todos:checked ~ .genero-filtros label[for="genero-todos"],
+#genero-acao:checked ~ .genero-filtros label[for="genero-acao"],
+#genero-comedia:checked ~ .genero-filtros label[for="genero-comedia"],
+#genero-drama:checked ~ .genero-filtros label[for="genero-drama"],
+#genero-terror:checked ~ .genero-filtros label[for="genero-terror"],
+#genero-ficcao:checked ~ .genero-filtros label[for="genero-ficcao"] {
+    background: var(--accent-red-line);
+    border-color: var(--accent-red-line);
+    color: #fff;
+}
+
+/* Destaca o botão de letra ativo */
+#letra-todos:checked ~ .letra-filtros label[for="letra-todos"],
+#letra-a:checked ~ .letra-filtros label[for="letra-a"],
+#letra-c:checked ~ .letra-filtros label[for="letra-c"],
+#letra-d:checked ~ .letra-filtros label[for="letra-d"],
+#letra-i:checked ~ .letra-filtros label[for="letra-i"],
+#letra-j:checked ~ .letra-filtros label[for="letra-j"],
+#letra-o:checked ~ .letra-filtros label[for="letra-o"],
+#letra-s:checked ~ .letra-filtros label[for="letra-s"],
+#letra-v:checked ~ .letra-filtros label[for="letra-v"] {
+    background: var(--accent-red-line);
+    border-color: var(--accent-red-line);
+    color: #fff;
+}   

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filmes</title>
+     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+</head>
+<body class="filmes-page">
+
+    <nav class="navbar navbar-expand-lg cinemark-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="filmesindex.html">Cinemark</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="filmesindex.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Filmes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contato.html">Contato</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="filmes-section">
+        <div class="container">
+
+            <div class="filmes-topo">
+                <h1>🎬 Todos os Filmes</h1>
+
+                <div class="busca-field">
+                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2"/></svg>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Pesquisar filme..."
+                        oninput="filtrarFilmes()"
+                    >
+                </div>
+            </div>
+
+            <div class="genero-filtros" id="filtrosGenero">
+                <button class="genero-btn active" data-genero="todos" onclick="filtrarPorGenero('todos', this)">Todos</button>
+                <button class="genero-btn" data-genero="ação" onclick="filtrarPorGenero('ação', this)">Ação</button>
+                <button class="genero-btn" data-genero="comédia" onclick="filtrarPorGenero('comédia', this)">Comédia</button>
+                <button class="genero-btn" data-genero="drama" onclick="filtrarPorGenero('drama', this)">Drama</button>
+                <button class="genero-btn" data-genero="terror" onclick="filtrarPorGenero('terror', this)">Terror</button>
+                <button class="genero-btn" data-genero="ficção" onclick="filtrarPorGenero('ficção', this)">Ficção</button>
+            </div>
+
+            <div class="filmes-grid" id="listaFilmes">
+                <!-- Cards gerados via JS -->
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        © 2026 Cinemark — todos os direitos reservados.
+    </footer>
+
+    <script>
+        const filmes = [
+            { titulo: "Interestelar", genero: "ficção", ano: 2014, nota: 8.6, classificacao: "12", capa: "https://placehold.co/300x450?text=Interestelar" },
+            { titulo: "O Poderoso Chefão", genero: "drama", ano: 1972, nota: 9.2, classificacao: "16", capa: "https://placehold.co/300x450?text=Poderoso+Chefao" },
+            { titulo: "Invocação do Mal", genero: "terror", ano: 2013, nota: 7.5, classificacao: "14", capa: "https://placehold.co/300x450?text=Invocacao+do+Mal" },
+            { titulo: "Se Beber Não Case", genero: "comédia", ano: 2009, nota: 7.7, classificacao: "16", capa: "https://placehold.co/300x450?text=Se+Beber+Nao+Case" },
+            { titulo: "John Wick", genero: "ação", ano: 2014, nota: 7.4, classificacao: "16", capa: "https://placehold.co/300x450?text=John+Wick" },
+            { titulo: "A Origem", genero: "ficção", ano: 2010, nota: 8.8, classificacao: "12", capa: "https://placehold.co/300x450?text=A+Origem" },
+            { titulo: "Coringa", genero: "drama", ano: 2019, nota: 8.4, classificacao: "18", capa: "https://placehold.co/300x450?text=Coringa" },
+            { titulo: "Corra!", genero: "terror", ano: 2017, nota: 7.7, classificacao: "16", capa: "https://placehold.co/300x450?text=Corra" },
+            { titulo: "Vingadores: Ultimato", genero: "ação", ano: 2019, nota: 8.4, classificacao: "12", capa: "https://placehold.co/300x450?text=Vingadores" },
+            { titulo: "Debi & Loide", genero: "comédia", ano: 1994, nota: 7.3, classificacao: "livre", capa: "https://placehold.co/300x450?text=Debi+e+Loide" },
+        ];
+
+        let generoAtual = "todos";
+
+        function renderizarFilmes(lista) {
+            const container = document.getElementById("listaFilmes");
+            container.innerHTML = "";
+
+            if (lista.length === 0) {
+                container.innerHTML = `
+                    <div class="sem-resultado">
+                        <h4>Nenhum filme encontrado 😕</h4>
+                        <p>Tente pesquisar por outro título ou gênero.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            lista.forEach(filme => {
+                const card = document.createElement("div");
+                card.className = "movie-poster-card";
+                card.innerHTML = `
+                    <img src="${filme.capa}" alt="${filme.titulo}">
+                    <div class="watch-badge">${filme.ano}</div>
+                    <div class="movie-poster-info">
+                        <h5>${filme.titulo}</h5>
+                        <div class="movie-meta">
+                            <span>${filme.genero}</span>
+                            <span class="rating-badge rating-${filme.classificacao}">${filme.classificacao === 'livre' ? 'L' : filme.classificacao}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function filtrarFilmes() {
+            const termo = document.getElementById("searchInput").value.toLowerCase();
+
+            const resultado = filmes.filter(filme => {
+                const combinaTexto = filme.titulo.toLowerCase().includes(termo);
+                const combinaGenero = generoAtual === "todos" || filme.genero === generoAtual;
+                return combinaTexto && combinaGenero;
+            });
+
+            renderizarFilmes(resultado);
+        }
+
+        function filtrarPorGenero(genero, botao) {
+            generoAtual = genero;
+
+            document.querySelectorAll(".genero-btn").forEach(btn => btn.classList.remove("active"));
+            botao.classList.add("active");
+
+            filtrarFilmes();
+        }
+
+        renderizarFilmes(filmes);
+    </script>
+
+</body>
+</html>
