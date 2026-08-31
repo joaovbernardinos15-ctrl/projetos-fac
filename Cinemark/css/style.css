@@ -210,18 +210,6 @@ nav {
     align-items: center;
     z-index: 1000;
 }
-.logo-navbar {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 45px;
-    width: 45px;             */
-    object-fit: cover;       
-    border-radius: 50%;      
-    z-index: 10;
-}
-
 /* Parte dos filmes e Navbar */
 
 /* ===== Navbar ===== */
@@ -237,18 +225,17 @@ nav {
     border-radius: 15px;
     border: 1px solid var(--card-border);                  
 }
-
 .cinemark-nav .navbar-brand {
     font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 800;             /* Deixa a letra mais marcante */
-    text-transform: uppercase;    /* Deixa em caixa alta (MAIÚSCULAS) */
-    letter-spacing: 2px;          /* Espaçamento entre as letras para um visual elegante */
+    font-weight: 800;             
+    text-transform: uppercase;    
+    letter-spacing: 2px;          
     color: var(--accent-red);
     font-size: 22px;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-right: 0 !important;
+    margin-right: 0
     text-align: center;
 }
 .cinemark-nav .container,
@@ -262,14 +249,21 @@ nav {
     color: var(--text-light);
     font-weight: 500;
 }
-
 .cinemark-nav .nav-link:hover,
 .cinemark-nav .nav-link.active {
     color: var(--accent-red);
 }
-
-
-
+.logo-navbar {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 45px;
+    width: 45px;             
+    object-fit: cover;       
+    border-radius: 50%;      
+    z-index: 10; /*eu acho que isso faz alguma coisa , depois reviso */
+}
 /* ===== Página de filmes =====
    Sobrescreve o "body { display:flex; ... }" do topo do arquivo
    (regras da tela de login), que senão faz o nav e a section
