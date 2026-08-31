@@ -262,7 +262,7 @@ nav {
     width: 45px;             
     object-fit: cover;       
     border-radius: 50%;      
-    z-index: 10; /*eu acho que isso faz alguma coisa , depois reviso */
+    z-index: 10; 
 }
 /* ===== Página de filmes =====
    Sobrescreve o "body { display:flex; ... }" do topo do arquivo
