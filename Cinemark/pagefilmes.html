@@ -11,12 +11,6 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./css/style.css" />
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
 </head>
 <body class="filmes-page">
 
@@ -38,10 +32,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link" href="filmesindex.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Filmes</a>
+              <a class="nav-link active" aria-current="page" href="#">Filmes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contato.html">Contato</a>
@@ -54,31 +48,174 @@
     <section class="filmes-section">
         <div class="container">
 
+            <!-- Radios escondidos que controlam os filtros (sem JS) -->
+            <input type="radio" name="genero" id="genero-todos" class="filtro-radio" checked>
+            <input type="radio" name="genero" id="genero-acao" class="filtro-radio">
+            <input type="radio" name="genero" id="genero-comedia" class="filtro-radio">
+            <input type="radio" name="genero" id="genero-drama" class="filtro-radio">
+            <input type="radio" name="genero" id="genero-terror" class="filtro-radio">
+            <input type="radio" name="genero" id="genero-ficcao" class="filtro-radio">
+
+            <input type="radio" name="letra" id="letra-todos" class="filtro-radio" checked>
+            <input type="radio" name="letra" id="letra-a" class="filtro-radio">
+            <input type="radio" name="letra" id="letra-c" class="filtro-radio">
+            <input type="radio" name="letra" id="letra-d" class="filtro-radio">
+            <input type="radio" name="letra" id="letra-i" class="filtro-radio">
+            <input type="radio" name="letra" id="letra-j" class="filtro-radio">
+            <input type="radio" name="letra" id="letra-o" class="filtro-radio">
+            <input type="radio" name="letra" id="letra-s" class="filtro-radio">
+            <input type="radio" name="letra" id="letra-v" class="filtro-radio">
+
             <div class="filmes-topo">
                 <h1>🎬 Todos os Filmes</h1>
+            </div>
 
-                <div class="busca-field">
-                    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke-width="2"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2"/></svg>
-                    <input
-                        type="text"
-                        id="searchInput"
-                        placeholder="Pesquisar filme..."
-                        oninput="filtrarFilmes()"
-                    >
+            <!-- Filtro por gênero -->
+            <div class="genero-filtros">
+                <label for="genero-todos" class="genero-btn">Todos</label>
+                <label for="genero-acao" class="genero-btn">Ação</label>
+                <label for="genero-comedia" class="genero-btn">Comédia</label>
+                <label for="genero-drama" class="genero-btn">Drama</label>
+                <label for="genero-terror" class="genero-btn">Terror</label>
+                <label for="genero-ficcao" class="genero-btn">Ficção</label>
+            </div>
+
+            <!-- Filtro por letra inicial -->
+            <div class="letra-filtros">
+                <label for="letra-todos" class="letra-btn">Todos</label>
+                <label for="letra-a" class="letra-btn">A</label>
+                <label for="letra-c" class="letra-btn">C</label>
+                <label for="letra-d" class="letra-btn">D</label>
+                <label for="letra-i" class="letra-btn">I</label>
+                <label for="letra-j" class="letra-btn">J</label>
+                <label for="letra-o" class="letra-btn">O</label>
+                <label for="letra-s" class="letra-btn">S</label>
+                <label for="letra-v" class="letra-btn">V</label>
+            </div>
+
+            <!-- Grid de filmes -->
+            <div class="filmes-grid">
+
+                <div class="movie-poster-card genero-ficcao letra-i">
+                    <img src="https://placehold.co/300x450?text=Interestelar" alt="Interestelar">
+                    <div class="watch-badge">2014</div>
+                    <div class="movie-poster-info">
+                        <h5>Interestelar</h5>
+                        <div class="movie-meta">
+                            <span>Ficção</span>
+                            <span class="rating-badge rating-12">12</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="genero-filtros" id="filtrosGenero">
-                <button class="genero-btn active" data-genero="todos" onclick="filtrarPorGenero('todos', this)">Todos</button>
-                <button class="genero-btn" data-genero="ação" onclick="filtrarPorGenero('ação', this)">Ação</button>
-                <button class="genero-btn" data-genero="comédia" onclick="filtrarPorGenero('comédia', this)">Comédia</button>
-                <button class="genero-btn" data-genero="drama" onclick="filtrarPorGenero('drama', this)">Drama</button>
-                <button class="genero-btn" data-genero="terror" onclick="filtrarPorGenero('terror', this)">Terror</button>
-                <button class="genero-btn" data-genero="ficção" onclick="filtrarPorGenero('ficção', this)">Ficção</button>
-            </div>
+                <div class="movie-poster-card genero-drama letra-o">
+                    <img src="https://placehold.co/300x450?text=Poderoso+Chefao" alt="O Poderoso Chefão">
+                    <div class="watch-badge">1972</div>
+                    <div class="movie-poster-info">
+                        <h5>O Poderoso Chefão</h5>
+                        <div class="movie-meta">
+                            <span>Drama</span>
+                            <span class="rating-badge rating-16">16</span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="filmes-grid" id="listaFilmes">
-                <!-- Cards gerados via JS -->
+                <div class="movie-poster-card genero-terror letra-i">
+                    <img src="https://placehold.co/300x450?text=Invocacao+do+Mal" alt="Invocação do Mal">
+                    <div class="watch-badge">2013</div>
+                    <div class="movie-poster-info">
+                        <h5>Invocação do Mal</h5>
+                        <div class="movie-meta">
+                            <span>Terror</span>
+                            <span class="rating-badge rating-14">14</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-poster-card genero-comedia letra-s">
+                    <img src="https://placehold.co/300x450?text=Se+Beber+Nao+Case" alt="Se Beber Não Case">
+                    <div class="watch-badge">2009</div>
+                    <div class="movie-poster-info">
+                        <h5>Se Beber Não Case</h5>
+                        <div class="movie-meta">
+                            <span>Comédia</span>
+                            <span class="rating-badge rating-16">16</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-poster-card genero-acao letra-j">
+                    <img src="https://placehold.co/300x450?text=John+Wick" alt="John Wick">
+                    <div class="watch-badge">2014</div>
+                    <div class="movie-poster-info">
+                        <h5>John Wick</h5>
+                        <div class="movie-meta">
+                            <span>Ação</span>
+                            <span class="rating-badge rating-16">16</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-poster-card genero-ficcao letra-a">
+                    <img src="https://placehold.co/300x450?text=A+Origem" alt="A Origem">
+                    <div class="watch-badge">2010</div>
+                    <div class="movie-poster-info">
+                        <h5>A Origem</h5>
+                        <div class="movie-meta">
+                            <span>Ficção</span>
+                            <span class="rating-badge rating-12">12</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-poster-card genero-drama letra-c">
+                    <img src="https://placehold.co/300x450?text=Coringa" alt="Coringa">
+                    <div class="watch-badge">2019</div>
+                    <div class="movie-poster-info">
+                        <h5>Coringa</h5>
+                        <div class="movie-meta">
+                            <span>Drama</span>
+                            <span class="rating-badge rating-18">18</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-poster-card genero-terror letra-c">
+                    <img src="https://placehold.co/300x450?text=Corra" alt="Corra!">
+                    <div class="watch-badge">2017</div>
+                    <div class="movie-poster-info">
+                        <h5>Corra!</h5>
+                        <div class="movie-meta">
+                            <span>Terror</span>
+                            <span class="rating-badge rating-16">16</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-poster-card genero-acao letra-v">
+                    <img src="https://placehold.co/300x450?text=Vingadores" alt="Vingadores: Ultimato">
+                    <div class="watch-badge">2019</div>
+                    <div class="movie-poster-info">
+                        <h5>Vingadores: Ultimato</h5>
+                        <div class="movie-meta">
+                            <span>Ação</span>
+                            <span class="rating-badge rating-12">12</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="movie-poster-card genero-comedia letra-d">
+                    <img src="https://placehold.co/300x450?text=Debi+e+Loide" alt="Debi & Loide">
+                    <div class="watch-badge">1994</div>
+                    <div class="movie-poster-info">
+                        <h5>Debi & Loide</h5>
+                        <div class="movie-meta">
+                            <span>Comédia</span>
+                            <span class="rating-badge rating-livre">L</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -88,7 +225,10 @@
         © 2026 Cinemark — todos os direitos reservados.
     </footer>
 
-   
-
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
 </body>
 </html>
