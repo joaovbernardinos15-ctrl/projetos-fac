@@ -38,10 +38,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="filmesindex.html">Home</a>
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Filmes</a>
+              <a class="nav-link" href="#">Filmes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contato.html">Contato</a>
@@ -88,77 +88,7 @@
         © 2026 Cinemark — todos os direitos reservados.
     </footer>
 
-    <script>
-        const filmes = [
-            { titulo: "Interestelar", genero: "ficção", ano: 2014, nota: 8.6, classificacao: "12", capa: "https://placehold.co/300x450?text=Interestelar" },
-            { titulo: "O Poderoso Chefão", genero: "drama", ano: 1972, nota: 9.2, classificacao: "16", capa: "https://placehold.co/300x450?text=Poderoso+Chefao" },
-            { titulo: "Invocação do Mal", genero: "terror", ano: 2013, nota: 7.5, classificacao: "14", capa: "https://placehold.co/300x450?text=Invocacao+do+Mal" },
-            { titulo: "Se Beber Não Case", genero: "comédia", ano: 2009, nota: 7.7, classificacao: "16", capa: "https://placehold.co/300x450?text=Se+Beber+Nao+Case" },
-            { titulo: "John Wick", genero: "ação", ano: 2014, nota: 7.4, classificacao: "16", capa: "https://placehold.co/300x450?text=John+Wick" },
-            { titulo: "A Origem", genero: "ficção", ano: 2010, nota: 8.8, classificacao: "12", capa: "https://placehold.co/300x450?text=A+Origem" },
-            { titulo: "Coringa", genero: "drama", ano: 2019, nota: 8.4, classificacao: "18", capa: "https://placehold.co/300x450?text=Coringa" },
-            { titulo: "Corra!", genero: "terror", ano: 2017, nota: 7.7, classificacao: "16", capa: "https://placehold.co/300x450?text=Corra" },
-            { titulo: "Vingadores: Ultimato", genero: "ação", ano: 2019, nota: 8.4, classificacao: "12", capa: "https://placehold.co/300x450?text=Vingadores" },
-            { titulo: "Debi & Loide", genero: "comédia", ano: 1994, nota: 7.3, classificacao: "livre", capa: "https://placehold.co/300x450?text=Debi+e+Loide" },
-        ];
-
-        let generoAtual = "todos";
-
-        function renderizarFilmes(lista) {
-            const container = document.getElementById("listaFilmes");
-            container.innerHTML = "";
-
-            if (lista.length === 0) {
-                container.innerHTML = `
-                    <div class="sem-resultado">
-                        <h4>Nenhum filme encontrado 😕</h4>
-                        <p>Tente pesquisar por outro título ou gênero.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            lista.forEach(filme => {
-                const card = document.createElement("div");
-                card.className = "movie-poster-card";
-                card.innerHTML = `
-                    <img src="${filme.capa}" alt="${filme.titulo}">
-                    <div class="watch-badge">${filme.ano}</div>
-                    <div class="movie-poster-info">
-                        <h5>${filme.titulo}</h5>
-                        <div class="movie-meta">
-                            <span>${filme.genero}</span>
-                            <span class="rating-badge rating-${filme.classificacao}">${filme.classificacao === 'livre' ? 'L' : filme.classificacao}</span>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function filtrarFilmes() {
-            const termo = document.getElementById("searchInput").value.toLowerCase();
-
-            const resultado = filmes.filter(filme => {
-                const combinaTexto = filme.titulo.toLowerCase().includes(termo);
-                const combinaGenero = generoAtual === "todos" || filme.genero === generoAtual;
-                return combinaTexto && combinaGenero;
-            });
-
-            renderizarFilmes(resultado);
-        }
-
-        function filtrarPorGenero(genero, botao) {
-            generoAtual = genero;
-
-            document.querySelectorAll(".genero-btn").forEach(btn => btn.classList.remove("active"));
-            botao.classList.add("active");
-
-            filtrarFilmes();
-        }
-
-        renderizarFilmes(filmes);
-    </script>
+   
 
 </body>
 </html>
