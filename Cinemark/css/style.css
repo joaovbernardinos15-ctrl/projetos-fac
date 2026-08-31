@@ -261,7 +261,7 @@ nav {
     height: 45px;
     width: 45px;             
     object-fit: cover;       
-    border-radius: 50%;      
+    border-radius: 50%;    
 }
 /* ===== Página de filmes =====
    Sobrescreve o "body { display:flex; ... }" do topo do arquivo
