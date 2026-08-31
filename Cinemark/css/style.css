@@ -210,7 +210,17 @@ nav {
     align-items: center;
     z-index: 1000;
 }
-
+.logo-navbar {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 45px;
+    width: 45px;             */
+    object-fit: cover;       
+    border-radius: 50%;      
+    z-index: 10;
+}
 
 /* Parte dos filmes e Navbar */
 
@@ -219,15 +229,35 @@ nav {
     background-color: var(--card-bg);
     border-bottom: 1px solid var(--card-border);
     padding: 10px 20px;
+    top: 15px;                            
+    left: 50%;                            
+    transform: translateX(-50%);         
+    width: 90%;                           
+    max-width: 1300px; 
+    border-radius: 15px;
+    border: 1px solid var(--card-border);                  
 }
 
 .cinemark-nav .navbar-brand {
-    font-family: 'Georgia', 'Times New Roman', serif;
-    font-weight: 700;
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 800;             /* Deixa a letra mais marcante */
+    text-transform: uppercase;    /* Deixa em caixa alta (MAIÚSCULAS) */
+    letter-spacing: 2px;          /* Espaçamento entre as letras para um visual elegante */
     color: var(--accent-red);
-    font-size: 24px;
+    font-size: 22px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-right: 0 !important;
+    text-align: center;
 }
-
+.cinemark-nav .container,
+.cinemark-nav .container-fluid {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .cinemark-nav .nav-link {
     color: var(--text-light);
     font-weight: 500;
@@ -237,6 +267,8 @@ nav {
 .cinemark-nav .nav-link.active {
     color: var(--accent-red);
 }
+
+
 
 /* ===== Página de filmes =====
    Sobrescreve o "body { display:flex; ... }" do topo do arquivo
