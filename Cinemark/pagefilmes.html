@@ -33,6 +33,11 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
+  <button type="button" class="btn-planos-nav" data-bs-toggle="modal" data-bs-target="#modalPlanos">
+    Planos
+  </button>
+</li>
+            <li class="nav-item">
               <a class="nav-link" href="filmesindex.html">Home</a>
             </li>
             <li class="nav-item">
@@ -221,6 +226,93 @@
 
         </div>
     </section>
+    <!-- Modal de Planos Cinepass 
+     usei i.a para implementa o bootstrap e fontawesome-->
+<div class="modal fade" id="modalPlanos" tabindex="-1" aria-labelledby="modalPlanosLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content modal-planos-content">
+      
+      <div class="modal-header border-0 pb-0">
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-4">
+        <div class="row g-4 justify-content-center">
+          
+          <!-- CARD LITE -->
+          <div class="col-lg-4 col-md-6">
+            <div class="card-plano plano-lite">
+              <div class="plano-header">
+                <i class="fa-solid fa-film icone-topo"></i>
+                <h2>CINEPASS <span>Lite</span></h2>
+                <p class="vantagens-qtd">4 vantagens exclusivas</p>
+              </div>
+              <ul class="plano-recursos">
+                <li><i class="fa-solid fa-ticket"></i> 2 Ingressos Grátis por Mês</li>
+                <li><i class="fa-solid fa-coins"></i> Desconto em ingressos</li>
+                <li><i class="fa-solid fa-star"></i> Acesso antecipado a pré-vendas</li>
+                <li><i class="fa-solid fa-user-group"></i> Cortesia para amigo por trimestre</li>
+              </ul>
+              <div class="plano-footer">
+                <div class="preco">R$ 19,90<span>/mês</span></div>
+                <button class="btn-assinar btn-lite">Assinar Lite</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD PLUS -->
+          <div class="col-lg-4 col-md-6">
+            <div class="card-plano plano-plus">
+              <div class="plano-header">
+                <i class="fa-solid fa-video icone-topo text-danger"></i>
+                <h2>CINEPASS <span class="text-danger">Plus</span></h2>
+                <p class="vantagens-qtd">6 vantagens exclusivas</p>
+              </div>
+              <ul class="plano-recursos">
+                <li><i class="fa-solid fa-ticket"></i> 5 Ingressos Grátis por Mês</li>
+                <li><i class="fa-solid fa-ticket-simple"></i> +2 Ingressos Adicionais por Mês</li>
+                <li><i class="fa-solid fa-coins"></i> Desconto em ingressos</li>
+                <li><i class="fa-solid fa-list"></i> Fila exclusiva</li>
+                <li><i class="fa-solid fa-popcorn"></i> Combo Pipoca + Refri grátis por mês</li>
+                <li><i class="fa-solid fa-user-group"></i> Cortesia para amigo por trimestre</li>
+              </ul>
+              <div class="plano-footer">
+                <div class="preco">R$ 39,90<span>/mês</span></div>
+                <button class="btn-assinar btn-plus">Assinar Plus</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD ULTRA -->
+          <div class="col-lg-4 col-md-6">
+            <div class="card-plano plano-ultra">
+              <div class="plano-header">
+                <i class="fa-solid fa-crown icone-topo text-warning"></i>
+                <h2>CINEPASS <span class="text-warning">Ultra</span></h2>
+                <p class="vantagens-qtd">7 vantagens exclusivas</p>
+              </div>
+              <ul class="plano-recursos">
+                <li><i class="fa-solid fa-ticket"></i> 10 Ingressos Grátis por Mês</li>
+                <li><i class="fa-solid fa-ticket-simple"></i> +4 Ingressos Adicionais por Mês</li>
+                <li><i class="fa-solid fa-star"></i> Acesso a pré-estreias exclusivas</li>
+                <li><i class="fa-solid fa-gem"></i> Sala VIP</li>
+                <li><i class="fa-solid fa-couch"></i> Combo Pipoca + Refri grátis por mês</li>
+                <li><i class="fa-solid fa-scissors"></i> Cortesia por mês</li>
+                <li><i class="fa-solid fa-user-group"></i> Cortesia para amigo por mês</li>
+              </ul>
+              <div class="plano-footer">
+                <div class="preco">R$ 79,90<span>/mês</span></div>
+                <button class="btn-assinar btn-ultra"><i class="fa-solid fa-crown me-1"></i> Assinar Ultra</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
 
     <footer class="site-footer">
         © 2026 Cinemark — todos os direitos reservados.

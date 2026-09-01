@@ -263,6 +263,140 @@ nav {
     object-fit: cover;       
     border-radius: 50%;    
 }
+
+.btn-planos-nav {
+    background-color: var(--bg-red-dark, #c1233b);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    margin: 0 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.btn-planos-nav:hover {
+    background-color: #c1233b;
+    transform: scale(1.05);
+}
+
+/* ======Modal de Planos =======
+Planos pagos para o cinemark atualmente focado no site e não no streaming*/
+.modal-planos-content {
+    background-color: #0b0c10;
+    border-radius: 20px;
+    border: 1px solid #333;
+}
+
+.card-plano {
+    background: #0d0f12;
+    border-radius: 18px;
+    padding: 30px 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Bordas Personalizadas da Imagem */
+.plano-lite {
+    border: 1px solid #4a5568;
+}
+.plano-plus {
+    border: 2px solid #ff003c;
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+}
+.plano-ultra {
+    border: 2px solid #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+/* Header dos Cards */
+.icone-topo {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+.card-plano h2 {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+.vantagens-qtd {
+    color: #a0aec0;
+    font-size: 14px;
+    border-bottom: 1px solid #2d3748;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+/* Lista de Recursos */
+.plano-recursos {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin-bottom: 25px;
+}
+.plano-recursos li {
+    font-size: 14px;
+    color: #e2e8f0;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.plano-recursos li i {
+    width: 20px;
+    text-align: center;
+    color: #cbd5e0;
+}
+/* Preço e Botões */
+.preco {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+.preco span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #a0aec0;
+}
+.btn-assinar {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: 700;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.btn-lite {
+    border: 1px solid #718096;
+    color: #ffffff;
+}
+.btn-lite:hover {
+    background: #718096;
+}
+.btn-plus {
+    border: 2px solid #ff003c;
+    color: #ffffff;
+}
+.btn-plus:hover {
+    background: #ff003c;
+}
+.btn-ultra {
+    border: 2px solid #d4af37;
+    color: #d4af37;
+}
+.btn-ultra:hover {
+    background: #d4af37;
+    color: #000000;
+}
+.btn-planos-nav {
+    border: none;
+    cursor: pointer;
+}
 /* ===== Página de filmes =====
    Sobrescreve o "body { display:flex; ... }" do topo do arquivo
    (regras da tela de login), que senão faz o nav e a section
