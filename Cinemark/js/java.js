@@ -288,42 +288,42 @@ if (paginaFilmes) {
       titulo: "Michael",
       genero: "Drama",
       ano: "2026",
-      classificacao: "14",
+      classificacao: "12",
       poster: "./img/MoviePoster-39a47201-3b75-4d07-b96a-02610d9885a9.png"
     },
     {
       titulo: "Muito Prazer",
       genero: "Comédia",
       ano: "2026",
-      classificacao: "14",
+      classificacao: "12",
       poster: "./img/MoviePoster-532e35b5-8c6a-4b0b-9f57-e40d06d35940.png"
     },
     {
-      titulo: "O Advogado de Deus",
+      titulo: "O Advogado do Diabo",
       genero: "Drama",
       ano: "2026",
-      classificacao: "12",
+      classificacao: "16",
       poster: "./img/MoviePoster-4a554ccc-f36c-4236-9d02-90c364e40816.png"
     },
     {
       titulo: "O Fim da Rua",
-      genero: "Terror",
+      genero: "Drama",
       ano: "2026",
-      classificacao: "16",
+      classificacao: "12",
       poster: "./img/MoviePoster-6ae2213a-1124-4e3b-94c0-9b0480aa6b82.png"
     },
     {
       titulo: "O Gênio do Crime",
-      genero: "Ação",
+      genero: "Comédia",
       ano: "2026",
       classificacao: "12",
       poster: "./img/MoviePoster-1d439958-eb6d-4749-bd17-16e3caff4ce4.png"
     },
     {
       titulo: "Ponto Sem Retorno",
-      genero: "Drama",
+      genero: "Ação",
       ano: "2026",
-      classificacao: "14",
+      classificacao: "12",
       poster: "./img/MoviePoster-6bba3710-5068-4f38-8597-2271a4271b2a.png"
     },
     {
@@ -335,9 +335,9 @@ if (paginaFilmes) {
     },
     {
       titulo: "Só Por Uma Noite",
-      genero: "Comédia",
+      genero: "Drama",
       ano: "2026",
-      classificacao: "16",
+      classificacao: "12",
       poster: "./img/MoviePoster-75453a35-a69e-43bc-b312-b1d6a30cbfe7.png"
     },
     {
@@ -349,7 +349,7 @@ if (paginaFilmes) {
     },
     {
       titulo: "Túmulo dos Vagalumes",
-      genero: "Drama",
+      genero: "Animação",
       ano: "2026",
       classificacao: "12",
       poster: "./img/MoviePoster-8270e450-9ede-4618-a15d-5f67292667cb.png"
@@ -362,7 +362,7 @@ if (paginaFilmes) {
       poster: "./img/MoviePoster-9acd854c-c1cd-43ab-a1ca-db1cebbcae2c.png"
     },
     {
-      titulo: "Descontrole",
+      titulo: "(Des)Controle",
       genero: "Drama",
       ano: "2026",
       classificacao: "14",
@@ -395,7 +395,8 @@ if (paginaFilmes) {
   }
 
   function primeiraLetra(titulo) {
-    return normalizar(titulo).charAt(0).toUpperCase();
+    const normalizado = normalizar(titulo);
+    return normalizado.charAt(0).toUpperCase();
   }
 
   function criarBotoesGenero() {
@@ -449,7 +450,7 @@ if (paginaFilmes) {
           alt="${filme.titulo}"
           loading="lazy">
 
-        <div class="watch-badge">${filme.ano}</div>
+        <div class="watch-badge">ASSISTA AGORA</div>
 
         <div class="movie-poster-info">
           <h5>${filme.titulo}</h5>

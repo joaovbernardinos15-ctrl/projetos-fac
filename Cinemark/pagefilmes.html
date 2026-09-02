@@ -38,10 +38,10 @@
   </button>
 </li>
             <li class="nav-item">
-              <a class="nav-link" href="filmesindex.html">Home</a>
+              <a class="nav-link" href="filmesindex.html">Lanches</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Filmes</a>
+              <a class="nav-link active" aria-current="page" href="pagefilmes.html">Filmes</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="contato.html">Contato</a>
@@ -50,300 +50,74 @@
         </div>
       </div>
     </nav>
+    <main id="pageFilmesApp" class="filmes-section">
+      <div class="filmes-container">
 
-    <section class="filmes-section">
-        <div class="container">
+        <header class="filmes-topo">
+          <div>
+            <span class="filmes-kicker">CINEMARK</span>
+            <h1>Filmes</h1>
+            <p>Encontre seu próximo filme de forma rápida e fácil.</p>
+          </div>
 
-            <!-- Radios escondidos que controlam os filtros (sem JS) -->
-            <input type="radio" name="genero" id="genero-todos" class="filtro-radio" checked>
-            <input type="radio" name="genero" id="genero-acao" class="filtro-radio">
-            <input type="radio" name="genero" id="genero-comedia" class="filtro-radio">
-            <input type="radio" name="genero" id="genero-drama" class="filtro-radio">
-            <input type="radio" name="genero" id="genero-terror" class="filtro-radio">
-            <input type="radio" name="genero" id="genero-ficcao" class="filtro-radio">
+          <div class="filmes-contador">
+            <strong id="filmesResultadoCount">17</strong>
+            <span>filmes encontrados</span>
+          </div>
+        </header>
 
-            <input type="radio" name="letra" id="letra-todos" class="filtro-radio" checked>
-            <input type="radio" name="letra" id="letra-a" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-b" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-c" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-d" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-e" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-f" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-g" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-h" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-i" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-j" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-k" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-l" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-m" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-n" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-o" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-p" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-q" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-r" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-s" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-t" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-u" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-v" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-w" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-x" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-y" class="filtro-radio">
-            <input type="radio" name="letra" id="letra-z" class="filtro-radio">
-
-            <div class="filmes-topo">
-                <h1>🎬 Todos os Filmes</h1>
-            </div>
-
-            <!-- Filtro por gênero -->
-            <div class="genero-filtros">
-                <label for="genero-todos" class="genero-btn">Todos</label>
-                <label for="genero-acao" class="genero-btn">Ação</label>
-                <label for="genero-comedia" class="genero-btn">Comédia</label>
-                <label for="genero-drama" class="genero-btn">Drama</label>
-                <label for="genero-terror" class="genero-btn">Terror</label>
-                <label for="genero-ficcao" class="genero-btn">Ficção</label>
-            </div>
-
-            <!-- Filtro por letra inicial -->
-            <div class="letra-filtros">
-                <label for="letra-todos" class="letra-btn">Todos</label>
-                <label for="letra-a" class="letra-btn">A</label>
-                <label for="letra-b" class="letra-btn">B</label>
-                <label for="letra-c" class="letra-btn">C</label>
-                <label for="letra-d" class="letra-btn">D</label>
-                <label for="letra-e" class="letra-btn">E</label>
-                <label for="letra-f" class="letra-btn">F</label>
-                <label for="letra-g" class="letra-btn">G</label>
-                <label for="letra-h" class="letra-btn">H</label>
-                <label for="letra-i" class="letra-btn">I</label>
-                <label for="letra-j" class="letra-btn">J</label>
-                <label for="letra-k" class="letra-btn">K</label>
-                <label for="letra-l" class="letra-btn">L</label>
-                <label for="letra-m" class="letra-btn">M</label>
-                <label for="letra-n" class="letra-btn">N</label>
-                <label for="letra-o" class="letra-btn">O</label>
-                <label for="letra-p" class="letra-btn">P</label>
-                <label for="letra-q" class="letra-btn">Q</label>
-                <label for="letra-r" class="letra-btn">R</label>
-                <label for="letra-s" class="letra-btn">S</label>
-                <label for="letra-t" class="letra-btn">T</label>
-                <label for="letra-u" class="letra-btn">U</label>
-                <label for="letra-v" class="letra-btn">V</label>
-                <label for="letra-w" class="letra-btn">W</label>
-                <label for="letra-x" class="letra-btn">X</label>
-                <label for="letra-y" class="letra-btn">Y</label>
-                <label for="letra-z" class="letra-btn">Z</label>
-            </div>
-
-            <!-- Grid de filmes -->
-            <div class="filmes-grid">
-                <div class="movie-poster-card genero-acao letra-h">
-                    <img src="./img/MoviePoster-11e62ed3-b0b0-42ae-97b8-54b881bc2bee.png" alt="Homem-Aranha: Um Novo Dia" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Homem-Aranha: Um Novo Dia</h5>
-                        <div class="movie-meta">
-                            <span>Ação</span>
-                            <span class="rating-badge rating-12">12</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-comedia letra-o">
-                    <img src="./img/MoviePoster-1d439958-eb6d-4749-bd17-16e3caff4ce4.png" alt="O Gênio do Crime" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>O Gênio do Crime</h5>
-                        <div class="movie-meta">
-                            <span>Comédia</span>
-                            <span class="rating-badge rating-12">12</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-terror letra-s">
-                    <img src="./img/MoviePoster-36bc59f8-4d4f-41c9-aee9-dc6cee2a9784.png" alt="Sobrenatural: Agora Entre Nós" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Sobrenatural: Agora Entre Nós</h5>
-                        <div class="movie-meta">
-                            <span>Terror</span>
-                            <span class="rating-badge rating-14">14</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-drama letra-m">
-                    <img src="./img/MoviePoster-39a47201-3b75-4d07-b96a-02610d9885a9.png" alt="Michael" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Michael</h5>
-                        <div class="movie-meta">
-                            <span>Drama</span>
-                            <span class="rating-badge rating-12">12</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-drama letra-o">
-                    <img src="./img/MoviePoster-4a554ccc-f36c-4236-9d02-90c364e40816.png" alt="O Advogado do Diabo" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>O Advogado do Diabo</h5>
-                        <div class="movie-meta">
-                            <span>Drama</span>
-                            <span class="rating-badge rating-16">16</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-comedia letra-c">
-                    <img src="./img/MoviePoster-4b578907-005f-4257-9448-684e6f52b1c4.png" alt="Colegas e o Herdeiro" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Colegas e o Herdeiro</h5>
-                        <div class="movie-meta">
-                            <span>Comédia</span>
-                            <span class="rating-badge rating-12">12</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-comedia letra-m">
-                    <img src="./img/MoviePoster-532e35b5-8c6a-4b0b-9f57-e40d06d35940.png" alt="Muito Prazer" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Muito Prazer</h5>
-                        <div class="movie-meta">
-                            <span>Comédia</span>
-                            <span class="rating-badge rating-14">14</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-terror letra-f">
-                    <img src="./img/MoviePoster-6ae2213a-1124-4e3b-94c0-9b0480aa6b82.png" alt="Fim da Rua" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Fim da Rua</h5>
-                        <div class="movie-meta">
-                            <span>Terror</span>
-                            <span class="rating-badge rating-14">14</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-acao letra-p">
-                    <img src="./img/MoviePoster-6bba3710-5068-4f38-8597-2271a4271b2a.png" alt="Ponto sem Retorno" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Ponto sem Retorno</h5>
-                        <div class="movie-meta">
-                            <span>Ação</span>
-                            <span class="rating-badge rating-14">14</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-comedia letra-s">
-                    <img src="./img/MoviePoster-75453a35-a69e-43bc-b312-b1d6a30cbfe7.png" alt="Só Por Uma Noite" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Só Por Uma Noite</h5>
-                        <div class="movie-meta">
-                            <span>Comédia</span>
-                            <span class="rating-badge rating-16">16</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-comedia letra-c">
-                    <img src="./img/MoviePoster-7b391aed-202c-47c4-81f8-426cca8ff7d4.png" alt="Crise de um Nerd" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Crise de um Nerd</h5>
-                        <div class="movie-meta">
-                            <span>Comédia</span>
-                            <span class="rating-badge rating-12">12</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-drama letra-t">
-                    <img src="./img/MoviePoster-8270e450-9ede-4618-a15d-5f67292667cb.png" alt="Túmulo dos Vagalumes" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Túmulo dos Vagalumes</h5>
-                        <div class="movie-meta">
-                            <span>Drama</span>
-                            <span class="rating-badge rating-12">12</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-acao letra-a">
-                    <img src="./img/MoviePoster-8ad878d5-f2a3-46d4-9f34-b07cf40b1541.png" alt="A Odisseia" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>A Odisseia</h5>
-                        <div class="movie-meta">
-                            <span>Ação</span>
-                            <span class="rating-badge rating-14">14</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-comedia letra-c">
-                    <img src="./img/MoviePoster-908f3c4f-27e4-4e30-a057-ad6fb93992d5.png" alt="Coyote vs. Acme" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Coyote vs. Acme</h5>
-                        <div class="movie-meta">
-                            <span>Comédia</span>
-                            <span class="rating-badge rating-l">L</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-ficcao letra-p">
-                    <img src="./img/MoviePoster-94f73a7f-62a1-44cb-a01a-2e32eaa87efc.png" alt="Patrulha Canina: Uma Aventura Dino" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Patrulha Canina: Uma Aventura Dino</h5>
-                        <div class="movie-meta">
-                            <span>Ficção</span>
-                            <span class="rating-badge rating-l">L</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-acao letra-v">
-                    <img src="./img/MoviePoster-9acd854c-c1cd-43ab-a1ca-db1cebbcae2c.png" alt="Vida 4K" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>Vida 4K</h5>
-                        <div class="movie-meta">
-                            <span>Ação</span>
-                            <span class="rating-badge rating-14">14</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="movie-poster-card genero-drama letra-d">
-                    <img src="./img/MoviePoster-a200868f-990a-4c7f-a725-c30d0a388997.png" alt="(Des)Controle" loading="lazy">
-                    <div class="watch-badge">ASSISTA AGORA</div>
-                    <div class="movie-poster-info">
-                        <h5>(Des)Controle</h5>
-                        <div class="movie-meta">
-                            <span>Drama</span>
-                            <span class="rating-badge rating-14">14</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+        <div class="busca-field">
+          <span class="busca-icon" aria-hidden="true">⌕</span>
+          <input
+            id="buscaFilme"
+            type="search"
+            placeholder="Buscar por nome do filme..."
+            autocomplete="off"
+            aria-label="Buscar por nome do filme">
+          <button
+            id="limparBusca"
+            type="button"
+            class="limpar-busca"
+            hidden
+            aria-label="Limpar busca">
+            ×
+          </button>
         </div>
-    </section>
+
+        <section class="catalogo-panel">
+
+          <div class="filtro-grupo">
+            <h2>Gênero</h2>
+            <div id="generoFiltros" class="genero-filtros"></div>
+          </div>
+
+          <div class="filtro-grupo filtro-alfabeto">
+            <h2>Encontre pela letra</h2>
+            <div id="letraFiltros" class="letra-filtros"></div>
+          </div>
+
+          <div
+            id="filmesGrid"
+            class="filmes-grid"
+            aria-live="polite">
+          </div>
+
+          <div id="filmesSemResultado" class="filmes-sem-resultado" hidden>
+            <div class="sem-resultado-icon">⌕</div>
+            <h3>Nenhum filme encontrado</h3>
+            <p>Tente outro nome, gênero ou letra.</p>
+            <button id="limparFiltrosVazio" type="button">
+              Limpar filtros
+            </button>
+          </div>
+
+          <button id="limparFiltros" type="button" class="limpar-filtros">
+            Limpar filtros
+          </button>
+
+        </section>
+      </div>
+    </main>
     <!-- Modal de Planos Cinepass 
      usei i.a para implementa o bootstrap e fontawesome-->
 <div class="modal fade" id="modalPlanos" tabindex="-1" aria-labelledby="modalPlanosLabel" aria-hidden="true">
@@ -435,6 +209,8 @@
     <footer class="site-footer">
         © 2026 Cinemark — todos os direitos reservados.
     </footer>
+
+    <script src="./js/java.js"></script>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
