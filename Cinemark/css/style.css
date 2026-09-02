@@ -1561,6 +1561,7 @@ Planos pagos para o cinemark atualmente focado no site e não no streaming*/
     font-size: 14px;
     font-weight: 700;
     line-height: 1.28;
+    line-clamp: 2;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
