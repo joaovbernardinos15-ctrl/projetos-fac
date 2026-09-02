@@ -1,8 +1,11 @@
 /* =========================================================
-   1. DADOS DOS FILMES
-   Pra adicionar um filme novo, só copiar um objeto abaixo,
-   colar antes do "];" e trocar os valores.
-   classificacao pode ser: "L", "6", "10", "12", "14", "16", "18"
+   CINEMARK - CARROSSÉIS
+   Os dados ficam aqui e o HTML continua responsável apenas
+   pela estrutura das seções. O Bootstrap controla a animação.
+   ========================================================= */
+
+/* =========================================================
+   1. FILMES EM CARTAZ
    ========================================================= */
 const filmes = [
   {
@@ -60,185 +63,203 @@ const filmes = [
     duracao: "88m",
     classificacao: "12",
     poster: "./img/MoviePoster-8270e450-9ede-4618-a15d-5f67292667cb.png"
+  },
+  {
+    titulo: "Nome do Filme",
+    genero: "Gênero",
+    duracao: "000m",
+    classificacao: "L",
+    poster: "./img/MoviePoster-1d439958-eb6d-4749-bd17-16e3caff4ce4.png"
   }
 ];
 
-/* =========================================================
-   2. REFERÊNCIAS AOS ELEMENTOS DA PÁGINA
-   ========================================================= */
-const track = document.getElementById('cartazTrack');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
+const FILMES_POR_PAGINA = 4;
 
-// Quantos cards "completos" o carrossel deve pular por clique.
-// Precisa bater com o número usado no CSS (calc(...) / 4.15)
-const CARDS_POR_PAGINA = 4;
+const filmesCarouselInner = document.getElementById("filmesCarouselInner");
+const filmesPrevBtn = document.getElementById("filmesPrevBtn");
+const filmesNextBtn = document.getElementById("filmesNextBtn");
 
-/* =========================================================
-   3. FUNÇÕES
-   ========================================================= */
+function criarCardFilme(filme) {
+  const ratingClass = filme.classificacao === "L"
+    ? "livre"
+    : filme.classificacao;
 
-// Transforma o array "filmes" em HTML e injeta dentro da track
-function renderFilmes() {
-  track.innerHTML = filmes.map(filme => `
-    <div class="movie-poster-card">
+  return `
+    <article class="movie-poster-card">
       <span class="watch-badge">ASSISTA AGORA</span>
-      <img src="${filme.poster}" alt="${filme.titulo}" />
+
+      <img
+        src="${filme.poster}"
+        alt="${filme.titulo}"
+        loading="lazy"
+      />
+
       <div class="movie-poster-info">
         <h5>${filme.titulo.toUpperCase()}</h5>
+
         <div class="movie-meta">
           <span>${filme.genero} · ${filme.duracao}</span>
-          <span class="rating-badge rating-${filme.classificacao === 'L' ? 'livre' : filme.classificacao}">${filme.classificacao}</span>
+          <span class="rating-badge rating-${ratingClass}">
+            ${filme.classificacao}
+          </span>
         </div>
       </div>
-    </div>
-  `).join('');
+    </article>
+  `;
 }
 
-// Calcula quanto o carrossel deve andar a cada clique.
-// Agora anda uma "página" inteira (4 cards + os gaps entre eles),
-// em vez de andar 1 card por vez.
-function getScrollStep() {
-  const card = track.querySelector('.movie-poster-card');
-  if (!card) return 0;
-  const cardWidth = card.getBoundingClientRect().width;
-  const gap = parseFloat(getComputedStyle(track).gap) || 0;
-  return (cardWidth + gap) * CARDS_POR_PAGINA;
+function criarPaginasFilmes() {
+  const paginas = [];
+
+  for (let i = 0; i < filmes.length; i += FILMES_POR_PAGINA) {
+    paginas.push(filmes.slice(i, i + FILMES_POR_PAGINA));
+  }
+
+  filmesCarouselInner.innerHTML = paginas
+    .map((pagina, index) => `
+      <div class="carousel-item ${index === 0 ? "active" : ""}">
+        <div class="movie-poster-row">
+          ${pagina.map(criarCardFilme).join("")}
+        </div>
+      </div>
+    `)
+    .join("");
 }
 
-// Desabilita a seta esquerda no início e a direita no fim do carrossel
-function updateArrows() {
-  const maxScroll = track.scrollWidth - track.clientWidth - 1;
-  prevBtn.disabled = track.scrollLeft <= 0;
-  nextBtn.disabled = track.scrollLeft >= maxScroll;
+function atualizarSetasFilmes() {
+  const itens = filmesCarouselInner.querySelectorAll(".carousel-item");
+  const indiceAtual = [...itens].findIndex(item =>
+    item.classList.contains("active")
+  );
+
+  const ultimoIndice = itens.length - 1;
+
+  filmesPrevBtn.disabled = indiceAtual <= 0;
+  filmesNextBtn.disabled = indiceAtual >= ultimoIndice;
+
+  filmesPrevBtn.classList.toggle("disabled", indiceAtual <= 0);
+  filmesNextBtn.classList.toggle("disabled", indiceAtual >= ultimoIndice);
+}
+
+function iniciarCarouselFilmes() {
+  criarPaginasFilmes();
+
+  const carouselElement = document.getElementById("filmesCarousel");
+
+  if (!carouselElement || !filmesCarouselInner) return;
+
+  const carousel = new bootstrap.Carousel(carouselElement, {
+    interval: false,
+    wrap: false,
+    touch: true
+  });
+
+  filmesPrevBtn.addEventListener("click", () => {
+    carousel.prev();
+  });
+
+  filmesNextBtn.addEventListener("click", () => {
+    carousel.next();
+  });
+
+  carouselElement.addEventListener("slid.bs.carousel", atualizarSetasFilmes);
+
+  atualizarSetasFilmes();
 }
 
 /* =========================================================
-   4. EVENTOS
+   2. BANNERS / HERO
    ========================================================= */
-nextBtn.addEventListener('click', () => {
-  track.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
-});
-
-prevBtn.addEventListener('click', () => {
-  track.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
-});
-
-track.addEventListener('scroll', updateArrows);
-window.addEventListener('resize', updateArrows);
-
-/* =========================================================
-   5. EXECUÇÃO
-   Ordem importa: primeiro renderiza os cards, só depois
-   calcula o scroll deles.
-   ========================================================= */
-renderFilmes();
-updateArrows();
-
-
-/* =========================================================
-   HERO BANNER (marketing / promoções)
-   Mesma lógica do carrossel de filmes, mas aqui só existe
-   1 slide visível por vez, com bolinhas indicadoras (dots)
-   e o carrossel "roda" (do último slide volta pro primeiro).
-   ========================================================= */
-
-// 1. DADOS DOS BANNERS
-// Pra adicionar um banner novo, só copiar um objeto abaixo,
-// colar antes do "];" e trocar a imagem/alt/link.
 const banners = [
   {
-    imagem: "./img/banner-club-black.png",
-    alt: "Cinemark Club Black: 2 ingressos todo mês e até 25% off no snack bar",
-    link: "#"
+    imagem: "./img/banner-cinemark-club-black_1255x495.png",
+    alt: "Cinemark Club Black: 2 ingressos todo mês e até 25% off no snack bar"
+  },
+  {
+    imagem: "./img/banner-viva-historias-incriveis_1255x495.png",
+    alt: "Viva histórias incríveis nas telas"
+  },
+  {
+    imagem: "./img/banner-diversao-para-todos_1255x495.png",
+    alt: "Diversão para todos os momentos"
+  },
+  {
+    imagem: "./img/banner-tudo-na-palma-da-mao_1255x495.png",
+    alt: "Tudo na palma da sua mão: baixe o app da Cinemark"
+  },
+  {
+    imagem: "./img/banner-segunda-e-dia-de-cinemark_1255x495.png",
+    alt: "Segunda é dia de Cinemark"
+  },
+  {
+    imagem: "./img/banner-combos-para-todos-os-gostos_1255x495.png",
+    alt: "Combos para todos os gostos"
+  },
+  {
+    imagem: "./img/banner-filmes-assistir_1255x495.png",
+    alt: "Filmes que você precisa assistir"
+  },
+  {
+    imagem: "./img/banner-presenteie-com-experiencias-incriveis_1255x495.png",
+    alt: "Presenteie com experiências incríveis"
+  },
+  {
+    imagem: "./img/banner-mais-conforto-mais-diversao_1255x495.png",
+    alt: "Mais conforto, mais diversão"
   }
-  // Exemplo de como adicionar outro banner:
-  // {
-  //   imagem: "./img/banner-promocao-terca.png",
-  //   alt: "Terça é dia de ingresso com desconto",
-  //   link: "#"
-  // },
 ];
 
-// 2. REFERÊNCIAS AOS ELEMENTOS DA PÁGINA
-const heroTrack = document.getElementById('heroTrack');
-const heroPrevBtn = document.getElementById('heroPrevBtn');
-const heroNextBtn = document.getElementById('heroNextBtn');
-const heroDotsContainer = document.getElementById('heroDots');
+const heroCarousel = document.getElementById("heroCarousel");
+const heroIndicators = document.getElementById("heroIndicators");
+const heroCarouselInner = document.getElementById("heroCarouselInner");
 
-let heroIndex = 0; // qual slide está sendo mostrado agora
+function criarBanners() {
+  heroIndicators.innerHTML = banners
+    .map((_, index) => `
+      <button
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide-to="${index}"
+        class="${index === 0 ? "active" : ""}"
+        ${index === 0 ? 'aria-current="true"' : ""}
+        aria-label="Slide ${index + 1}"
+      ></button>
+    `)
+    .join("");
 
-// 3. FUNÇÕES
-
-// Transforma o array "banners" em HTML e injeta dentro da track
-function renderBanners() {
-  heroTrack.innerHTML = banners.map(banner => `
-    <a class="hero-slide" href="${banner.link}">
-      <img src="${banner.imagem}" alt="${banner.alt}" />
-    </a>
-  `).join('');
+  heroCarouselInner.innerHTML = banners
+    .map((banner, index) => `
+      <div class="carousel-item ${index === 0 ? "active" : ""}">
+        <a href="#">
+          <img
+            src="${banner.imagem}"
+            alt="${banner.alt}"
+            loading="${index === 0 ? "eager" : "lazy"}"
+          />
+        </a>
+      </div>
+    `)
+    .join("");
 }
 
-// Cria uma bolinha (dot) pra cada banner
-function renderDots() {
-  heroDotsContainer.innerHTML = banners.map((_, i) => `
-    <button class="hero-dot" data-index="${i}" aria-label="Ir para o slide ${i + 1}"></button>
-  `).join('');
+function iniciarCarouselHero() {
+  criarBanners();
 
-  // Clicar numa bolinha leva direto pro slide correspondente
-  heroDotsContainer.querySelectorAll('.hero-dot').forEach(dot => {
-    dot.addEventListener('click', () => {
-      goToSlide(Number(dot.dataset.index));
-    });
+  if (!heroCarousel) return;
+
+  new bootstrap.Carousel(heroCarousel, {
+    interval: 6000,
+    ride: "carousel",
+    pause: "hover",
+    touch: true,
+    wrap: true
   });
 }
 
-// Marca visualmente qual bolinha está ativa
-function updateDots() {
-  heroDotsContainer.querySelectorAll('.hero-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === heroIndex);
-  });
-}
-
-// Rola o carrossel até o slide de índice "index"
-function goToSlide(index) {
-  heroIndex = index;
-  const slideWidth = heroTrack.clientWidth;
-  heroTrack.scrollTo({ left: slideWidth * heroIndex, behavior: 'smooth' });
-  updateDots();
-}
-
-// Avança 1 slide; se estiver no último, volta pro primeiro
-function nextSlide() {
-  const proximo = (heroIndex + 1) % banners.length;
-  goToSlide(proximo);
-}
-
-// Volta 1 slide; se estiver no primeiro, vai pro último
-function prevSlide() {
-  const anterior = (heroIndex - 1 + banners.length) % banners.length;
-  goToSlide(anterior);
-}
-
-// 4. EVENTOS
-heroNextBtn.addEventListener('click', nextSlide);
-heroPrevBtn.addEventListener('click', prevSlide);
-
-// Se o usuário arrastar o carrossel manualmente (touch/scroll),
-// atualiza qual bolinha deve ficar ativa
-heroTrack.addEventListener('scroll', () => {
-  const slideWidth = heroTrack.clientWidth;
-  heroIndex = Math.round(heroTrack.scrollLeft / slideWidth);
-  updateDots();
+/* =========================================================
+   3. INICIALIZAÇÃO
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+  iniciarCarouselHero();
+  iniciarCarouselFilmes();
 });
-
-// 5. EXECUÇÃO
-renderBanners();
-renderDots();
-updateDots();
-
-// Autoplay: troca de slide sozinho a cada 6 segundos.
-// Se não quiser autoplay, é só apagar este bloco.
-setInterval(() => {
-  nextSlide();
-}, 6000);
