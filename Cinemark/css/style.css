@@ -235,7 +235,7 @@ nav {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    margin-right: 0
+    margin-right: 0;
     text-align: center;
 }
 .cinemark-nav .container,
@@ -1047,3 +1047,199 @@ Planos pagos para o cinemark atualmente focado no site e não no streaming*/
     border-color: var(--accent-red-line);
     color: #fff;
 }   
+
+/* =========================================================
+   AJUSTE FINAL — PÁGINA DE FILMES
+   Correções visuais sem alterar a estrutura do projeto.
+   ========================================================= */
+
+/* Corrige regras globais herdadas da tela de login */
+.filmes-page {
+    display: block !important;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+    background: radial-gradient(
+        circle at 20% 0%,
+        #c21818 0%,
+        #7a0b0b 48%,
+        #4d0707 100%
+    );
+    padding: 0 !important;
+}
+
+/* Navbar da página de filmes */
+.filmes-page .cinemark-nav {
+    position: fixed !important;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: min(94%, 1300px);
+    min-height: 62px;
+    padding: 8px 18px;
+}
+
+/* Impede que a logo original de 1200x1200 fique gigante */
+.filmes-page .logo-navbar {
+    position: absolute !important;
+    left: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 42px !important;
+    height: 42px !important;
+    max-width: 42px !important;
+    max-height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+}
+
+/* Conteúdo mais compacto e alinhado */
+.filmes-page .filmes-section {
+    width: 100%;
+    padding: 108px 20px 45px !important;
+}
+
+.filmes-page .filmes-section > .container {
+    max-width: 1180px;
+    padding: 0;
+}
+
+/* Cabeçalho */
+.filmes-page .filmes-topo {
+    margin-bottom: 18px !important;
+    gap: 10px;
+}
+
+.filmes-page .filmes-topo h1 {
+    margin: 0 !important;
+    font-size: clamp(26px, 3vw, 34px) !important;
+    line-height: 1.15;
+}
+
+/* Área dos filtros */
+.filmes-page .genero-filtros,
+.filmes-page .letra-filtros {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filmes-page .genero-filtros {
+    margin-bottom: 12px !important;
+}
+
+.filmes-page .letra-filtros {
+    margin-bottom: 24px !important;
+}
+
+.filmes-page .genero-btn,
+.filmes-page .letra-btn {
+    padding: 6px 13px !important;
+    min-height: 34px;
+    font-size: 12.5px !important;
+    line-height: 1;
+    border-radius: 18px;
+}
+
+.filmes-page .letra-btn {
+    min-width: 34px;
+    padding: 6px 9px !important;
+}
+
+/* Busca, caso esteja presente no HTML */
+.filmes-page .busca-field {
+    width: min(100%, 420px);
+    max-width: 420px;
+    min-height: 42px;
+    padding: 8px 12px;
+    margin: 0 0 16px;
+}
+
+/* Grade de filmes */
+.filmes-page .filmes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 22px;
+}
+
+/* Cards um pouco menores e mais elegantes */
+.filmes-page .filmes-grid .movie-poster-card {
+    max-width: 210px;
+    margin: 0 auto;
+}
+
+/* Rodapé */
+.filmes-page .site-footer {
+    margin-top: 10px;
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .filmes-page .cinemark-nav {
+        width: calc(100% - 20px);
+        top: 10px;
+    }
+
+    .filmes-page .filmes-section {
+        padding: 94px 14px 35px !important;
+    }
+
+    .filmes-page .filmes-topo {
+        margin-bottom: 14px !important;
+    }
+
+    .filmes-page .filmes-topo h1 {
+        font-size: 26px !important;
+    }
+
+    .filmes-page .genero-filtros,
+    .filmes-page .letra-filtros {
+        gap: 6px;
+    }
+
+    .filmes-page .genero-btn,
+    .filmes-page .letra-btn {
+        padding: 6px 10px !important;
+        min-height: 32px;
+        font-size: 12px !important;
+    }
+}
+
+/* Celular */
+@media (max-width: 480px) {
+    .filmes-page .filmes-section {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .filmes-page .logo-navbar {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+    }
+
+    .filmes-page .filmes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+    }
+
+    .filmes-page .filmes-grid .movie-poster-card {
+        width: 100%;
+    }
+}
+
+/* Posters reais do catálogo */
+.filmes-page .movie-poster-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border-radius: 14px;
+}
+.filmes-page .movie-poster-card {
+    overflow: hidden;
+}
