@@ -83,6 +83,17 @@
                         </button>
                     </div>
 
+                    <div class="input-icone password-wrap">
+                        <i class="fa-solid fa-lock"></i>
+                        <input id="registerPasswordConfirmation" type="password" placeholder="Confirmar senha" required
+                            minlength="8">
+                        <button type="button" class="toggle-password" data-target="registerPasswordConfirmation"
+                            aria-label="Mostrar senha">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <div class="invalid-feedback">As senhas precisam ser iguais.</div>
+                    </div>
+
                     <div class="divisor">ou cadastre-se com:</div>
 
                     <div class="icones-sociais">
@@ -124,6 +135,12 @@
             </div>
         </section>
     </main>
+
+    <div id="toastCadastro" class="toast-cadastro" role="status" aria-live="polite">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <span>Cadastro realizado com sucesso!</span>
+        <button type="button" class="fechar-toast" aria-label="Fechar mensagem">&times;</button>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

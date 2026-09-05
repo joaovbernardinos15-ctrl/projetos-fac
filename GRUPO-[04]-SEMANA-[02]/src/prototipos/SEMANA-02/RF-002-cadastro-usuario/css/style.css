@@ -239,9 +239,62 @@ body {
   margin-bottom: 20px;
 }
 
+.toast-cadastro {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 14px 16px;
+  border-left: 4px solid #42d392;
+  border-radius: 8px;
+  background-color: #202020;
+  box-shadow: 0 8px 24px var(--sombra);
+  color: var(--branco);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast-cadastro.visivel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.toast-cadastro > i {
+  color: #42d392;
+  font-size: 20px;
+}
+
+.fechar-toast {
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: var(--texto-cinza);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.fechar-toast:hover {
+  color: var(--branco);
+}
+
 @media (max-width: 480px) {
   .card-auth {
     padding: 30px 20px;
+  }
+
+  .toast-cadastro {
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    max-width: none;
   }
 
   .titulo-card {
