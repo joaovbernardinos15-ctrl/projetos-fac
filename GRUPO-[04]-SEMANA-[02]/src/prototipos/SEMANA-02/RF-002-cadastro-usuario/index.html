@@ -30,7 +30,8 @@
 
                     <div class="input-icone password-wrap">
                         <i class="fa-solid fa-lock"></i>
-                        <input id="loginPassword" type="password" placeholder="Senha (mínimo 8 caracteres)" required minlength="8">
+                        <input id="loginPassword" type="password" placeholder="Senha (mínimo 8 caracteres)" required
+                            minlength="8">
                         <button type="button" class="toggle-password" data-target="loginPassword"
                             aria-label="Mostrar senha">
                             <i class="fa-solid fa-eye"></i>
@@ -142,7 +143,20 @@
         <button type="button" class="fechar-toast" aria-label="Fechar mensagem">&times;</button>
     </div>
 
+    <div id="toastLogin" class="toast-cadastro" role="status" aria-live="polite">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <span>Login realizado com sucesso!</span>
+        <button type="button" class="fechar-toast" aria-label="Fechar mensagem">&times;</button>
+    </div>
+
+    <div id="toastRecuperacao" class="toast-cadastro" role="status" aria-live="polite">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <span>Link de recuperação enviado! Verifique seu e-mail.</span>
+        <button type="button" class="fechar-toast" aria-label="Fechar mensagem">&times;</button>
+    </div>
+
     <script src="js/script.js"></script>
+
 </body>
 
 </html>

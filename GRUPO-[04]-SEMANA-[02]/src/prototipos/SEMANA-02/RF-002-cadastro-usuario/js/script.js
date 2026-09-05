@@ -1,23 +1,46 @@
 const panels = document.querySelectorAll('.form-panel');
 const toggleButtons = document.querySelectorAll('[data-show-panel]');
 const passwordToggles = document.querySelectorAll('.toggle-password');
+
+// --- Toasts (Cadastro, Login e Recuperação de Senha) ---
 const cadastroToast = document.querySelector('#toastCadastro');
-const closeToastButton = cadastroToast?.querySelector('.fechar-toast');
-let toastTimeout;
+const loginToast = document.querySelector('#toastLogin');
+const recuperacaoToast = document.querySelector('#toastRecuperacao');
 
-function mostrarToastCadastro() {
-  if (!cadastroToast) return;
+const toastTimeouts = new WeakMap();
 
-  clearTimeout(toastTimeout);
-  cadastroToast.classList.add('visivel');
-  toastTimeout = setTimeout(() => {
-    cadastroToast.classList.remove('visivel');
+function mostrarToast(toastEl) {
+  if (!toastEl) return;
+
+  clearTimeout(toastTimeouts.get(toastEl));
+  toastEl.classList.add('visivel');
+
+  const timeoutId = setTimeout(() => {
+    toastEl.classList.remove('visivel');
   }, 4500);
+
+  toastTimeouts.set(toastEl, timeoutId);
 }
 
-closeToastButton?.addEventListener('click', () => {
-  cadastroToast.classList.remove('visivel');
-  clearTimeout(toastTimeout);
+function mostrarToastCadastro() {
+  mostrarToast(cadastroToast);
+}
+
+function mostrarToastLogin() {
+  mostrarToast(loginToast);
+}
+
+function mostrarToastRecuperacao() {
+  mostrarToast(recuperacaoToast);
+}
+
+// Botão de fechar de cada toast
+[cadastroToast, loginToast, recuperacaoToast].forEach((toastEl) => {
+  const closeButton = toastEl?.querySelector('.fechar-toast');
+  closeButton?.addEventListener('click', () => {
+    toastEl.classList.remove('visivel');
+    clearTimeout(toastTimeouts.get(toastEl));
+  });
 });
 
 function showPanel(panelName) {
@@ -96,6 +119,12 @@ document.querySelectorAll('input[type="email"]').forEach((input) => {
   });
 });
 
+function limparValidacaoVisual(form) {
+  form.querySelectorAll('.is-valid, .is-invalid').forEach((input) => {
+    input.classList.remove('is-valid', 'is-invalid');
+  });
+}
+
 // Bloqueia o envio do formulário se o e-mail for inválido
 document.querySelectorAll('.auth-form').forEach((form) => {
   form.addEventListener('submit', (event) => {
@@ -118,17 +147,36 @@ document.querySelectorAll('.auth-form').forEach((form) => {
       return;
     }
 
+    // --- Cadastro: reseta o formulário, volta pro Login e mostra o toast ---
     const registerPanel = form.closest('[data-panel="register"]');
     if (registerPanel) {
       event.preventDefault();
       form.reset();
-      form.querySelectorAll('.is-valid, .is-invalid').forEach((input) => {
-        input.classList.remove('is-valid', 'is-invalid');
-      });
+      limparValidacaoVisual(form);
       delete confirmationInput?.dataset.touched;
       delete confirmationInput?.dataset.validationFocus;
       showPanel('login');
       mostrarToastCadastro();
+      return;
+    }
+
+    // --- Login: mostra o toast de sucesso (não há painel de destino real, pois não há backend) ---
+    const loginPanel = form.closest('[data-panel="login"]');
+    if (loginPanel) {
+      event.preventDefault();
+      limparValidacaoVisual(form);
+      mostrarToastLogin();
+      return;
+    }
+
+    // --- Esqueci Senha: reseta o formulário e mostra o toast ---
+    const recoverPanel = form.closest('[data-panel="recover"]');
+    if (recoverPanel) {
+      event.preventDefault();
+      form.reset();
+      limparValidacaoVisual(form);
+      mostrarToastRecuperacao();
+      return;
     }
   });
 });
