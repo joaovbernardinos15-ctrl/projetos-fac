@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinemark - Meu perfil</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Só entra quem está logado -->
+  <script src="js/store.js"></script>
+  <script>
+    Store.sessao.exigirLogin("login.html");
+  </script>
+</head>
+
+<body class="admin-page">
+
+  <header class="adm-topbar">
+    <a class="adm-marca" href="index.html">
+      <i class="fa-solid fa-film"></i>
+      <span>
+        Cinemark
+        <small>MINHA CONTA</small>
+      </span>
+    </a>
+
+    <div class="adm-topbar-acoes">
+      <a class="adm-btn" href="index.html">
+        <i class="fa-solid fa-arrow-left"></i> Voltar ao site
+      </a>
+
+      <a class="adm-btn" href="admin.html" id="linkAdmin" hidden>
+        <i class="fa-solid fa-gauge-high"></i> Administração
+      </a>
+
+      <button type="button" class="adm-btn adm-btn-perigo" id="btnSair">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+      </button>
+    </div>
+  </header>
+
+  <main class="perfil-conteudo">
+    <div class="perfil-card">
+      <div class="perfil-avatar" id="perfilIniciais">?</div>
+
+      <h1 class="adm-titulo-pagina" id="perfilNomeTopo">—</h1>
+      <p class="perfil-meta">
+        <span class="etiqueta" id="perfilEtiqueta">CLIENTE</span>
+        &nbsp;·&nbsp; Cliente desde <span id="perfilDesde">—</span>
+      </p>
+
+      <p class="mensagem-erro" id="erroPerfil" hidden></p>
+
+      <!-- UPDATE dos próprios dados -->
+      <div class="form-linha">
+        <label for="perfilNome">Nome completo</label>
+        <input type="text" class="adm-input" id="perfilNome">
+      </div>
+
+      <div class="form-linha">
+        <label for="perfilEmail">E-mail</label>
+        <input type="email" class="adm-input" id="perfilEmail">
+      </div>
+
+      <div class="form-linha">
+        <label for="perfilSenha">Nova senha</label>
+        <input type="password" class="adm-input" id="perfilSenha" placeholder="Mínimo 8 caracteres">
+        <p class="form-ajuda">Deixe em branco para continuar com a senha atual.</p>
+      </div>
+
+      <button type="button" class="adm-btn adm-btn-primario" id="btnSalvarPerfil">
+        <i class="fa-solid fa-floppy-disk"></i> Salvar alterações
+      </button>
+
+      <!-- DELETE da própria conta -->
+      <section class="aviso-perigo">
+        <h3><i class="fa-solid fa-triangle-exclamation"></i> Excluir minha conta</h3>
+        <p>
+          Sua conta e seus dados serão removidos permanentemente do sistema.
+          Não é possível desfazer.
+        </p>
+        <button type="button" class="adm-btn adm-btn-perigo" id="btnExcluirConta">
+          <i class="fa-solid fa-trash"></i> Excluir minha conta
+        </button>
+      </section>
+    </div>
+  </main>
+
+  <!-- Confirmação da exclusão -->
+  <div class="modal fade modal-cinemark" id="modalExcluirConta" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Excluir minha conta</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="mensagem-erro" id="erroExcluirConta" hidden></p>
+          <p>Digite <strong>EXCLUIR</strong> para confirmar:</p>
+          <input type="text" class="adm-input" id="confirmacaoTexto" placeholder="EXCLUIR">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="adm-btn" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="adm-btn adm-btn-perigo" id="btnConfirmarExclusaoConta">
+            Excluir definitivamente
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-adm" id="toastAdm" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/perfil.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinemark - Administração</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <!-- Trava de acesso: roda antes da página aparecer.
+       Quem não for admin é redirecionado para o login. -->
+  <script src="js/store.js"></script>
+  <script>
+    Store.sessao.exigirAdmin("login.html");
+  </script>
+</head>
+
+<body class="admin-page">
+
+  <header class="adm-topbar">
+    <a class="adm-marca" href="index.html">
+      <i class="fa-solid fa-film"></i>
+      <span>
+        Cinemark
+        <small>PAINEL ADMINISTRATIVO</small>
+      </span>
+    </a>
+
+    <div class="adm-topbar-acoes">
+      <span class="adm-usuario">
+        <i class="fa-solid fa-circle-user"></i>
+        <strong id="admNome">—</strong>
+      </span>
+
+      <a class="adm-btn" href="index.html">
+        <i class="fa-solid fa-arrow-left"></i> Ver o site
+      </a>
+
+      <button type="button" class="adm-btn" id="btnRestaurar" title="Volta os dados para o estado inicial">
+        <i class="fa-solid fa-rotate-left"></i> Restaurar dados
+      </button>
+
+      <button type="button" class="adm-btn adm-btn-perigo" id="btnSair">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+      </button>
+    </div>
+  </header>
+
+  <main class="adm-conteudo">
+    <h1 class="adm-titulo-pagina">Gestão de conteúdo</h1>
+    <p class="adm-subtitulo">
+      RF03 — cadastro, consulta, edição e exclusão de filmes e de usuários.
+    </p>
+
+    <!-- Indicadores -->
+    <section class="adm-cards">
+      <article class="adm-card">
+        <span class="rotulo">Filmes cadastrados</span>
+        <span class="valor" id="totalFilmes">0</span>
+      </article>
+      <article class="adm-card">
+        <span class="rotulo">Em cartaz</span>
+        <span class="valor" id="totalCartaz">0</span>
+      </article>
+      <article class="adm-card">
+        <span class="rotulo">Usuários</span>
+        <span class="valor" id="totalUsuarios">0</span>
+      </article>
+      <article class="adm-card">
+        <span class="rotulo">Administradores</span>
+        <span class="valor" id="totalAdmins">0</span>
+      </article>
+    </section>
+
+    <!-- Abas -->
+    <nav class="adm-abas">
+      <button type="button" class="adm-aba ativa" data-aba="filmes">
+        <i class="fa-solid fa-clapperboard"></i> Filmes
+      </button>
+      <button type="button" class="adm-aba" data-aba="usuarios">
+        <i class="fa-solid fa-users"></i> Usuários
+      </button>
+    </nav>
+
+    <!-- =====================================================
+         ABA FILMES — CRUD COMPLETO (RF03)
+         ===================================================== -->
+    <section class="adm-painel" data-painel="filmes">
+      <div class="adm-filtros">
+        <div class="adm-campo-busca">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" class="adm-input" id="buscaFilme" placeholder="Buscar por título ou gênero...">
+        </div>
+
+        <select class="adm-select" id="filtroGenero">
+          <option value="">Todos os gêneros</option>
+        </select>
+
+        <select class="adm-select" id="filtroCartaz">
+          <option value="">Todos os status</option>
+          <option value="sim">Em cartaz</option>
+          <option value="nao">Fora de cartaz</option>
+        </select>
+
+        <button type="button" class="adm-btn adm-btn-primario" id="btnNovoFilme">
+          <i class="fa-solid fa-plus"></i> Novo filme
+        </button>
+      </div>
+
+      <div class="adm-tabela-wrap">
+        <table class="adm-tabela">
+          <thead>
+            <tr>
+              <th>Pôster</th>
+              <th>Título</th>
+              <th>Gênero</th>
+              <th>Ano</th>
+              <th>Classificação</th>
+              <th>Status</th>
+              <th class="coluna-acoes">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaFilmes"></tbody>
+        </table>
+
+        <div class="adm-vazio" id="filmesVazio" hidden>
+          <i class="fa-regular fa-face-frown"></i>
+          Nenhum filme encontrado com esses filtros.
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         ABA USUÁRIOS — CRUD COMPLETO
+         ===================================================== -->
+    <section class="adm-painel" data-painel="usuarios" hidden>
+      <div class="adm-filtros">
+        <div class="adm-campo-busca">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="search" class="adm-input" id="buscaUsuario" placeholder="Buscar por nome ou e-mail...">
+        </div>
+
+        <select class="adm-select" id="filtroPerfil">
+          <option value="">Todos os perfis</option>
+          <option value="admin">Administrador</option>
+          <option value="cliente">Cliente</option>
+        </select>
+
+        <button type="button" class="adm-btn adm-btn-primario" id="btnNovoUsuario">
+          <i class="fa-solid fa-user-plus"></i> Novo usuário
+        </button>
+      </div>
+
+      <div class="adm-tabela-wrap">
+        <table class="adm-tabela">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Perfil</th>
+              <th>Cadastrado em</th>
+              <th class="coluna-acoes">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaUsuarios"></tbody>
+        </table>
+
+        <div class="adm-vazio" id="usuariosVazio" hidden>
+          <i class="fa-regular fa-face-frown"></i>
+          Nenhum usuário encontrado com esses filtros.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       MODAL DE FILME — usado tanto no CREATE quanto no UPDATE
+       ===================================================== -->
+  <div class="modal fade modal-cinemark" id="modalFilme" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloModalFilme">Novo filme</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="mensagem-erro" id="erroFilme" hidden></p>
+
+          <input type="hidden" id="filmeId">
+
+          <div class="form-linha">
+            <label for="filmeTitulo">Título *</label>
+            <input type="text" class="adm-input" id="filmeTitulo" placeholder="Ex.: A Odisseia">
+          </div>
+
+          <div class="form-duplo">
+            <div class="form-linha">
+              <label for="filmeGenero">Gênero *</label>
+              <input type="text" class="adm-input" id="filmeGenero" list="listaGeneros" placeholder="Ex.: Ação">
+              <datalist id="listaGeneros"></datalist>
+            </div>
+
+            <div class="form-linha">
+              <label for="filmeAno">Ano *</label>
+              <input type="number" class="adm-input" id="filmeAno" min="1900" max="2100" placeholder="2026">
+            </div>
+          </div>
+
+          <div class="form-duplo">
+            <div class="form-linha">
+              <label for="filmeClassificacao">Classificação *</label>
+              <select class="adm-select" id="filmeClassificacao" style="max-width:none">
+                <option value="L">L — Livre</option>
+                <option value="10">10 anos</option>
+                <option value="12">12 anos</option>
+                <option value="14">14 anos</option>
+                <option value="16">16 anos</option>
+                <option value="18">18 anos</option>
+              </select>
+            </div>
+
+            <div class="form-linha">
+              <label for="filmePoster">Caminho do pôster</label>
+              <input type="text" class="adm-input" id="filmePoster" placeholder="./img/meu-poster.png">
+            </div>
+          </div>
+
+          <div class="form-linha">
+            <label for="filmeSinopse">Sinopse</label>
+            <textarea class="adm-textarea" id="filmeSinopse" rows="3"
+              placeholder="Resumo do filme (opcional)"></textarea>
+          </div>
+
+          <label class="form-check-cinemark">
+            <input type="checkbox" id="filmeEmCartaz" checked>
+            Em cartaz (aparece no carrossel da home)
+          </label>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="adm-btn" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="adm-btn adm-btn-primario" id="btnSalvarFilme">
+            <i class="fa-solid fa-floppy-disk"></i> Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MODAL DE USUÁRIO — CREATE e UPDATE
+       ===================================================== -->
+  <div class="modal fade modal-cinemark" id="modalUsuario" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="tituloModalUsuario">Novo usuário</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="mensagem-erro" id="erroUsuario" hidden></p>
+
+          <input type="hidden" id="usuarioId">
+
+          <div class="form-linha">
+            <label for="usuarioNome">Nome completo *</label>
+            <input type="text" class="adm-input" id="usuarioNome">
+          </div>
+
+          <div class="form-linha">
+            <label for="usuarioEmail">E-mail *</label>
+            <input type="email" class="adm-input" id="usuarioEmail">
+          </div>
+
+          <div class="form-duplo">
+            <div class="form-linha">
+              <label for="usuarioPerfil">Perfil *</label>
+              <select class="adm-select" id="usuarioPerfil" style="max-width:none">
+                <option value="cliente">Cliente</option>
+                <option value="admin">Administrador</option>
+              </select>
+            </div>
+
+            <div class="form-linha">
+              <label for="usuarioSenha">Senha</label>
+              <input type="password" class="adm-input" id="usuarioSenha" placeholder="Mínimo 8 caracteres">
+              <p class="form-ajuda" id="ajudaSenha">Deixe em branco para manter a senha atual.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="adm-btn" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="adm-btn adm-btn-primario" id="btnSalvarUsuario">
+            <i class="fa-solid fa-floppy-disk"></i> Salvar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================
+       MODAL DE CONFIRMAÇÃO — usado pelos dois DELETEs
+       ===================================================== -->
+  <div class="modal fade modal-cinemark" id="modalExcluir" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmar exclusão</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="modal-body">
+          <p class="mensagem-erro" id="erroExcluir" hidden></p>
+          <p id="textoExcluir">Tem certeza?</p>
+          <p class="form-ajuda">Essa ação não pode ser desfeita.</p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="adm-btn" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="adm-btn adm-btn-perigo" id="btnConfirmarExclusao">
+            <i class="fa-solid fa-trash"></i> Excluir
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-adm" id="toastAdm" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+
+</html>

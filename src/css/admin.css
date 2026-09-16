@@ -1,0 +1,556 @@
+/* =========================================================
+   CINEMARK — PAINEL ADMINISTRATIVO E PERFIL (admin.css)
+
+   Folha própria, independente de style.css, para que as
+   páginas internas não herdem o layout centralizado do site.
+   ========================================================= */
+
+:root {
+  --adm-vermelho: #e63950;
+  --adm-vermelho-escuro: #c1233b;
+  --adm-fundo: #120e0f;
+  --adm-superficie: #1a1516;
+  --adm-superficie-2: #221b1d;
+  --adm-borda: #2f2628;
+  --adm-texto: #eae6e6;
+  --adm-texto-fraco: #9c9494;
+  --adm-verde: #2ecc71;
+  --adm-amarelo: #f1c40f;
+}
+
+body.admin-page {
+  margin: 0;
+  min-height: 100vh;
+  display: block;
+  background: var(--adm-fundo);
+  color: var(--adm-texto);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* ---------- barra superior ---------- */
+
+.adm-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 26px;
+  background: var(--adm-superficie);
+  border-bottom: 1px solid var(--adm-borda);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.adm-marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--adm-texto);
+  text-decoration: none;
+}
+
+.adm-marca i {
+  color: var(--adm-vermelho);
+}
+
+.adm-marca small {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--adm-texto-fraco);
+  letter-spacing: 0.4px;
+}
+
+.adm-topbar-acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.adm-usuario {
+  font-size: 14px;
+  color: var(--adm-texto-fraco);
+}
+
+.adm-usuario strong {
+  color: var(--adm-texto);
+}
+
+/* ---------- botões ---------- */
+
+.adm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9px;
+  border: 1.5px solid var(--adm-borda);
+  background: transparent;
+  color: var(--adm-texto);
+  padding: 9px 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.adm-btn:hover {
+  background: var(--adm-superficie-2);
+  border-color: var(--adm-vermelho-escuro);
+  color: var(--adm-texto);
+}
+
+.adm-btn-primario {
+  background: var(--adm-vermelho);
+  border-color: var(--adm-vermelho);
+  color: #fff;
+}
+
+.adm-btn-primario:hover {
+  background: var(--adm-vermelho-escuro);
+  border-color: var(--adm-vermelho-escuro);
+  color: #fff;
+}
+
+.adm-btn-perigo {
+  border-color: var(--adm-vermelho-escuro);
+  color: var(--adm-vermelho);
+}
+
+.adm-btn-perigo:hover {
+  background: rgba(230, 57, 80, 0.12);
+}
+
+.adm-btn-icone {
+  border: none;
+  background: transparent;
+  color: var(--adm-texto-fraco);
+  padding: 7px 9px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.adm-btn-icone:hover {
+  background: var(--adm-superficie-2);
+  color: var(--adm-texto);
+}
+
+.adm-btn-icone.excluir:hover {
+  color: var(--adm-vermelho);
+}
+
+/* ---------- layout ---------- */
+
+.adm-conteudo {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 26px 70px;
+}
+
+.adm-titulo-pagina {
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+
+.adm-subtitulo {
+  color: var(--adm-texto-fraco);
+  font-size: 14.5px;
+  margin: 0 0 24px;
+}
+
+/* ---------- indicadores ---------- */
+
+.adm-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.adm-card {
+  background: var(--adm-superficie);
+  border: 1px solid var(--adm-borda);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+
+.adm-card .rotulo {
+  display: block;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--adm-texto-fraco);
+  margin-bottom: 6px;
+}
+
+.adm-card .valor {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--adm-vermelho);
+}
+
+/* ---------- abas ---------- */
+
+.adm-abas {
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--adm-borda);
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.adm-aba {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--adm-texto-fraco);
+  padding: 11px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.adm-aba.ativa {
+  color: var(--adm-texto);
+  border-bottom-color: var(--adm-vermelho);
+}
+
+.adm-painel[hidden] {
+  display: none;
+}
+
+/* ---------- filtros ---------- */
+
+.adm-filtros {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.adm-campo-busca {
+  position: relative;
+  flex: 1;
+  min-width: 220px;
+}
+
+.adm-campo-busca i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--adm-texto-fraco);
+  font-size: 14px;
+}
+
+.adm-input,
+.adm-select,
+.adm-textarea {
+  width: 100%;
+  background: var(--adm-superficie-2);
+  border: 1.5px solid var(--adm-borda);
+  border-radius: 9px;
+  color: var(--adm-texto);
+  padding: 10px 14px;
+  font-size: 14.5px;
+  outline: none;
+  font-family: inherit;
+}
+
+.adm-campo-busca .adm-input {
+  padding-left: 38px;
+}
+
+.adm-input:focus,
+.adm-select:focus,
+.adm-textarea:focus {
+  border-color: var(--adm-vermelho);
+}
+
+.adm-input::placeholder {
+  color: var(--adm-texto-fraco);
+}
+
+.adm-select {
+  max-width: 220px;
+}
+
+/* ---------- tabela ---------- */
+
+.adm-tabela-wrap {
+  background: var(--adm-superficie);
+  border: 1px solid var(--adm-borda);
+  border-radius: 14px;
+  overflow-x: auto;
+}
+
+.adm-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 660px;
+}
+
+.adm-tabela th {
+  text-align: left;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--adm-texto-fraco);
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--adm-borda);
+  white-space: nowrap;
+}
+
+.adm-tabela td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--adm-borda);
+  font-size: 14.5px;
+  vertical-align: middle;
+}
+
+.adm-tabela tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.adm-tabela tbody tr:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.adm-poster {
+  width: 40px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 5px;
+  background: var(--adm-superficie-2);
+}
+
+.adm-acoes {
+  display: flex;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+.coluna-acoes {
+  text-align: right;
+  width: 1%;
+  white-space: nowrap;
+}
+
+/* ---------- etiquetas ---------- */
+
+.etiqueta {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.etiqueta-cartaz {
+  background: rgba(46, 204, 113, 0.14);
+  color: var(--adm-verde);
+}
+
+.etiqueta-fora {
+  background: rgba(156, 148, 148, 0.16);
+  color: var(--adm-texto-fraco);
+}
+
+.etiqueta-admin {
+  background: rgba(230, 57, 80, 0.16);
+  color: var(--adm-vermelho);
+}
+
+.etiqueta-cliente {
+  background: rgba(241, 196, 15, 0.14);
+  color: var(--adm-amarelo);
+}
+
+/* ---------- vazio ---------- */
+
+.adm-vazio {
+  text-align: center;
+  padding: 44px 20px;
+  color: var(--adm-texto-fraco);
+}
+
+.adm-vazio i {
+  font-size: 30px;
+  display: block;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+/* ---------- modais ---------- */
+
+.modal-cinemark .modal-content {
+  background: var(--adm-superficie);
+  border: 1px solid var(--adm-borda);
+  border-radius: 16px;
+  color: var(--adm-texto);
+}
+
+.modal-cinemark .modal-header,
+.modal-cinemark .modal-footer {
+  border-color: var(--adm-borda);
+}
+
+.modal-cinemark .modal-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modal-cinemark .btn-close {
+  filter: invert(1) grayscale(1) brightness(1.6);
+}
+
+.form-linha {
+  margin-bottom: 14px;
+}
+
+.form-linha label {
+  display: block;
+  font-size: 13px;
+  color: var(--adm-texto-fraco);
+  margin-bottom: 6px;
+}
+
+.form-duplo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.form-check-cinemark {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14.5px;
+}
+
+.form-check-cinemark input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--adm-vermelho);
+}
+
+.form-ajuda {
+  font-size: 12.5px;
+  color: var(--adm-texto-fraco);
+  margin-top: 5px;
+}
+
+/* ---------- mensagens ---------- */
+
+.mensagem-erro {
+  background: rgba(230, 57, 80, 0.12);
+  border: 1px solid var(--adm-vermelho-escuro);
+  color: #ff9aa7;
+  border-radius: 9px;
+  padding: 10px 14px;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.mensagem-erro[hidden] {
+  display: none;
+}
+
+.aviso-perigo {
+  background: rgba(230, 57, 80, 0.08);
+  border: 1px solid var(--adm-vermelho-escuro);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-top: 26px;
+}
+
+.aviso-perigo h3 {
+  font-size: 16px;
+  color: var(--adm-vermelho);
+  margin: 0 0 6px;
+}
+
+.aviso-perigo p {
+  font-size: 14px;
+  color: var(--adm-texto-fraco);
+  margin: 0 0 14px;
+}
+
+/* ---------- toast ---------- */
+
+.toast-adm {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  background: var(--adm-superficie-2);
+  border: 1px solid var(--adm-borda);
+  border-left: 4px solid var(--adm-verde);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 14.5px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transform: translateY(14px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 2000;
+}
+
+.toast-adm.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- página de perfil ---------- */
+
+.perfil-conteudo {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 34px 22px 70px;
+}
+
+.perfil-card {
+  background: var(--adm-superficie);
+  border: 1px solid var(--adm-borda);
+  border-radius: 16px;
+  padding: 28px 26px;
+}
+
+.perfil-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--adm-vermelho);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.perfil-meta {
+  font-size: 13px;
+  color: var(--adm-texto-fraco);
+  margin-bottom: 22px;
+}
+
+@media (max-width: 575px) {
+  .form-duplo {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-conteudo {
+    padding: 22px 16px 60px;
+  }
+}
