@@ -40,8 +40,31 @@
 }
 
 .contato-page .social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 7px 16px rgba(0, 0, 0, .18);
   text-decoration: none;
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.contato-page .social-btn svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.contato-page .social-btn:hover {
+  background: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, .28);
+  transform: translateY(-3px);
 }
 
 .contato-page .contato-map {

@@ -120,6 +120,38 @@
   margin-top: 10px;
 }
 
+/* Layout estável: logo, marca e menu ocupam áreas independentes. */
+@media (min-width: 992px) {
+  .cinemark-nav .container-fluid {
+    display: grid;
+    grid-template-columns: minmax(110px, 1fr) auto minmax(110px, 1fr);
+    justify-content: initial;
+    column-gap: 20px;
+  }
+
+  .cinemark-nav .navbar-brand,
+  .filmes-page .cinemark-nav .navbar-brand,
+  .contato-page .cinemark-nav .navbar-brand {
+    position: absolute !important;
+    left: calc(50% - 18px) !important;
+    top: 50% !important;
+    margin-right: 0 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .cinemark-nav .navbar-collapse,
+  .filmes-page .cinemark-nav .navbar-collapse,
+  .contato-page .cinemark-nav .navbar-collapse {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    width: max-content;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    transform: translateX(8px);
+  }
+}
+
 /* Mantém o mesmo desenho mesmo quando style.css tem regras antigas por página. */
 .filmes-page .cinemark-nav,
 .contato-page .cinemark-nav {
@@ -169,6 +201,7 @@
   }
 
   .cinemark-nav .container-fluid {
+    display: flex;
     flex-wrap: wrap;
   }
 
@@ -228,3 +261,13 @@
     min-height: 36px !important;
   }
 }
+
+@media (min-width: 992px) {
+  .filmes-page .cinemark-nav .navbar-brand,
+  .contato-page .cinemark-nav .navbar-brand {
+    left: calc(50% - 18px) !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
