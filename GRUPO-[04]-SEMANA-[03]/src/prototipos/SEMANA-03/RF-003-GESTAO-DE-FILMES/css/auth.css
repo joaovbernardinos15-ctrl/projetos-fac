@@ -320,3 +320,40 @@ body {
 .erro-auth[hidden] {
   display: none;
 }
+
+/* Acabamento visual sem alterar a estrutura dos formulários. */
+body {
+  background:
+    radial-gradient(circle at 78% 8%, rgba(255, 59, 78, .28), transparent 26%),
+    linear-gradient(135deg, #b3001b 0%, #4a0008 58%, #1a0002 100%);
+}
+
+.card-auth {
+  border: 1px solid rgba(255, 255, 255, .08);
+  box-shadow: 0 26px 70px rgba(0, 0, 0, .5);
+}
+
+.input-icone input:focus {
+  border-color: var(--vermelho);
+  box-shadow: 0 0 0 3px rgba(255, 59, 78, .14);
+}
+
+.btn-vermelho,
+.toggle-password,
+.fechar-toast {
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.btn-vermelho:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(255, 59, 78, .18);
+}
+
+.btn-vermelho:focus-visible,
+.toggle-password:focus-visible,
+.link-vermelho:focus-visible,
+.texto-rodape a:focus-visible,
+.fechar-toast:focus-visible {
+  outline: 2px solid #ff9aa7;
+  outline-offset: 3px;
+}

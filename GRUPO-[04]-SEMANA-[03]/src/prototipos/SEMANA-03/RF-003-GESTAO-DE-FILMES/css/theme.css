@@ -1,0 +1,148 @@
+/* Tema visual compartilhado das páginas públicas. */
+
+:root {
+  --theme-surface: rgba(17, 14, 15, .9);
+  --theme-surface-strong: #100d0e;
+  --theme-line: rgba(255, 255, 255, .1);
+  --theme-shadow: 0 20px 50px rgba(0, 0, 0, .28);
+  --theme-red-glow: rgba(230, 57, 80, .2);
+}
+
+body.filmes-page,
+body.contato-page {
+  background-color: #4d0707;
+  background-image:
+    radial-gradient(circle at 82% 0%, rgba(230, 57, 80, .25), transparent 28%),
+    linear-gradient(135deg, #c21818 0%, #7c0b0d 45%, #400507 100%);
+}
+
+body.filmes-page::after,
+body.contato-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(120deg, transparent 0 58%, rgba(0, 0, 0, .12) 100%);
+  pointer-events: none;
+}
+
+.cinemark-nav {
+  border-color: var(--theme-line);
+  box-shadow: var(--theme-shadow);
+  backdrop-filter: blur(12px);
+}
+
+.cinemark-nav .navbar-brand {
+  text-shadow: 0 0 22px var(--theme-red-glow);
+}
+
+@media (min-width: 992px) {
+  .cinemark-nav .navbar-collapse {
+    padding-left: 150px;
+  }
+}
+
+.cinemark-nav .nav-link,
+.btn-planos-nav,
+.arrow-btn,
+.genero-btn,
+.letra-btn,
+.submit-btn,
+.limpar-filtros,
+.limpar-busca {
+  transition: color .2s ease, background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.cinemark-nav .nav-link:focus-visible,
+.btn-planos-nav:focus-visible,
+.arrow-btn:focus-visible,
+.genero-btn:focus-visible,
+.letra-btn:focus-visible,
+.submit-btn:focus-visible,
+.limpar-filtros:focus-visible,
+.limpar-busca:focus-visible,
+.btn-assinar:focus-visible {
+  outline: 2px solid #ff8290;
+  outline-offset: 3px;
+}
+
+.btn-planos-nav:hover,
+.submit-btn:hover,
+.limpar-filtros:hover {
+  box-shadow: 0 8px 22px var(--theme-red-glow);
+}
+
+.hero-banner {
+  filter: drop-shadow(0 18px 30px rgba(0, 0, 0, .2));
+}
+
+.hero-banner .carousel-inner {
+  border: 1px solid var(--theme-line);
+  background: rgba(10, 8, 9, .6);
+}
+
+.em-cartaz,
+.catalogo-panel,
+.contato-card {
+  border: 1px solid var(--theme-line);
+  box-shadow: var(--theme-shadow);
+}
+
+.em-cartaz-header h2,
+.contato-card h2,
+.filtro-grupo h2 {
+  letter-spacing: .04em;
+}
+
+.movie-poster-card {
+  border: 1px solid var(--theme-line);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, .22);
+}
+
+.movie-poster-card:hover {
+  border-color: rgba(230, 57, 80, .65);
+  box-shadow: 0 18px 32px rgba(0, 0, 0, .35), 0 0 0 1px var(--theme-red-glow);
+}
+
+.filmes-page .busca-field {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .2);
+}
+
+.filmes-page .busca-field:focus-within {
+  border-color: #e63950;
+  box-shadow: 0 0 0 3px var(--theme-red-glow), 0 12px 30px rgba(0, 0, 0, .2);
+}
+
+.contato-page .contato-card {
+  background: linear-gradient(145deg, rgba(25, 20, 21, .96), rgba(13, 10, 11, .96));
+}
+
+.contato-page .contato-map {
+  box-shadow: 0 12px 26px rgba(0, 0, 0, .22);
+}
+
+@media (max-width: 650px) {
+  .hero-banner {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .em-cartaz {
+    margin-top: 22px;
+    border-radius: 12px;
+  }
+
+  .contato-card {
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .22);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}

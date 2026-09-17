@@ -1,0 +1,173 @@
+/* ===== Página de Lanches ===== */
+.lanches-page .contato-hero {
+  padding-bottom: 34px;
+}
+
+.lanches-kicker,
+.lanches-card-label {
+  display: inline-block;
+  color: #ff8290;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.lanches-page .contato-hero h1 {
+  margin-top: 8px;
+  font-size: clamp(32px, 5vw, 48px);
+}
+
+.lanches-page .contato-wrap {
+  display: flex;
+  max-width: 980px;
+  margin: 0 auto 60px;
+  padding: 0 18px;
+}
+
+.lanches-page .contato-card {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 42px 46px;
+  background:
+    linear-gradient(135deg, rgba(28, 20, 22, .98), rgba(12, 10, 11, .98)),
+    #161213;
+}
+
+.lanches-page .contato-card::after {
+  content: "";
+  position: absolute;
+  top: -150px;
+  right: -100px;
+  width: 330px;
+  height: 330px;
+  border: 42px solid rgba(230, 57, 80, .08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.lanches-page .contato-card h2 {
+  position: relative;
+  z-index: 1;
+  margin: 8px 0 10px;
+  color: #fff;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(24px, 3vw, 32px);
+}
+
+.lanches-page .contato-card > p {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  color: #b9aeaf;
+  line-height: 1.65;
+}
+
+.lista-lanches {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 30px 0 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.lista-lanches li {
+  min-height: 64px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .035);
+  line-height: 1.35;
+  transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.lista-lanches li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 12px 14px;
+  color: #f1eaea;
+  text-decoration: none;
+}
+
+.lanche-item-img {
+  width: 70px;
+  height: 52px;
+  flex: 0 0 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.lista-lanches li a > span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lista-lanches li:hover {
+  border-color: rgba(230, 57, 80, .55);
+  background: rgba(230, 57, 80, .1);
+  transform: translateY(-2px);
+}
+
+.lista-lanches i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border-radius: 50%;
+  background: rgba(230, 57, 80, .14);
+  color: #ff6678;
+}
+
+.lista-lanches .seta-lanche {
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  background: transparent;
+  color: #a99699;
+  font-size: 14px;
+}
+
+.lista-lanches li:hover .seta-lanche {
+  color: #fff;
+  transform: translateX(3px);
+}
+
+.aviso-construcao {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(230, 57, 80, .45);
+  border-radius: 12px;
+  background: rgba(230, 57, 80, .09);
+  color: #d8cacc;
+  font-size: 14px;
+}
+
+.aviso-construcao i {
+  color: #ff6678;
+  font-size: 17px;
+}
+
+@media (max-width: 650px) {
+  .lanches-page .contato-card {
+    padding: 30px 22px;
+  }
+
+  .lista-lanches {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+}

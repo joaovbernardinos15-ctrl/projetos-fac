@@ -1,0 +1,65 @@
+/* Correções visuais e de usabilidade da página de contato. */
+
+.contato-page {
+  overflow-x: hidden;
+}
+
+.contato-page .contato-hero {
+  position: relative;
+  z-index: 1;
+  padding-top: 116px;
+}
+
+.contato-page .contato-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.contato-page .contato-card {
+  min-width: 0;
+}
+
+.contato-page .contato-form .field {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  transform: none;
+}
+
+.contato-page .contato-form input,
+.contato-page .contato-form textarea {
+  min-width: 0;
+}
+
+.contato-page .contato-form textarea {
+  line-height: 1.5;
+}
+
+.contato-page .contato-form .submit-btn {
+  cursor: pointer;
+}
+
+.contato-page .social-btn {
+  flex: 0 0 auto;
+  text-decoration: none;
+}
+
+.contato-page .contato-map {
+  min-height: 190px;
+}
+
+@media (max-width: 900px) {
+  .contato-page .contato-hero {
+    padding-top: 98px;
+  }
+}
+
+@media (max-width: 560px) {
+  .contato-page .contato-hero {
+    padding-top: 88px;
+  }
+
+  .contato-page .contato-form .field {
+    padding: 11px 12px;
+  }
+}

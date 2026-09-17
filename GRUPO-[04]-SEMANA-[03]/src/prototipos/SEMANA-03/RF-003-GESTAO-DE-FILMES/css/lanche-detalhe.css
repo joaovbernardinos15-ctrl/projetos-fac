@@ -1,0 +1,145 @@
+.lanche-detalhe-page .contato-hero {
+  padding-bottom: 28px;
+}
+
+.lanche-detalhe {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 36px, 920px);
+  margin: 0 auto 60px;
+  padding: 42px 46px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(28, 20, 22, .98), rgba(12, 10, 11, .98));
+  box-shadow: 0 20px 50px rgba(0, 0, 0, .3);
+}
+
+.lanche-detalhe::after {
+  content: "";
+  position: absolute;
+  top: -170px;
+  right: -110px;
+  width: 360px;
+  height: 360px;
+  border: 45px solid rgba(230, 57, 80, .08);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.lanche-detalhe::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 260px;
+  margin-bottom: 30px;
+  border-radius: 14px;
+  background-position: center;
+  background-size: cover;
+  box-shadow: inset 0 -70px 70px rgba(12, 10, 11, .45);
+}
+
+body:has(.fa-bowl-food) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_36.png"); }
+body:has(.fa-mug-hot) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_25.png"); }
+body:has(.fa-hotdog) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_40.png"); }
+body:has(.fa-candy-cane) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_29.png"); }
+body:has(.fa-box-open) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_03_56.png"); }
+
+.lanche-detalhe-cabecalho,
+.lanche-opcoes,
+.lanche-detalhe-acoes {
+  position: relative;
+  z-index: 1;
+}
+
+.lanche-icone {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 20px;
+  border-radius: 18px;
+  background: rgba(230, 57, 80, .14);
+  color: #ff6678;
+  font-size: 28px;
+}
+
+.lanche-detalhe h2 {
+  margin-bottom: 10px;
+  color: #fff;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.lanche-detalhe-cabecalho p {
+  max-width: 650px;
+  color: #c8bfc0;
+  line-height: 1.7;
+}
+
+.lanche-opcoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 28px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lanche-opcoes li {
+  padding: 15px 16px;
+  border: 1px solid rgba(255, 255, 255, .08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .035);
+  color: #f1eaea;
+}
+
+.lanche-opcoes strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #ff8290;
+}
+
+.lanche-detalhe-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.lanche-detalhe-acoes a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px;
+  border: 1px solid #d8344b;
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.lanche-detalhe-acoes a:first-child {
+  background: #a91529;
+}
+
+.lanche-detalhe-acoes a:hover {
+  background: #c1233b;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 650px) {
+  .lanche-detalhe {
+    width: min(100% - 20px, 920px);
+    padding: 30px 22px;
+  }
+
+  .lanche-opcoes {
+    grid-template-columns: 1fr;
+  }
+
+  .lanche-detalhe::before {
+    height: 190px;
+  }
+}

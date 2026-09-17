@@ -554,3 +554,46 @@ body.admin-page {
     padding: 22px 16px 60px;
   }
 }
+
+/* Acabamento visual da área interna, mantendo os componentes existentes. */
+body.admin-page {
+  background:
+    radial-gradient(circle at 88% 0%, rgba(230, 57, 80, .14), transparent 28%),
+    linear-gradient(135deg, #171012 0%, #100b0c 58%, #080708 100%);
+}
+
+.adm-topbar {
+  background: rgba(26, 21, 22, .92);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, .2);
+  backdrop-filter: blur(12px);
+}
+
+.adm-card,
+.adm-tabela-wrap,
+.perfil-card {
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .18);
+}
+
+.adm-card,
+.adm-btn,
+.adm-input,
+.adm-select,
+.adm-textarea,
+.perfil-card {
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.adm-card:hover {
+  border-color: rgba(230, 57, 80, .45);
+  transform: translateY(-2px);
+}
+
+.adm-btn:focus-visible,
+.adm-input:focus-visible,
+.adm-select:focus-visible,
+.adm-textarea:focus-visible,
+.adm-aba:focus-visible,
+.adm-btn-icone:focus-visible {
+  outline: 2px solid #ff9aa7;
+  outline-offset: 3px;
+}
