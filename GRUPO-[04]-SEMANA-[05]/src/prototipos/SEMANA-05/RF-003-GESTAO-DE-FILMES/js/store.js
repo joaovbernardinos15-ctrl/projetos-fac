@@ -20,7 +20,8 @@ const Store = (() => {
   const CHAVES = {
     usuarios: "cinemark:usuarios",
     filmes: "cinemark:filmes",
-    sessao: "cinemark:sessao"
+    sessao: "cinemark:sessao",
+    carrinho: "cinemark:carrinho"
   };
 
   /* ---------- utilitários ---------- */
@@ -375,6 +376,44 @@ const Store = (() => {
     }
   };
 
+  const carrinho = {
+    listar() {
+      return ler(CHAVES.carrinho, []);
+    },
+
+    adicionar(produto, quantidade = 1) {
+      const itens = this.listar();
+      const existente = itens.find((item) => item.id === produto.id);
+
+      if (existente) {
+        existente.quantidade += quantidade;
+      } else {
+        itens.push({ ...produto, quantidade });
+      }
+
+      gravar(CHAVES.carrinho, itens);
+      return itens;
+    },
+
+    atualizarQuantidade(id, quantidade) {
+      const itens = this.listar()
+        .map((item) => item.id === id ? { ...item, quantidade } : item)
+        .filter((item) => item.quantidade > 0);
+      gravar(CHAVES.carrinho, itens);
+      return itens;
+    },
+
+    remover(id) {
+      const itens = this.listar().filter((item) => item.id !== id);
+      gravar(CHAVES.carrinho, itens);
+      return itens;
+    },
+
+    limpar() {
+      gravar(CHAVES.carrinho, []);
+    }
+  };
+
   /* ---------- reset (útil para apresentação/banca) ---------- */
 
   function restaurarPadrao() {
@@ -386,5 +425,5 @@ const Store = (() => {
 
   semear();
 
-  return { usuarios, filmes, sessao, restaurarPadrao, normalizar, CHAVES };
+  return { usuarios, filmes, sessao, carrinho, restaurarPadrao, normalizar, CHAVES };
 })();

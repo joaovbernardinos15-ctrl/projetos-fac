@@ -120,6 +120,71 @@
   margin-top: 10px;
 }
 
+.nav-conta-entrar,
+.nav-conta-logado {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.badge-admin {
+  margin-left: 5px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: var(--accent-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  vertical-align: middle;
+}
+
+.dropdown-cinemark {
+  min-width: 215px;
+  padding: 6px;
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  background: var(--card-bg);
+}
+
+.dropdown-cinemark .dropdown-header {
+  padding: 8px 12px 4px;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  word-break: break-all;
+}
+
+.dropdown-cinemark .dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 14.5px;
+  text-align: left;
+}
+
+.dropdown-cinemark .dropdown-item:hover,
+.dropdown-cinemark .dropdown-item:focus {
+  background: rgba(230, 57, 80, .14);
+  color: var(--accent-red);
+}
+
+.dropdown-cinemark .dropdown-item i {
+  width: 16px;
+  text-align: center;
+}
+
+.dropdown-cinemark .dropdown-divider {
+  margin: 5px 0;
+  border-color: var(--card-border);
+}
+
 /* Layout estável: logo, marca e menu ocupam áreas independentes. */
 @media (min-width: 992px) {
   .cinemark-nav .container-fluid {

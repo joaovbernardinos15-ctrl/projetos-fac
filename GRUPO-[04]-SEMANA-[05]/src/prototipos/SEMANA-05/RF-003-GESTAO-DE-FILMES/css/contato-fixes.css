@@ -1,5 +1,51 @@
 /* Correções visuais e de usabilidade da página de contato. */
 
+.field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--accent-red-line);
+  border-radius: 10px;
+  background: var(--input-bg);
+}
+
+.field svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: var(--accent-red-line);
+}
+
+.field input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 16px;
+}
+
+.field input::placeholder,
+.contato-form textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.contato-form textarea {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-light);
+  font-family: inherit;
+  font-size: 16px;
+  resize: vertical;
+}
+
 .contato-page {
   overflow-x: hidden;
 }
@@ -85,4 +131,368 @@
   .contato-page .contato-form .field {
     padding: 11px 12px;
   }
+}
+
+
+/* ===== Página de Contato =====
+   Reaproveita .field, .social-btn e .submit-btn (já existem lá em
+   cima, usados no login) pra manter os campos e botões com a
+   mesma cara em todo o site. */
+.contato-page {
+    display: block;
+    background-color: var(--bg-red-dark);
+    min-height: 100vh;
+    padding: 0;
+}
+
+.contato-hero {
+    padding: 56px 16px 40px;
+    text-align: center;
+}
+
+.contato-hero h1 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 34px;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.contato-hero p {
+    color: var(--text-light);
+    opacity: 0.85;
+    font-size: 15.5px;
+}
+
+.contato-wrap {
+    max-width: 1100px;
+    margin: -20px auto 60px;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 28px;
+}
+
+.contato-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 32px 30px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.contato-card h2 {
+    color: var(--text-light);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 21px;
+    margin-bottom: 22px;
+}
+
+/* Textarea reaproveita a aparência do .field, mas o texto começa
+   no topo (align-items:flex-start) em vez de centralizado */
+.contato-form .field-textarea {
+    align-items: flex-start;
+}
+
+.contato-form textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-light);
+    font-size: 16px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 110px;
+}
+
+.contato-form textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* Lista de informações (endereço, telefone, e-mail, horário) */
+.contato-info-list {
+    list-style: none;
+    margin-bottom: 26px;
+}
+
+.contato-info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 20px;
+}
+
+.contato-info-list svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    stroke: var(--accent-red);
+    fill: none;
+    margin-top: 2px;
+}
+
+.contato-info-list strong {
+    display: block;
+    color: var(--text-light);
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.contato-info-list span,
+.contato-info-list a {
+    color: var(--text-muted);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.contato-info-list a:hover {
+    color: var(--accent-red);
+    text-decoration: underline;
+}
+
+.contato-map {
+    width: 100%;
+    border: 0;
+    border-radius: 14px;
+    margin-top: 6px;
+    aspect-ratio: 4 / 3;
+}
+
+.site-footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 24px 16px 32px;
+}
+
+/* ===== Responsivo (celular/tablet) ===== */
+@media (max-width: 900px) {
+    .contato-wrap {
+        grid-template-columns: 1fr;
+        margin-top: -10px;
+    }
+
+    .contato-hero {
+        padding: 40px 16px 30px;
+    }
+
+    .contato-hero h1 {
+        font-size: 26px;
+    }
+}
+
+/* =========================================================
+   REFINAMENTO FINAL — CONTATO
+   Mantém a estrutura/HTML existente e melhora apenas o visual.
+   ========================================================= */
+.contato-page {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background:
+        radial-gradient(circle at 78% 8%, rgba(194, 24, 24, .55) 0 12%, transparent 30%),
+        radial-gradient(circle at 12% 45%, rgba(194, 24, 24, .32) 0 10%, transparent 32%),
+        linear-gradient(135deg, #c21818 0%, #8b0d0d 42%, #4c0707 100%);
+}
+
+/* Círculo decorativo semelhante ao catálogo de filmes */
+.contato-page::before {
+    content: "";
+    position: fixed;
+    width: 610px;
+    height: 610px;
+    right: -105px;
+    top: -300px;
+    border: 74px solid rgba(35, 3, 3, .25);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+}
+/* Cabeçalho */
+.contato-page .contato-hero {
+    padding: 102px 16px 28px;
+}
+
+.contato-page .contato-hero h1 {
+    margin-bottom: 7px;
+    font-size: clamp(30px, 4vw, 40px);
+    letter-spacing: -.4px;
+    text-shadow: 0 4px 18px rgba(0,0,0,.22);
+}
+
+.contato-page .contato-hero p {
+    margin: 0;
+    font-size: 15px;
+}
+
+/* Cards principais */
+.contato-page .contato-wrap {
+    max-width: 1080px;
+    margin: 0 auto 38px;
+    padding: 0 18px;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.contato-page .contato-card {
+    padding: 27px 28px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, #171415 0%, #100e0f 100%);
+    border: 1px solid #31282a;
+    box-shadow: 0 18px 45px rgba(0,0,0,.30);
+}
+
+.contato-page .contato-card h2 {
+    margin-bottom: 19px;
+    font-size: 20px;
+}
+
+/* Campos mais modernos */
+.contato-page .contato-form .field {
+    min-height: 48px;
+    margin-bottom: 13px;
+    padding: 12px 14px;
+    border-radius: 9px;
+    background: #1a1617;
+    border-color: #9e1830;
+    transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.contato-page .contato-form .field:focus-within {
+    border-color: #e63950;
+    box-shadow: 0 0 0 3px rgba(230,57,80,.10);
+    transform: translateY(-1px);
+}
+
+.contato-page .contato-form .field svg {
+    width: 18px;
+    height: 18px;
+}
+
+.contato-page .contato-form .field input,
+.contato-page .contato-form .field textarea {
+    font-size: 14px;
+}
+
+.contato-page .contato-form textarea {
+    min-height: 105px;
+}
+
+.contato-page .submit-btn {
+    width: 100%;
+    min-height: 49px;
+    margin-top: 3px;
+    border-radius: 9px;
+    border: 1px solid #c1233b;
+    background: transparent;
+    color: #e63950;
+    font-weight: 800;
+    letter-spacing: .3px;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+}
+
+.contato-page .submit-btn:hover {
+    background: #c1233b;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+/* Informações */
+.contato-page .contato-info-list {
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+.contato-page .contato-info-list li {
+    gap: 13px;
+    margin-bottom: 17px;
+}
+
+.contato-page .contato-info-list svg {
+    width: 20px;
+    height: 20px;
+}
+
+.contato-page .contato-info-list strong {
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.contato-page .contato-info-list span,
+.contato-page .contato-info-list a {
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+/* Redes sociais */
+.contato-page .socials {
+    justify-content: flex-start;
+    gap: 12px;
+    margin: 7px 0 20px;
+}
+
+.contato-page .social-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid #e5e1e1;
+    box-shadow: 0 7px 16px rgba(0,0,0,.18);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.contato-page .social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,.25);
+}
+
+/* Mapa */
+.contato-page .contato-map {
+    height: 220px;
+    aspect-ratio: auto;
+    border: 1px solid #31282a;
+    border-radius: 13px;
+    margin-top: 2px;
+    display: block;
+}
+
+.contato-page .site-footer {
+    padding: 10px 16px 25px;
+}
+
+@media (max-width: 900px) {
+    .contato-page .contato-wrap {
+        grid-template-columns: 1fr;
+        max-width: 700px;
+    }
+
+    .contato-page .contato-card {
+        padding: 24px;
+    }
+}
+
+
+
+@media (max-width: 560px) {
+.contato-page .cinemark-nav .logo-navbar {
+        width: 36px !important;
+        height: 36px !important;
+        min-width: 36px !important;
+        min-height: 36px !important;
+    }
+.contato-page .contato-hero {
+        padding-top: 92px;
+        padding-bottom: 22px;
+    }
+
+    .contato-page .contato-wrap {
+        padding: 0 10px;
+    }
+
+    .contato-page .contato-card {
+        padding: 21px 18px;
+        border-radius: 15px;
+    }
+
+    .contato-page .contato-map {
+        height: 190px;
+    }
 }

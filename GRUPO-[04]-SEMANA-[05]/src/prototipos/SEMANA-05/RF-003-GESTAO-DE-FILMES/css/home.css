@@ -1,8 +1,12 @@
 /* Visual exclusivo da pagina inicial. */
 
 .home-page {
+  display: block;
   position: relative;
+  width: 100%;
+  min-height: 100vh;
   overflow-x: hidden;
+  padding: 0;
   background:
     radial-gradient(circle at 18% 0%, rgba(230, 57, 80, .32), transparent 28%),
     linear-gradient(135deg, #a70e13 0%, #60070b 48%, #1a0708 100%);

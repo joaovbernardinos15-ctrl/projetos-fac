@@ -68,31 +68,15 @@
 
     <header class="contato-hero">
       <span class="lanches-kicker">BOMBONIERE CINEMARK</span>
-      <h1>Lanches e combos</h1>
-      <p>Escolha o sabor da sua próxima sessão.</p>
+      <h1>Cardápio da bomboniere</h1>
+      <p>Escolha seus favoritos para aproveitar durante o filme.</p>
     </header>
 
-    <main class="contato-wrap">
-      <section class="contato-card">
-        <span class="lanches-card-label">EM BREVE</span>
-        <h2>Seu filme merece um combo</h2>
-        <p>
-          A bomboniere do Cinemark está sendo montada nesta página.
-          Em breve você poderá escolher seu combo antes de chegar ao cinema.
-        </p>
-
-        <ul class="lista-lanches">
-          <li><a href="pipoca.html"><img class="lanche-item-img" src="img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_36.png" alt="Pipoca clássica e caramelizada"><span><i class="fa-solid fa-bowl-food"></i>Pipoca salgada, doce e caramelizada</span><i class="fa-solid fa-arrow-right seta-lanche"></i></a></li>
-          <li><a href="bebidas.html"><img class="lanche-item-img" src="img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_25.png" alt="Bebidas variadas"><span><i class="fa-solid fa-mug-hot"></i>Refrigerantes, sucos e cafés</span><i class="fa-solid fa-arrow-right seta-lanche"></i></a></li>
-          <li><a href="salgados.html"><img class="lanche-item-img" src="img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_40.png" alt="Combo de hot dog e snacks"><span><i class="fa-solid fa-hotdog"></i>Hot dog, nachos e batata</span><i class="fa-solid fa-arrow-right seta-lanche"></i></a></li>
-          <li><a href="doces.html"><img class="lanche-item-img" src="img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_29.png" alt="Seleção de doces"><span><i class="fa-solid fa-candy-cane"></i>Doces, chocolates e sorvetes</span><i class="fa-solid fa-arrow-right seta-lanche"></i></a></li>
-          <li><a href="combos.html"><img class="lanche-item-img" src="img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_03_56.png" alt="Combo família para compartilhar"><span><i class="fa-solid fa-box-open"></i>Combos para compartilhar</span><i class="fa-solid fa-arrow-right seta-lanche"></i></a></li>
-        </ul>
-
-        <p class="aviso-construcao">
-          <i class="fa-solid fa-screwdriver-wrench"></i>
-          Página em construção — o cardápio completo entra na próxima entrega.
-        </p>
+    <main class="cardapio-shell">
+      <section class="cardapio">
+        <nav class="cardapio-categorias" id="atalhosCardapio" aria-label="Categorias do cardápio"></nav>
+        <div class="cardapio-categorias-lista" id="categoriasCardapio"></div>
+        <p class="cardapio-nota">Preços demonstrativos do protótipo.</p>
       </section>
     </main>
 <div class="modal fade" id="modalPlanos" tabindex="-1" aria-labelledby="modalPlanosLabel" aria-hidden="true">
@@ -189,5 +173,7 @@
   <script src="./js/store.js"></script>
     <script src="./js/nav.js"></script>
     <script src="./js/site.js"></script>
+    <script src="./js/menu-data.js"></script>
+    <script src="./js/lanches.js"></script>
   </body>
 </html>

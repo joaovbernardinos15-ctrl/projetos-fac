@@ -92,6 +92,33 @@ body:has(.fa-box-open) .lanche-detalhe::before { background-image: url("../img/C
   border-radius: 12px;
   background: rgba(255, 255, 255, .035);
   color: #f1eaea;
+  transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.lanche-opcoes li:has(a:hover) {
+  transform: translateY(-2px);
+  border-color: rgba(255, 130, 144, .55);
+  background: rgba(230, 57, 80, .08);
+}
+
+.lanche-opcoes a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.lanche-opcoes a:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid #ff8290;
+  outline-offset: 4px;
+}
+
+.lanche-opcoes a span {
+  display: block;
+  margin-top: 12px;
+  color: #ff9eaa;
+  font-size: .85rem;
+  font-weight: 700;
 }
 
 .lanche-opcoes strong {
