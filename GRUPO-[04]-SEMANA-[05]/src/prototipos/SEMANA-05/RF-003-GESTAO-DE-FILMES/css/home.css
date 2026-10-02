@@ -83,21 +83,28 @@ html:has(body.home-page)::-webkit-scrollbar {
 .home-page .hero-banner .carousel-control-next:hover { background: #c1233b; }
 
 .home-page .hero-banner .carousel-indicators {
+  align-items: center;
   gap: 6px;
   margin: 16px 0 0;
 }
 
 .home-page .hero-banner .carousel-indicators button {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
+  flex: 0 0 9px;
+  width: 9px !important;
+  height: 9px !important;
+  min-width: 9px;
+  min-height: 9px;
+  padding: 0 !important;
+  border: 0;
+  border-radius: 50%;
   background: rgba(255, 255, 255, .45);
+  transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
 }
 
 .home-page .hero-banner .carousel-indicators button.active {
-  width: 30px;
+  transform: scale(1.35);
   background: #fff;
-  box-shadow: 0 0 14px rgba(255, 255, 255, .35);
+  box-shadow: 0 0 14px rgba(255, 255, 255, .55);
 }
 
 .home-page .em-cartaz {
@@ -175,10 +182,14 @@ html:has(body.home-page)::-webkit-scrollbar {
   top: 10px;
   left: 10px;
   padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, .2);
   border-radius: 5px;
-  background: rgba(10, 8, 9, .78);
+  background: rgba(10, 8, 9, .92);
+  color: #fff;
   font-size: 10px;
   font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 .home-page .movie-poster-info { min-height: 88px; padding: 13px; background: linear-gradient(180deg, #0d0b0c, #080707); }
 .home-page .movie-poster-info h5 { margin-bottom: 11px; color: #fff; font-size: 14px; }
