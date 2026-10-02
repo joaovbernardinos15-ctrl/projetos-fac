@@ -1,7 +1,7 @@
 # ENTREGA SEMANAL DE REQUISITOS
 
-**Data de Entrega:** 28/09/2026  
-**Grupo:** Grupo 04 - Cinemark  
+**Data de Entrega:** 28/09/2026
+**Grupo:** Grupo 04 - Cinemark
 **Integrantes:** Fabrício Aguiar (fabricio62258946@edu.df.senac.br); João Silva (joao61806466@edu.df.senac.br); Natanael Souza (natanael61421786@edu.df.senac.br)
 
 ---
@@ -10,11 +10,14 @@
 
 ### RF-003: Gestão de Filmes e Usuários
 
-**ID:** RF-003  
-**Título:** Gerenciar filmes e usuários pelo painel administrativo  
-**Tipo:** Requisito Funcional  
+**ID:** RF-003
+**Título:** Gerenciar filmes e usuários pelo painel administrativo
+**Prioridade:** Alta — o catálogo e as contas dependem desta manutenção.
+**Complexidade:** 8 story points — estimativa para dois CRUDs, filtros, sessão e validações; sujeita à revisão da equipe.
+**Status:** Implementado no protótipo / em revisão acadêmica.
+**Tipo:** Requisito Funcional
 
-**Breve Descrição:**  
+**Breve Descrição:**
 O sistema permite que um administrador autenticado cadastre, consulte, edite e exclua filmes e usuários. O painel também apresenta indicadores e oferece busca e filtros para localizar registros.
 
 ---
@@ -155,22 +158,63 @@ Os dados são armazenados no navegador por meio do `localStorage`. O protótipo 
 1. O administrador confirma a exclusão da própria conta.
 2. O sistema remove a conta, encerra a sessão e redireciona para `index.html`.
 
+### UC-003.3: Consultar e filtrar filmes
+
+**Pré-condição:** sessão administrativa; dados locais disponíveis.
+**Pós-condição:** registros exibidos sem alterar os dados armazenados.
+
+1. O administrador abre a aba Filmes.
+2. O sistema lista os filmes em ordem alfabética de título.
+3. O administrador busca por título ou gênero e/ou filtra por gênero e situação em cartaz.
+4. O sistema combina os critérios e atualiza a tabela.
+5. Ao limpar os critérios, todos os filmes voltam a ser exibidos.
+
+**Alternativa:** sem correspondências, o sistema apresenta o estado vazio. A busca ignora caixa e acentuação. Não há paginação neste protótipo.
+
+### UC-003.4: Consultar e filtrar usuários
+
+**Pré-condição:** sessão administrativa; dados locais disponíveis.
+**Pós-condição:** consulta sem alteração das contas.
+
+1. O administrador abre a aba Usuários.
+2. O sistema lista as contas em ordem alfabética de nome.
+3. O administrador busca por nome ou e-mail e/ou seleciona Cliente ou Administrador.
+4. O sistema combina os critérios e atualiza a tabela.
+5. Ao limpar os critérios, todas as contas voltam a ser exibidas.
+
+**Alternativa:** sem correspondências, o sistema apresenta o estado vazio.
+
 #### Regras de Negócio (RN)
 
-**RN-01:** Somente uma sessão com perfil `admin` pode acessar o painel administrativo.  
-**RN-02:** Título, gênero, ano e classificação são obrigatórios para cadastrar um filme.  
-**RN-03:** Não é permitido cadastrar filmes com títulos duplicados; a comparação ignora caixa e acentuação.  
-**RN-04:** Nome, e-mail e senha são obrigatórios para cadastrar um usuário.  
-**RN-05:** A senha de um usuário deve ter no mínimo oito caracteres.  
-**RN-06:** Não é permitido cadastrar mais de um usuário com o mesmo e-mail.  
-**RN-07:** Não é permitido excluir o último usuário com perfil de administrador.  
-**RN-08:** Ao editar usuário, deixar a senha em branco mantém a senha atual.  
+**RN-01:** Somente uma sessão com perfil `admin` pode acessar o painel administrativo.
+**RN-02:** Título, gênero, ano e classificação são obrigatórios para cadastrar um filme.
+**RN-03:** Não é permitido cadastrar filmes com títulos duplicados; a comparação ignora caixa e acentuação.
+**RN-04:** Nome, e-mail e senha são obrigatórios para cadastrar um usuário.
+**RN-05:** A senha de um usuário deve ter no mínimo oito caracteres.
+**RN-06:** Não é permitido cadastrar mais de um usuário com o mesmo e-mail.
+**RN-07:** Não é permitido excluir o último usuário com perfil de administrador.
+**RN-08:** Ao editar usuário, deixar a senha em branco mantém a senha atual.
 **RN-09:** A exclusão de filme ou usuário exige confirmação no painel.
 **RN-10:** No formulário de usuário, o perfil pode ser selecionado como Cliente ou Administrador.
 
+**RN-11:** Não é permitido remover o perfil do último administrador, inclusive por edição.
+**RN-12:** Campos obrigatórios permanecem obrigatórios na edição; valores apenas com espaços são rejeitados. O e-mail deve ter formato válido e o perfil deve ser Cliente ou Administrador.
+
 #### Requisitos Não Funcionais
 
-O projeto consultado não especifica requisitos não funcionais numerados para esta funcionalidade.
+Os critérios abaixo são verificáveis. Definir uma meta não equivale a comprovar seu atendimento.
+
+| ID | Requisito e critério de aceitação | Situação |
+|---|---|---|
+| RNF-01 | Busca e filtro devem atualizar a tabela em menos de 100 ms com 100 registros, medidos após o carregamento no navegador de referência. | Meta; medição no navegador pendente |
+| RNF-02 | Acesso sem sessão administrativa deve redirecionar ao login; textos inseridos nas tabelas devem ser escapados. | Implementado; segurança limitada ao protótipo |
+| RNF-03 | Operações destrutivas devem exigir confirmação e operações inválidas devem apresentar mensagem sem alterar o registro. | Implementado |
+| RNF-04 | O painel deve permitir uso em larguras de 375, 768 e 1280 px, com tabelas roláveis e controles acessíveis. | Layout implementado; revisão visual pendente |
+| RNF-05 | Fluxos CRUD devem funcionar nas duas últimas versões estáveis de Chrome, Firefox e Safari. | Matriz de compatibilidade pendente |
+| RNF-06 | Campos devem possuir labels, ações nomes acessíveis e mensagens de erro perceptíveis; avaliar teclado, foco e contraste para WCAG 2.1 AA. | Auditoria completa pendente; não há certificação AA |
+| RNF-07 | Alterações devem permanecer após recarregar a página na mesma origem e navegador, enquanto o armazenamento existir. | Implementado com localStorage |
+| RNF-08 | Documentar capacidade, disponibilidade e recuperação: armazenamento finito, dependências CDN e ausência de backup automático. | Documentado; backup/exportação não implementados |
+
 
 ---
 
@@ -361,10 +405,53 @@ O protótipo consultado não apresenta um estado de carregamento com spinner. A 
 
 ### ADR-001: Persistência local com `localStorage`
 
-**Status:** Implementado no protótipo  
-**Contexto:** O projeto implementa a persistência no próprio navegador e não possui integração com backend ou banco de dados remoto.  
-**Decisão observada:** O módulo `js/store.js` concentra as operações de leitura e gravação de filmes, usuários e sessão no `localStorage`.  
+**Status:** Implementado no protótipo
+**Contexto:** O projeto implementa a persistência no próprio navegador e não possui integração com backend ou banco de dados remoto.
+**Decisão observada:** O módulo `js/store.js` concentra as operações de leitura e gravação de filmes, usuários e sessão no `localStorage`.
 **Consequência observada:** Os dados ficam associados ao navegador em que foram cadastrados; não há sincronização entre dispositivos ou usuários.
+
+### ADR-002: Separação da interface e camada de dados
+
+**Status:** Adotado.
+**Contexto:** várias telas compartilham filmes, usuários e sessão.
+**Decisão:** HTML/CSS apresentam a interface; `admin.js` controla eventos e renderização; `store.js` centraliza CRUD e validação. Trata-se de separação em camadas, semelhante a MVC, sem framework MVC formal.
+**Alternativa rejeitada:** duplicar CRUD em cada página.
+**Consequências:** regras reaproveitáveis e testes isolados; ainda há acoplamento aos IDs do DOM e ao armazenamento do navegador.
+
+### ADR-003: localStorage em vez de IndexedDB ou API
+
+**Status:** Adotado para a demonstração.
+**Contexto:** pequeno catálogo e execução sem servidor.
+**Decisão:** manter armazenamento síncrono simples. IndexedDB adicionaria transações e maior capacidade, mas também complexidade; uma API permitiria dados compartilhados e controle de acesso real, exigindo backend.
+**Consequências:** adequado à demonstração, sem sincronização, transações entre coleções ou garantia contra alterações concorrentes. A capacidade depende do navegador/origem; cerca de 5 MiB é uma referência de planejamento, não uma garantia universal. Gravações podem falhar por quota ou bloqueio e ainda não possuem tratamento completo na interface.
+
+### ADR-004: Bootstrap e validação no navegador
+
+**Status:** Adotado no protótipo.
+**Contexto:** implementar modais e layout responsivo com a estrutura existente.
+**Decisão:** manter Bootstrap 5.3.3 e CSS próprio em vez de migrar para Tailwind ou reescrever componentes. Validar regras no Store, independentemente do formulário.
+**Consequências:** reaproveitamento e entrega mais simples; dependência de CDN. Validação no navegador pode ser contornada, portanto uma versão de produção exige validação e autorização no backend.
+
+### Fluxo de dados
+
+```mermaid
+flowchart TD
+    A[Administrador] --> B[Formulário e admin.js]
+    B --> C[Store: validação]
+    C --> D{Dados válidos?}
+    D -->|Não| E[Mensagem de erro]
+    D -->|Sim| F[localStorage: gravação]
+    F --> G[Store: leitura]
+    G --> H[Tabela e indicadores]
+```
+
+Consultas seguem `admin.js → Store.listar() → localStorage → filtros → tabela` sem gravar. As chaves são `cinemark:filmes`, `cinemark:usuarios` e `cinemark:sessao`.
+
+### Limitações e segurança
+
+Visitantes e clientes acessam as páginas públicas, mas não têm permissão de painel. O sistema é um componente interno, não um usuário externo. A sessão local pode ser adulterada; não representa autenticação segura de produção. Senhas estão em texto puro e devem ser exclusivamente fictícias. Escape de texto reduz injeção nas tabelas, mas não comprova ausência de XSS em todo o site. Uma versão de produção precisaria de backend, hash de senhas, autorização no servidor e HTTPS/TLS. HTTPS sozinho não protege dados locais contra scripts maliciosos.
+
+Os dados pertencem à origem e ao navegador, podem ser apagados e não são compartilhados entre dispositivos. Não há backup, disponibilidade garantida nem controle de concorrência. A opção Restaurar padrão é destrutiva e não recupera cadastros anteriores. Recursos CDN exigem conectividade/cache; não se promete funcionamento totalmente offline. Não há spinner porque as operações atuais são síncronas; futura API deverá adicionar estados de carregamento e falha.
 
 ### Tecnologias Utilizadas
 
@@ -386,9 +473,14 @@ O protótipo consultado não apresenta um estado de carregamento com spinner. A 
 - [x] Fluxos de sucesso, validação e acesso administrativo documentados.
 - [x] Arquitetura descrita conforme a persistência atualmente implementada.
 - [x] Localização do painel administrativo informada.
-- [ ] Protótipo em `index.html` com CSS embutido no diretório específico do requisito: o protótipo atual usa `admin.html` e arquivos CSS/JS externos.
-- [ ] Requisitos não funcionais numerados: não encontrados no projeto consultado.
+- [x] Entrada `RF-03.html` adicionada, direcionando ao painel `admin.html`; CSS/JS externos preservados. A recomendação de nomenclatura é informativa na validação.
+- [ ] Confirmar com o professor eventual exigência adicional de HTML único com CSS embutido; não foi presumida equivalência desse formato com a entrada adicionada.
+- [x] Requisitos não funcionais numerados com critérios e pendências explícitos.
 
 ---
 
 **Observação:** Este documento descreve o estado atual do protótipo da Semana 05; não pressupõe backend, banco de dados, integrações ou comportamentos que não estejam implementados.
+
+### Validação executada nesta revisão
+
+Execute `node tests/rf003-store.test.cjs` na raiz do repositório. O teste usa armazenamento em memória e verifica CRUD, título duplicado, campos obrigatórios, e-mail, manutenção de senha e proteção do último administrador. Passou nesta revisão; não substitui teste visual ou em navegadores reais. Sintaxe de `store.js` e `admin.js` também verificada com `node --check`.
