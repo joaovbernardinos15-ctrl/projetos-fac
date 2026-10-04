@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Detalhes e reprodução de filmes do Cinemark.">
+  <title>Filme - Cinemark</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/theme.css">
+  <link rel="stylesheet" href="./css/navbar.css">
+  <link rel="stylesheet" href="./css/filme-detalhe.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="filme-detalhe-page">
+  <nav class="navbar navbar-expand-lg cinemark-nav">
+    <div class="container-fluid">
+      <img src="img/Logo.jpeg" alt="Logo Cinemark" class="logo-navbar">
+      <a class="navbar-brand" href="index.html">Cinemark</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Abrir menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+          <li class="nav-item"><a class="nav-link active" aria-current="page" href="filmes.html">Filmes</a></li>
+          <li class="nav-item"><a class="nav-link" href="lanches.html">Loja</a></li>
+          <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+          <li class="nav-item dropdown" id="navConta"></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="filme-detalhe-main">
+    <a class="voltar-catalogo" href="filmes.html">
+      <span aria-hidden="true">&larr;</span> Voltar ao catálogo
+    </a>
+
+    <section class="filme-detalhe-conteudo" aria-labelledby="filmeTitulo">
+      <div id="filmePlayerRegiao" class="filme-player-regiao">
+        <img id="filmePlayerPoster" class="filme-player-poster" alt="" hidden>
+        <div id="filmeIndisponivel" class="filme-estado" role="status" hidden>
+          <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+          <h2 id="filmeEstadoTitulo">Conteúdo temporariamente indisponível</h2>
+          <p id="filmeEstadoMensagem">Este filme ainda não possui uma fonte de vídeo autorizada.</p>
+          <a class="filme-botao-secundario" href="filmes.html">Voltar ao catálogo</a>
+        </div>
+
+        <div id="filmeFalha" class="filme-estado filme-estado-erro" role="alert" hidden>
+          <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+          <p id="filmeFalhaMensagem">Não foi possível carregar o vídeo.</p>
+          <button id="filmeTentarNovamente" class="filme-botao-secundario" type="button">Tentar novamente</button>
+        </div>
+
+        <video id="filmeVideo" controls playsinline preload="metadata" aria-label="Player do filme" hidden></video>
+        <p id="filmePlayerStatus" class="filme-player-status" aria-live="polite" hidden></p>
+        <button id="filmeCarregarVideo" class="filme-botao-principal" type="button" hidden>
+          <i class="fa-solid fa-play" aria-hidden="true"></i> Assistir
+        </button>
+      </div>
+
+      <div class="filme-detalhe-texto">
+        <p class="filme-detalhe-kicker">CINEMARK · FILMES</p>
+        <h1 id="filmeTitulo">Carregando filme...</h1>
+        <p id="filmeMetadados" class="filme-metadados"></p>
+        <p id="filmeClassificacao" class="filme-classificacao"></p>
+        <div class="filme-sinopse">
+          <h2>Sinopse</h2>
+          <p id="filmeSinopse">Detalhes do filme.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © 2026 Cinemark — todos os direitos reservados.
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+  <script src="./js/store.js"></script>
+  <script src="./js/nav.js"></script>
+  <script src="./js/filme.js"></script>
+</body>
+</html>

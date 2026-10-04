@@ -14,7 +14,7 @@
 **Título:** Assistir filmes na plataforma  
 **Prioridade:** Alta — a reprodução de filmes é a principal finalidade da plataforma de streaming.  
 **Complexidade:** 8 story points — estimativa para consulta do catálogo, detalhes, integração do player e estados de erro; sujeita à revisão da equipe.  
-**Status:** Especificado; reprodução de vídeos ainda não implementada no protótipo.  
+**Status:** Implementado parcialmente no protótipo; a reprodução depende do cadastro de uma fonte de vídeo autorizada.
 **Tipo:** Requisito Funcional
 
 **Breve Descrição:**  
@@ -30,7 +30,7 @@ O catálogo apresenta os filmes disponibilizados pela plataforma. Ao escolher um
 
 Cada filme precisa possuir uma fonte de vídeo válida, identificada por caminho relativo servido pelo próprio site ou por endereço HTTPS autorizado pelo projeto. A fonte deve ser mantida separada do pôster e da sinopse. O arquivo de vídeo não deve ser gravado no `localStorage`; no protótipo, o armazenamento local mantém somente os metadados e o endereço da mídia.
 
-O protótipo consultado não possui arquivos de vídeo nem um campo de fonte de vídeo no cadastro de filmes. Portanto, este requisito especifica uma evolução ainda pendente e não afirma que já seja possível assistir aos filmes cadastrados. A reprodução real também depende de conteúdo de demonstração que o grupo tenha autorização para utilizar.
+O protótipo oferece detalhes e player HTML5, e o painel permite cadastrar uma fonte relativa ou HTTPS. Os filmes iniciais ainda não possuem vídeos associados; por isso, eles exibem o estado de indisponibilidade até que uma fonte de demonstração autorizada seja cadastrada.
 
 ### Atores do Sistema
 
@@ -45,7 +45,7 @@ O protótipo consultado não possui arquivos de vídeo nem um campo de fonte de 
 
 - **Papel:** Manter o catálogo e a fonte de vídeo associada a cada filme.
 - **Responsabilidades:** Informar ou atualizar o endereço da mídia, verificar se o título está disponível e retirar do catálogo fontes inválidas.
-- **Dependência:** O painel do RF-003 ainda não possui campo para endereço de vídeo; esse cadastro precisa ser incluído antes de validar o fluxo completo.
+- **Dependência:** A reprodução requer que o administrador informe uma fonte de vídeo acessível e autorizada.
 
 #### 3. Sistema (ator automático)
 
@@ -133,13 +133,13 @@ O protótipo consultado não possui arquivos de vídeo nem um campo de fonte de 
 
 | ID | Requisito e critério de aceitação | Situação |
 |---|---|---|
-| RNF-01 | A página do filme e o player devem se adaptar a larguras de 375, 768 e 1280 px, sem cortes nos controles ou rolagem horizontal indevida. | Pendente de implementação e revisão visual |
-| RNF-02 | Os controles do player devem ser operáveis por teclado; botões próprios devem possuir nome acessível, foco visível e estado perceptível. | Pendente de implementação e teste de acessibilidade |
-| RNF-03 | A página deve exibir título e classificação indicativa junto ao player, inclusive em telas pequenas. | Pendente de implementação |
-| RNF-04 | Falha de rede, fonte ausente e formato incompatível devem produzir estado de erro legível, sem travar a navegação. | Pendente de implementação e teste |
+| RNF-01 | A página do filme e o player devem se adaptar a larguras de 375, 768 e 1280 px, sem cortes nos controles ou rolagem horizontal indevida. | Layout responsivo implementado; revisão visual pendente |
+| RNF-02 | Os controles do player devem ser operáveis por teclado; botões próprios devem possuir nome acessível, foco visível e estado perceptível. | Controles nativos e foco visível; teste de acessibilidade pendente |
+| RNF-03 | A página deve exibir título e classificação indicativa junto ao player, inclusive em telas pequenas. | Implementado; revisão visual pendente |
+| RNF-04 | Falha de rede, fonte ausente e formato incompatível devem produzir estado de erro legível, sem travar a navegação. | Estados implementados; teste com mídia real pendente |
 | RNF-05 | O fluxo deve ser verificado nas duas últimas versões estáveis de Chrome, Firefox e Safari, usando um arquivo de vídeo de teste autorizado. | Matriz de compatibilidade pendente |
 | RNF-06 | A primeira reprodução deve depender de ação explícita do usuário; não deve iniciar automaticamente com áudio. | Critério definido; teste pendente |
-| RNF-07 | A aplicação deve aceitar somente caminhos relativos ou URLs HTTPS aprovadas para a fonte de mídia. | Regra definida; validação no painel pendente |
+| RNF-07 | A aplicação deve aceitar somente caminhos relativos ou URLs HTTPS aprovadas para a fonte de mídia. | Validação no cadastro e antes do carregamento implementada; aprovação da URL é responsabilidade do projeto |
 | RNF-08 | O tempo de início depende do tamanho do arquivo, rede, codec e servidor; não há meta de streaming adaptativo neste protótipo. | Limitação documentada; CDN/streaming adaptativo fora do escopo |
 
 ---
@@ -148,7 +148,7 @@ O protótipo consultado não possui arquivos de vídeo nem um campo de fonte de 
 
 ### Protótipo Existente
 
-A página inicial e o catálogo são implementados em `src/prototipos/SEMANA-05/RF-003-GESTAO-DE-FILMES/index.html` e `filmes.html`. O catálogo atual consulta os filmes mantidos pelo `js/store.js`, mas ainda não apresenta detalhes com player e os registros não possuem endereço de vídeo. A tela de reprodução descrita abaixo é uma proposta para implementação do RF-004.
+A página inicial e o catálogo atuais estão em `src/prototipos/SEMANA-06/index.html` e `filmes.html`. A imagem de destaque e cada card de filme na home e no catálogo são links para a tela `filme.html`, que apresenta metadados, classificação indicativa e player HTML5. O painel administrativo permite manter a fonte de vídeo. Como os filmes sem fonte não são reproduzíveis, a tela informa a indisponibilidade e permite voltar ao catálogo.
 
 ### Mockups das Telas
 
@@ -223,17 +223,17 @@ A página inicial e o catálogo são implementados em `src/prototipos/SEMANA-05/
 
 ### ADR-001: Player HTML5
 
-**Status:** Proposto para implementação.  
-**Contexto:** O protótipo é composto por páginas HTML, CSS e JavaScript e ainda não possui player ou backend.  
-**Decisão:** Utilizar o elemento nativo `<video controls>` para reproduzir mídias fornecidas em formatos suportados pelo navegador.  
+**Status:** Implementado no protótipo; teste com mídia autorizada pendente.
+**Contexto:** O protótipo é composto por páginas HTML, CSS e JavaScript, sem backend.
+**Decisão:** Utilizar o elemento nativo `<video controls>` para reproduzir mídias fornecidas em formatos suportados pelo navegador, após ação explícita do usuário.
 **Alternativa rejeitada:** Incorporar um serviço de streaming de terceiros sem contrato, fonte licenciada ou requisito definido.  
 **Consequências:** Implementação adequada ao protótipo, sem streaming adaptativo, DRM, sincronização de progresso ou garantia de reprodução de qualquer codec.
 
 ### ADR-002: Endereço da mídia separado do arquivo
 
-**Status:** Proposto para implementação.  
-**Contexto:** O painel RF-003 registra título, sinopse e pôster, mas não uma fonte de vídeo. Arquivos de vídeo também não devem ser gravados no `localStorage`.  
-**Decisão:** Incluir no registro do filme um endereço relativo ou HTTPS validado e permitir que o painel o mantenha.  
+**Status:** Implementado no protótipo.
+**Contexto:** O protótipo não possui hospedagem de mídia. Arquivos de vídeo não devem ser gravados no `localStorage`.
+**Decisão:** Manter no registro do filme um endereço relativo ou HTTPS validado e permitir que o painel o mantenha.
 **Consequências:** A reprodução depende de um arquivo acessível na origem ou de um servidor HTTPS autorizado. O protótipo não fará upload nem hospedará vídeos.
 
 ### Fluxo de dados proposto
@@ -274,14 +274,14 @@ Compra de lanches e brinquedos é complementar ao produto e deve ser descrita em
 
 - [x] Requisito alinhado ao posicionamento de plataforma de streaming.
 - [x] Fluxo principal e alternativas de falha especificados.
-- [x] Limites do protótipo atual registrados; não há afirmação de reprodução já implementada.
+- [x] Limites do protótipo atual registrados; a reprodução depende de uma fonte autorizada.
 - [x] Compra de lanches e brinquedos separada do fluxo de reprodução.
-- [ ] Adicionar fonte de vídeo ao cadastro/edição de filmes do painel RF-003.
+- [x] Adicionar fonte de vídeo ao cadastro/edição de filmes do painel RF-003.
 - [ ] Disponibilizar arquivo de demonstração autorizado e testar reprodução em navegadores previstos.
-- [ ] Implementar tela de detalhes e player responsivo.
-- [ ] Validar controles por teclado, estados de erro e acessibilidade.
+- [x] Implementar tela de detalhes e player responsivo.
+- [ ] Revisar visualmente os breakpoints e testar controles, estados de erro e acessibilidade.
 - [ ] Definir com o professor se há exigência de login ou assinatura antes da reprodução.
 
 ---
 
-**Observação:** Este documento especifica o RF-004 proposto para o Cinemark. A implementação do player depende de uma fonte de vídeo autorizada e da inclusão do respectivo endereço no cadastro de filmes. O documento não presume backend, assinatura, pagamento ou hospedagem de conteúdo.
+**Observação:** O protótipo implementa o fluxo de detalhes e player do RF-004, mas não inclui vídeos. A reprodução depende de uma fonte autorizada cadastrada pelo administrador. O documento não presume backend, assinatura, pagamento ou hospedagem de conteúdo.

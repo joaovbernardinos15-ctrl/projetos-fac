@@ -52,6 +52,37 @@ const Store = (() => {
       .trim();
   }
 
+  function validarFonteVideo(fonte) {
+    const valor = String(fonte ?? "").trim();
+    if (!valor) return { ok: true, erro: "" };
+
+    if (valor.startsWith("//")) {
+      return { ok: false, erro: "Use um caminho relativo ou um endereço HTTPS para o vídeo." };
+    }
+
+    if (/^[a-z][a-z\d+.-]*:/i.test(valor)) {
+      try {
+        if (new URL(valor).protocol === "https:") return { ok: true, erro: "" };
+      } catch {
+        return { ok: false, erro: "O endereço do vídeo é inválido." };
+      }
+
+      return { ok: false, erro: "Endereços externos de vídeo devem usar HTTPS." };
+    }
+
+    try {
+      const base = new URL(window.location.href);
+      const destino = new URL(valor, base);
+      if (destino.protocol === base.protocol && destino.origin === base.origin) {
+        return { ok: true, erro: "" };
+      }
+    } catch {
+      return { ok: false, erro: "O caminho do vídeo é inválido." };
+    }
+
+    return { ok: false, erro: "Use um caminho relativo ou um endereço HTTPS para o vídeo." };
+  }
+
   /* ---------- seed (dados iniciais) ---------- */
 
   const FILMES_INICIAIS = [
@@ -249,11 +280,16 @@ const Store = (() => {
       return this.listar().find((filme) => filme.id === id) || null;
     },
 
+    validarFonteVideo,
+
     // CREATE
-    criar({ titulo, genero, ano, classificacao, poster, sinopse = "", emCartaz = true }) {
+    criar({ titulo, genero, ano, classificacao, poster, sinopse = "", fonteVideo = "", emCartaz = true }) {
       if (!titulo || !genero || !ano || !classificacao) {
         return { ok: false, erro: "Título, gênero, ano e classificação são obrigatórios." };
       }
+
+      const validacaoFonte = validarFonteVideo(fonteVideo);
+      if (!validacaoFonte.ok) return { ok: false, erro: validacaoFonte.erro };
 
       const duplicado = this.listar().some(
         (filme) => normalizar(filme.titulo) === normalizar(titulo)
@@ -271,6 +307,7 @@ const Store = (() => {
         classificacao: String(classificacao).trim(),
         poster: poster?.trim() || "",
         sinopse: sinopse.trim(),
+        fonteVideo: String(fonteVideo ?? "").trim(),
         emCartaz: Boolean(emCartaz),
         criadoEm: new Date().toISOString()
       };
@@ -289,6 +326,12 @@ const Store = (() => {
 
       if (indice === -1) {
         return { ok: false, erro: "Filme não encontrado." };
+      }
+
+      if (dados.fonteVideo !== undefined) {
+        const validacaoFonte = validarFonteVideo(dados.fonteVideo);
+        if (!validacaoFonte.ok) return { ok: false, erro: validacaoFonte.erro };
+        dados = { ...dados, fonteVideo: String(dados.fonteVideo ?? "").trim() };
       }
 
       if (dados.titulo) {

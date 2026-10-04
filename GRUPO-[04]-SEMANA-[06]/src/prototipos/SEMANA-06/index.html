@@ -69,13 +69,18 @@
 
     <main class="streaming-home">
       <section class="streaming-hero" aria-labelledby="destaqueTitulo">
-        <img class="streaming-hero-poster" id="destaquePoster" src="./img/Logo.jpeg" alt="" fetchpriority="high">
+        <a class="streaming-hero-poster-link" id="destaquePosterLink" href="filmes.html" aria-label="Abrir tela de reprodução do destaque">
+          <img class="streaming-hero-poster" id="destaquePoster" src="./img/Logo.jpeg" alt="" fetchpriority="high">
+        </a>
         <div class="streaming-hero-content">
           <p class="streaming-kicker"><span></span> CINEMARK · EM DESTAQUE</p>
           <h1 id="destaqueTitulo">Descubra seu próximo filme</h1>
           <p class="streaming-description" id="destaqueDescricao">Histórias para aproveitar no seu ritmo.</p>
           <div class="streaming-meta" id="destaqueMeta" aria-label="Informações do filme"></div>
           <div class="streaming-actions">
+            <a class="streaming-primary" id="destaqueAssistir" href="filmes.html" hidden>
+              <i class="fa-solid fa-play" aria-hidden="true"></i> Assistir destaque
+            </a>
             <a class="streaming-primary" href="filmes.html"><i class="fa-solid fa-film" aria-hidden="true"></i> Explorar filmes</a>
             <a class="streaming-secondary" href="lanches.html"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i> Ir para a loja</a>
           </div>

@@ -15,6 +15,9 @@ const destaquePoster = document.getElementById("destaquePoster");
 const destaqueTitulo = document.getElementById("destaqueTitulo");
 const destaqueDescricao = document.getElementById("destaqueDescricao");
 const destaqueMeta = document.getElementById("destaqueMeta");
+const destaqueAssistir = document.getElementById("destaqueAssistir");
+const destaquePosterLink = document.getElementById("destaquePosterLink");
+const streamingHero = document.querySelector(".streaming-hero");
 
 const filmesCarousel = document.getElementById("filmesCarousel");
 const filmesCarouselInner = document.getElementById("filmesCarouselInner");
@@ -28,6 +31,20 @@ const filmesNextBtn = document.getElementById("filmesNextBtn");
 function renderizarDestaque() {
   const filme = filmes[0];
   if (!filme || !destaquePoster || !destaqueTitulo || !destaqueDescricao || !destaqueMeta) return;
+
+  streamingHero?.addEventListener("click", (event) => {
+    if (!(event.target instanceof Element) || event.target.closest("a, button")) return;
+    window.location.href = `filme.html?id=${encodeURIComponent(filme.id)}`;
+  });
+
+  if (destaqueAssistir) {
+    destaqueAssistir.href = `filme.html?id=${encodeURIComponent(filme.id)}`;
+    destaqueAssistir.hidden = false;
+  }
+  if (destaquePosterLink) {
+    destaquePosterLink.href = `filme.html?id=${encodeURIComponent(filme.id)}`;
+    destaquePosterLink.setAttribute("aria-label", `Abrir tela de reprodução de ${filme.titulo}`);
+  }
 
   destaquePoster.src = filme.poster || "./img/Logo.jpeg";
   destaquePoster.alt = `Pôster de ${filme.titulo}`;
@@ -59,34 +76,49 @@ const filmes = Store.filmes
   .filter((filme) => filme.emCartaz)
   .sort((a, b) => a.titulo.localeCompare(b.titulo, "pt-BR"))
   .map((filme) => ({
+    id: filme.id,
     titulo: filme.titulo,
     genero: filme.genero,
     duracao: filme.ano,
     classificacao: filme.classificacao,
     poster: filme.poster,
-    sinopse: filme.sinopse
+    sinopse: filme.sinopse,
+    fonteVideo: filme.fonteVideo
   }));
 
 function criarCardFilme(filme) {
+  const escapar = (valor) => String(valor ?? "").replace(/[&<>"']/g, (caractere) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[caractere]));
+  const fonteVideoValida = Boolean(filme.fonteVideo) &&
+    Store.filmes.validarFonteVideo(filme.fonteVideo).ok;
+
   return `
     <article class="movie-poster-card">
-      <span class="watch-badge">NO CATÁLOGO</span>
+      <a class="movie-card-link" href="filme.html?id=${encodeURIComponent(filme.id)}"
+        aria-label="Abrir tela de reprodução de ${escapar(filme.titulo)}">
+        <span class="watch-badge">${fonteVideoValida ? "VÍDEO CADASTRADO" : "SEM VÍDEO"}</span>
 
-      <img
-        src="${filme.poster}"
-        alt="${filme.titulo}"
-        loading="lazy">
+        <img
+          src="${escapar(filme.poster)}"
+          alt="Pôster de ${escapar(filme.titulo)}"
+          loading="lazy">
 
-      <div class="movie-poster-info">
-        <h5>${filme.titulo.toUpperCase()}</h5>
+        <div class="movie-poster-info">
+          <h5>${escapar(filme.titulo.toUpperCase())}</h5>
 
-        <div class="movie-meta">
-          <span>${filme.genero} · ${filme.duracao}</span>
-          <span class="rating-badge rating-${filme.classificacao}">
-            ${filme.classificacao}
-          </span>
+          <div class="movie-meta">
+            <span>${escapar(filme.genero)} · ${escapar(filme.duracao)}</span>
+            <span class="rating-badge rating-${escapar(filme.classificacao === "L" ? "livre" : filme.classificacao)}">
+              ${escapar(filme.classificacao)}
+            </span>
+          </div>
         </div>
-      </div>
+      </a>
     </article>
   `;
 }
@@ -175,7 +207,7 @@ const paginaFilmes = document.getElementById("pageFilmesApp");
 
 if (paginaFilmes) {
   // READ (RF03): catálogo completo vindo do Store
-  const filmesCatalogo = Store.filmes.listar();
+  const filmesCatalogo = Store.filmes.listar().filter((filme) => filme.emCartaz);
 
   const grid = document.getElementById("filmesGrid");
   const buscaInput = document.getElementById("buscaFilme");
@@ -250,25 +282,36 @@ if (paginaFilmes) {
       ? "livre"
       : filme.classificacao;
 
+    const escapar = (valor) => String(valor ?? "").replace(/[&<>"']/g, (caractere) => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[caractere]));
+    const fonteVideoValida = Boolean(filme.fonteVideo) &&
+      Store.filmes.validarFonteVideo(filme.fonteVideo).ok;
+
     return `
       <article class="movie-poster-card">
-        <img
-          src="${filme.poster}"
-          alt="${filme.titulo}"
-          loading="lazy">
+        <a class="movie-card-link" href="filme.html?id=${encodeURIComponent(filme.id)}"
+          aria-label="Abrir tela de reprodução de ${escapar(filme.titulo)}">
+          <img src="${escapar(filme.poster)}" alt="Pôster de ${escapar(filme.titulo)}" loading="lazy">
 
-        <div class="watch-badge">NO CATÁLOGO</div>
+          <div class="watch-badge">${fonteVideoValida ? "VÍDEO CADASTRADO" : "SEM VÍDEO"}</div>
 
-        <div class="movie-poster-info">
-          <h5>${filme.titulo}</h5>
+          <div class="movie-poster-info">
+            <h5>${escapar(filme.titulo)}</h5>
 
-          <div class="movie-meta">
-            <span>${filme.genero}</span>
-            <span class="rating-badge rating-${classeRating}">
-              ${filme.classificacao}
-            </span>
+            <div class="movie-meta">
+              <span>${escapar(filme.genero)}</span>
+              <span class="rating-badge rating-${escapar(classeRating)}">
+                ${escapar(filme.classificacao)}
+              </span>
+            </div>
+            <span class="filme-detalhes-link">Assistir / detalhes</span>
           </div>
-        </div>
+        </a>
       </article>
     `;
   }

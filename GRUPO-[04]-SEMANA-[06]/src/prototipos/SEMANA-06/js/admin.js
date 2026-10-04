@@ -173,6 +173,7 @@
     $("filmeClassificacao").value = filme ? filme.classificacao : "L";
     $("filmePoster").value = filme ? filme.poster : "";
     $("filmeSinopse").value = filme ? filme.sinopse : "";
+    $("filmeFonteVideo").value = filme ? filme.fonteVideo || "" : "";
     $("filmeEmCartaz").checked = filme ? filme.emCartaz : true;
 
     modalFilme.show();
@@ -188,6 +189,7 @@
       classificacao: $("filmeClassificacao").value,
       poster: $("filmePoster").value,
       sinopse: $("filmeSinopse").value,
+      fonteVideo: $("filmeFonteVideo").value,
       emCartaz: $("filmeEmCartaz").checked
     };
 

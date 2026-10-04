@@ -146,12 +146,15 @@
 }
 
 .filmes-page .movie-poster-card:hover { transform: translateY(-5px); border-color: rgba(230, 57, 80, .7); box-shadow: 0 17px 32px rgba(0, 0, 0, .38), 0 0 0 1px rgba(230, 57, 80, .16); }
+.filmes-page .movie-card-link { height: 100%; }
 .filmes-page .movie-poster-card img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 12px 12px 0 0; }
 .filmes-page .watch-badge { top: 10px; left: 10px; padding: 6px 10px; border-radius: 5px; background: rgba(0, 0, 0, .82); color: #fff; font-size: 10px; font-weight: 800; }
 .filmes-page .movie-poster-info { min-height: 92px; padding: 12px; background: linear-gradient(180deg, #0b0b0b, #070707); }
 .filmes-page .movie-poster-info h5 { display: -webkit-box; min-height: 36px; margin: 0 0 8px; overflow: hidden; color: #f4f4f4; font-size: 14px; line-height: 1.28; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .filmes-page .movie-meta span:first-child { overflow: hidden; color: #aaa; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
 .filmes-page .rating-badge { width: 29px; height: 29px; border-radius: 6px; font-size: 12px; }
+.filmes-page .filme-detalhes-link { display: inline-flex; margin-top: 12px; color: #ff7d88; font-size: 13px; font-weight: 700; text-decoration: none; }
+.filmes-page .filme-detalhes-link:hover, .filmes-page .filme-detalhes-link:focus-visible { color: #fff; text-decoration: underline; }
 
 .filmes-page .filmes-sem-resultado { padding: 60px 20px; color: #fff; text-align: center; }
 .filmes-page .sem-resultado-icon { color: #e52a32; font-size: 42px; }
