@@ -8,55 +8,13 @@
 const FILMES_POR_PAGINA = 4;
 
 /* =========================================================
-   BANNERS
-   ========================================================= */
-
-const banners = [
-  {
-    imagem: "./img/banner-cinemark-club-black_1255x495.png",
-    alt: "Cinemark Club Black"
-  },
-  {
-    imagem: "./img/banner-viva-historias-incriveis_1255x495.png",
-    alt: "Viva histórias incríveis"
-  },
-  {
-    imagem: "./img/banner-diversao-para-todos_1255x495.png",
-    alt: "Diversão para todos"
-  },
-  {
-    imagem: "./img/banner-tudo-na-palma-da-mao_1255x495.png",
-    alt: "Tudo na palma da sua mão"
-  },
-  {
-    imagem: "./img/banner-segunda-e-dia-de-cinemark_1255x495.png",
-    alt: "Segunda é dia de Cinemark"
-  },
-  {
-    imagem: "./img/banner-combos-para-todos-os-gostos_1255x495.png",
-    alt: "Combos para todos os gostos"
-  },
-  {
-    imagem: "./img/banner-filmes-assistir_1255x495.png",
-    alt: "Filmes para assistir"
-  },
-  {
-    imagem: "./img/banner-presenteie-com-experiencias-incriveis_1255x495.png",
-    alt: "Presenteie com experiências incríveis"
-  },
-  {
-    imagem: "./img/banner-mais-conforto-mais-diversao_1255x495.png",
-    alt: "Mais conforto, mais diversão"
-  }
-];
-
-/* =========================================================
    ELEMENTOS
    ========================================================= */
 
-const heroCarousel = document.getElementById("heroCarousel");
-const heroIndicators = document.getElementById("heroIndicators");
-const heroCarouselInner = document.getElementById("heroCarouselInner");
+const destaquePoster = document.getElementById("destaquePoster");
+const destaqueTitulo = document.getElementById("destaqueTitulo");
+const destaqueDescricao = document.getElementById("destaqueDescricao");
+const destaqueMeta = document.getElementById("destaqueMeta");
 
 const filmesCarousel = document.getElementById("filmesCarousel");
 const filmesCarouselInner = document.getElementById("filmesCarouselInner");
@@ -64,44 +22,26 @@ const filmesPrevBtn = document.getElementById("filmesPrevBtn");
 const filmesNextBtn = document.getElementById("filmesNextBtn");
 
 /* =========================================================
-   HERO
+   DESTAQUE DA HOME
    ========================================================= */
 
-function renderizarBanners() {
-  if (!heroIndicators || !heroCarouselInner) return;
+function renderizarDestaque() {
+  const filme = filmes[0];
+  if (!filme || !destaquePoster || !destaqueTitulo || !destaqueDescricao || !destaqueMeta) return;
 
-  heroIndicators.innerHTML = banners.map((_, index) => `
-    <button
-      type="button"
-      data-bs-target="#heroCarousel"
-      data-bs-slide-to="${index}"
-      class="${index === 0 ? "active" : ""}"
-      ${index === 0 ? 'aria-current="true"' : ""}
-      aria-label="Ir para o banner ${index + 1}">
-    </button>
-  `).join("");
+  destaquePoster.src = filme.poster || "./img/Logo.jpeg";
+  destaquePoster.alt = `Pôster de ${filme.titulo}`;
+  destaqueTitulo.textContent = filme.titulo;
+  destaqueDescricao.textContent = filme.sinopse || `${filme.genero} · uma história para descobrir no catálogo.`;
+  destaqueMeta.replaceChildren();
 
-  heroCarouselInner.innerHTML = banners.map((banner, index) => `
-    <div class="carousel-item ${index === 0 ? "active" : ""}">
-      <a href="#" aria-label="${banner.alt}">
-        <img
-          src="${banner.imagem}"
-          alt="${banner.alt}"
-          loading="${index === 0 ? "eager" : "lazy"}">
-      </a>
-    </div>
-  `).join("");
-}
-
-function iniciarHeroCarousel() {
-  if (!heroCarousel || typeof bootstrap === "undefined") return;
-
-  new bootstrap.Carousel(heroCarousel, {
-    interval: 6000,
-    pause: "hover",
-    touch: true,
-    wrap: true
-  });
+  [filme.genero, filme.duracao, `Classificação ${filme.classificacao === "L" ? "Livre" : `${filme.classificacao} anos`}`]
+    .filter(Boolean)
+    .forEach((informacao) => {
+      const item = document.createElement("span");
+      item.textContent = informacao;
+      destaqueMeta.append(item);
+    });
 }
 
 /* =========================================================
@@ -123,13 +63,14 @@ const filmes = Store.filmes
     genero: filme.genero,
     duracao: filme.ano,
     classificacao: filme.classificacao,
-    poster: filme.poster
+    poster: filme.poster,
+    sinopse: filme.sinopse
   }));
 
 function criarCardFilme(filme) {
   return `
     <article class="movie-poster-card">
-      <span class="watch-badge">ASSISTA AGORA</span>
+      <span class="watch-badge">NO CATÁLOGO</span>
 
       <img
         src="${filme.poster}"
@@ -220,8 +161,7 @@ function iniciarFilmesCarousel() {
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderizarBanners();
-  iniciarHeroCarousel();
+  renderizarDestaque();
   iniciarFilmesCarousel();
 });
 
@@ -317,7 +257,7 @@ if (paginaFilmes) {
           alt="${filme.titulo}"
           loading="lazy">
 
-        <div class="watch-badge">ASSISTA AGORA</div>
+        <div class="watch-badge">NO CATÁLOGO</div>
 
         <div class="movie-poster-info">
           <h5>${filme.titulo}</h5>

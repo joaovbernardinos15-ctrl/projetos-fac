@@ -47,19 +47,10 @@
                 Planos
               </button>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Início</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="filmes.html">Filmes</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="lanches.html">Lanches</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="contato.html">Contato</a>
-            </li>
-            <!-- Preenchido por js/nav.js conforme o usuario logado (visitante / cliente / admin) -->
+            <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+            <li class="nav-item"><a class="nav-link" href="filmes.html">Filmes</a></li>
+            <li class="nav-item"><a class="nav-link" href="lanches.html">Loja</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="contato.html">Contato</a></li>
             <li class="nav-item dropdown" id="navConta"></li>
           </ul>
         </div>
@@ -72,48 +63,32 @@
     </header>
 
     <main class="contato-wrap">
-
-      <!-- Formulário -->
       <section class="contato-card">
         <h2>Envie sua mensagem</h2>
-
-        <!--
-          TODO: essa página não tem backend/JS pra processar o
-          envio de fato. O jeito mais simples de fazer o formulário
-          "funcionar" sem servidor é trocar o "action" abaixo por
-          "mailto:seuemail@cinemark.com.br" — isso abre o programa
-          de e-mail do usuário com os dados preenchidos. Se no
-          futuro vocês tiverem um backend (PHP, Node etc.), é só
-          trocar o action pra URL certa.
-        -->
         <form class="contato-form" action="mailto:contato@cinemark.com.br" method="post" enctype="text/plain">
-
           <div class="field">
-            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-            <input type="text" name="nome" placeholder="Seu nome" required />
+            <input type="text" name="nome" placeholder="Seu nome" aria-label="Seu nome" required />
           </div>
-
           <div class="field">
-            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true">
               <path d="M4 4h16v16H4z" />
               <path d="M22 6l-10 7L2 6" />
             </svg>
-            <input type="email" name="email" placeholder="Seu e-mail" required />
+            <input type="email" name="email" placeholder="Seu e-mail" aria-label="Seu e-mail" required />
           </div>
-
           <div class="field">
-            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true">
               <path d="M14 3v4a1 1 0 0 0 1 1h4" />
               <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z" />
             </svg>
-            <input type="text" name="assunto" placeholder="Assunto" required />
+            <input type="text" name="assunto" placeholder="Assunto" aria-label="Assunto" required />
           </div>
-
           <div class="field field-textarea">
-            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+            <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" aria-hidden="true">
               <path d="M12 20h9" />
               <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
             </svg>
@@ -125,7 +100,7 @@
       </section>
 
       <!-- Informações de contato -->
-      <section class="contato-card">
+      <section class="contato-card" hidden>
         <h2>Informações</h2>
 
         <ul class="contato-info-list">
@@ -207,13 +182,17 @@
           title="Localização do Cinemark no mapa"
         ></iframe>
       </section>
-      <!-- Modal de Planos Cinepass 
+      <!-- Modal de Planos Cinemark
      usei i.a para implementa o bootstrap e fontawesome-->
 <div class="modal fade" id="modalPlanos" tabindex="-1" aria-labelledby="modalPlanosLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content modal-planos-content">
       
       <div class="modal-header border-0 pb-0">
+        <div class="me-auto">
+          <h2 class="modal-title fs-4 text-white" id="modalPlanosLabel">Planos Cinemark</h2>
+          <p class="small text-white-50 mt-2 mb-0">Benefícios e valores demonstrativos. Assinaturas ainda não estão disponíveis.</p>
+        </div>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
@@ -225,18 +204,18 @@
             <div class="card-plano plano-lite">
               <div class="plano-header">
                 <i class="fa-solid fa-film icone-topo"></i>
-                <h2>CINEPASS <span>Lite</span></h2>
-                <p class="vantagens-qtd">4 vantagens exclusivas</p>
+                <h2>CINEMARK <span>Lite</span></h2>
+                <p class="vantagens-qtd">4 benefícios propostos</p>
               </div>
               <ul class="plano-recursos">
-                <li><i class="fa-solid fa-ticket"></i> 2 Ingressos Grátis por Mês</li>
-                <li><i class="fa-solid fa-coins"></i> Desconto em ingressos</li>
-                <li><i class="fa-solid fa-star"></i> Acesso antecipado a pré-vendas</li>
-                <li><i class="fa-solid fa-user-group"></i> Cortesia para amigo por trimestre</li>
+                <li><i class="fa-solid fa-film"></i> Catálogo de filmes da plataforma</li>
+                <li><i class="fa-solid fa-user"></i> 1 perfil</li>
+                <li><i class="fa-solid fa-tv"></i> 1 tela simultânea</li>
+                <li><i class="fa-solid fa-display"></i> Qualidade conforme o conteúdo disponível</li>
               </ul>
               <div class="plano-footer">
                 <div class="preco">R$ 19,90<span>/mês</span></div>
-                <button class="btn-assinar btn-lite">Assinar Lite</button>
+                <button type="button" class="btn-assinar btn-lite" disabled>Em breve</button>
               </div>
             </div>
           </div>
@@ -246,20 +225,20 @@
             <div class="card-plano plano-plus">
               <div class="plano-header">
                 <i class="fa-solid fa-video icone-topo text-danger"></i>
-                <h2>CINEPASS <span class="text-danger">Plus</span></h2>
-                <p class="vantagens-qtd">6 vantagens exclusivas</p>
+                <h2>CINEMARK <span class="text-danger">Plus</span></h2>
+                <p class="vantagens-qtd">6 benefícios propostos</p>
               </div>
               <ul class="plano-recursos">
-                <li><i class="fa-solid fa-ticket"></i> 5 Ingressos Grátis por Mês</li>
-                <li><i class="fa-solid fa-ticket-simple"></i> +2 Ingressos Adicionais por Mês</li>
-                <li><i class="fa-solid fa-coins"></i> Desconto em ingressos</li>
-                <li><i class="fa-solid fa-list"></i> Fila exclusiva</li>
-                <li><i class="fa-solid fa-popcorn"></i> Combo Pipoca + Refri grátis por mês</li>
-                <li><i class="fa-solid fa-user-group"></i> Cortesia para amigo por trimestre</li>
+                <li><i class="fa-solid fa-film"></i> Catálogo de filmes da plataforma</li>
+                <li><i class="fa-solid fa-users"></i> Até 3 perfis</li>
+                <li><i class="fa-solid fa-tv"></i> Até 2 telas simultâneas</li>
+                <li><i class="fa-solid fa-display"></i> Qualidade conforme o conteúdo disponível</li>
+                <li><i class="fa-solid fa-wand-magic-sparkles"></i> Sugestões personalizadas</li>
+                <li><i class="fa-solid fa-bag-shopping"></i> Ofertas na loja</li>
               </ul>
               <div class="plano-footer">
                 <div class="preco">R$ 39,90<span>/mês</span></div>
-                <button class="btn-assinar btn-plus">Assinar Plus</button>
+                <button type="button" class="btn-assinar btn-plus" disabled>Em breve</button>
               </div>
             </div>
           </div>
@@ -269,21 +248,21 @@
             <div class="card-plano plano-ultra">
               <div class="plano-header">
                 <i class="fa-solid fa-crown icone-topo text-warning"></i>
-                <h2>CINEPASS <span class="text-warning">Ultra</span></h2>
-                <p class="vantagens-qtd">7 vantagens exclusivas</p>
+                <h2>CINEMARK <span class="text-warning">Ultra</span></h2>
+                <p class="vantagens-qtd">7 benefícios propostos</p>
               </div>
               <ul class="plano-recursos">
-                <li><i class="fa-solid fa-ticket"></i> 10 Ingressos Grátis por Mês</li>
-                <li><i class="fa-solid fa-ticket-simple"></i> +4 Ingressos Adicionais por Mês</li>
-                <li><i class="fa-solid fa-star"></i> Acesso a pré-estreias exclusivas</li>
-                <li><i class="fa-solid fa-gem"></i> Sala VIP</li>
-                <li><i class="fa-solid fa-couch"></i> Combo Pipoca + Refri grátis por mês</li>
-                <li><i class="fa-solid fa-scissors"></i> Cortesia por mês</li>
-                <li><i class="fa-solid fa-user-group"></i> Cortesia para amigo por mês</li>
+                <li><i class="fa-solid fa-film"></i> Catálogo de filmes da plataforma</li>
+                <li><i class="fa-solid fa-users"></i> Até 5 perfis</li>
+                <li><i class="fa-solid fa-tv"></i> Até 4 telas simultâneas</li>
+                <li><i class="fa-solid fa-display"></i> Qualidade máxima disponível</li>
+                <li><i class="fa-solid fa-star"></i> Acesso antecipado a lançamentos</li>
+                <li><i class="fa-solid fa-ban"></i> Experiência sem anúncios</li>
+                <li><i class="fa-solid fa-bag-shopping"></i> Benefícios na loja</li>
               </ul>
               <div class="plano-footer">
                 <div class="preco">R$ 79,90<span>/mês</span></div>
-                <button class="btn-assinar btn-ultra"><i class="fa-solid fa-crown me-1"></i> Assinar Ultra</button>
+                <button type="button" class="btn-assinar btn-ultra" disabled>Em breve</button>
               </div>
             </div>
           </div>

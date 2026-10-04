@@ -210,3 +210,255 @@ html:has(body.home-page)::-webkit-scrollbar {
   .home-page .movie-poster-info { padding: 10px; }
   .home-page .movie-poster-info h5 { font-size: 12px; }
 }
+
+/* Home de streaming */
+.home-page {
+  display: block;
+  align-items: initial;
+  justify-content: initial;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 0;
+  background: #100b0d;
+  color: #f6f0f1;
+}
+
+.home-page::before { display: none; }
+
+.streaming-home {
+  position: relative;
+  padding-top: 96px;
+  background: radial-gradient(ellipse at 78% 0%, rgba(156, 25, 45, .25), transparent 38%);
+}
+
+.streaming-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  width: min(calc(100% - 48px), 1340px);
+  min-height: 500px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+  background: #110d0e;
+}
+
+.streaming-hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, #110d0e 0%, rgba(17, 13, 14, .96) 34%, rgba(17, 13, 14, .44) 72%, rgba(17, 13, 14, .12) 100%);
+  content: "";
+}
+
+.streaming-hero-poster {
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  right: 0;
+  width: 68%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 24%;
+  opacity: .86;
+}
+
+.streaming-hero-content {
+  width: min(100%, 650px);
+  padding: 64px 24px 72px 4px;
+}
+
+.streaming-kicker,
+.shelf-kicker {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 16px;
+  color: #f08a98;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.streaming-kicker span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4058;
+  box-shadow: 0 0 16px rgba(239, 64, 88, .8);
+}
+
+.home-page .streaming-hero h1 {
+  max-width: 590px;
+  margin: 0 0 15px;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 54px;
+  font-weight: 700;
+  line-height: 1.04;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.streaming-description {
+  max-width: 500px;
+  margin: 0;
+  color: #d1c9cb;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.streaming-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.streaming-meta span {
+  padding: 5px 9px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 4px;
+  color: #f0e9eb;
+  font-size: 12px;
+}
+
+.streaming-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 25px;
+}
+
+.streaming-actions a,
+.loja-chamada > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  padding: 0 17px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: background-color .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.streaming-actions a:hover,
+.loja-chamada > a:hover { transform: translateY(-2px); }
+
+.streaming-primary { background: #d52d46; }
+.streaming-primary:hover { background: #f03d56; }
+.streaming-secondary { border-color: rgba(255, 255, 255, .32) !important; background: rgba(16, 12, 13, .7); }
+.streaming-secondary:hover { border-color: #fff !important; background: rgba(255, 255, 255, .1); }
+
+.home-page .em-cartaz {
+  width: min(calc(100% - 48px), 1340px);
+  margin: 26px auto 0;
+  padding: 24px 0 32px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.home-page .em-cartaz-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.home-page .em-cartaz-header h2 {
+  margin: 0;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  letter-spacing: 0;
+}
+
+.home-page .em-cartaz-header h2::before { display: none; }
+.home-page .shelf-kicker { margin-bottom: 6px; font-size: 10px; }
+.home-page .em-cartaz-arrows { display: flex; }
+.home-page .em-cartaz .arrow-btn { width: 40px; height: 40px; }
+
+.home-page .movie-poster-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.home-page .movie-poster-card {
+  flex: initial;
+  max-width: none;
+  border-radius: 5px;
+  transition: border-color .2s ease, transform .2s ease;
+}
+
+.home-page .movie-poster-card:hover { transform: translateY(-4px); }
+.home-page .watch-badge { border-radius: 3px; color: #ffc7ce; }
+.home-page .movie-poster-info { min-height: 86px; }
+.home-page .movie-poster-info h5 { line-height: 1.4; }
+
+.loja-chamada {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  width: min(calc(100% - 48px), 1340px);
+  margin: 4px auto 52px;
+  padding: 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  border-bottom: 1px solid rgba(255, 255, 255, .12);
+}
+
+.loja-chamada-icone {
+  display: grid;
+  width: 52px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgba(238, 62, 85, .45);
+  border-radius: 50%;
+  background: rgba(177, 25, 47, .15);
+  color: #ff7384;
+  font-size: 21px;
+}
+
+.loja-chamada .shelf-kicker { margin-bottom: 5px; }
+.loja-chamada h2 { margin: 0 0 5px; color: #fff; font-size: 19px; }
+.loja-chamada p:not(.shelf-kicker) { margin: 0; color: #bdb4b6; font-size: 14px; }
+.loja-chamada > a { min-height: 42px; padding: 0 14px; background: #791628; }
+.loja-chamada > a:hover { background: #a51d36; }
+
+.home-page a:focus-visible,
+.home-page button:focus-visible { outline: 3px solid #ff9aa7; outline-offset: 3px; }
+
+@media (max-width: 768px) {
+  .streaming-home { padding-top: 86px; }
+  .streaming-hero { width: 100%; min-height: 500px; align-items: end; }
+  .streaming-hero::after { background: linear-gradient(0deg, #100b0d 0%, rgba(16, 11, 13, .93) 30%, rgba(16, 11, 13, .2) 100%); }
+  .streaming-hero-poster { width: 100%; opacity: .52; object-position: center 18%; }
+  .streaming-hero-content { padding: 210px 22px 34px; }
+  .home-page .streaming-hero h1 { max-width: 540px; font-size: 42px; }
+  .home-page .em-cartaz { width: calc(100% - 32px); padding-top: 25px; }
+  .home-page .movie-poster-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .loja-chamada { width: calc(100% - 32px); grid-template-columns: 46px minmax(0, 1fr); gap: 12px; margin-bottom: 34px; }
+  .loja-chamada-icone { width: 44px; font-size: 18px; }
+  .loja-chamada > a { grid-column: 2; justify-self: start; }
+}
+
+@media (max-width: 420px) {
+  .streaming-hero { min-height: 480px; }
+  .streaming-hero-content { padding: 180px 18px 28px; }
+  .home-page .streaming-hero h1 { font-size: 36px; }
+  .streaming-description { font-size: 14px; }
+  .streaming-actions { gap: 8px; }
+  .streaming-actions a { min-height: 43px; padding: 0 12px; font-size: 12px; }
+  .home-page .em-cartaz-header h2 { font-size: 23px; }
+  .home-page .movie-poster-info h5 { font-size: 12px; }
+}

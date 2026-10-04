@@ -29,11 +29,17 @@
     const cabecalho = document.createElement("header");
     cabecalho.className = "menu-categoria-cabecalho";
 
-    const imagem = document.createElement("img");
+    const imagem = document.createElement(dados.imagem ? "img" : "div");
     imagem.className = "menu-categoria-imagem";
-    imagem.src = dados.imagem;
-    imagem.alt = dados.alt;
-    imagem.loading = "lazy";
+    if (dados.imagem) {
+      imagem.src = dados.imagem;
+      imagem.alt = dados.alt;
+      imagem.loading = "lazy";
+    } else {
+      imagem.classList.add("menu-categoria-icone");
+      imagem.setAttribute("aria-hidden", "true");
+      imagem.append(criarIcone(dados.icone));
+    }
 
     const titulo = document.createElement("div");
     titulo.className = "menu-categoria-titulo";

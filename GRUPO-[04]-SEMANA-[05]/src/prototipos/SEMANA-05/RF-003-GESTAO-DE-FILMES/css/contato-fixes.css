@@ -496,3 +496,18 @@
         height: 190px;
     }
 }
+
+.contato-page .contato-wrap {
+    max-width: 760px;
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.contato-page .contato-card h2 {
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .contato-page .contato-wrap {
+        max-width: 700px;
+    }
+}

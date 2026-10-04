@@ -58,5 +58,15 @@ window.CATALOGO_LANCHES = {
       "Combo Família": { preco: 59.9, descricao: "Porções maiores para compartilhar." },
       "Monte seu combo": { preco: 44.9, descricao: "Escolha seus favoritos em uma só opção." }
     }
+  },
+  Brinquedos: {
+    icone: "fa-puzzle-piece",
+    descricao: "Brinquedos e lembranças para levar a diversão para casa.",
+    itens: {
+      "Miniatura colecionável": { preco: 39.9, descricao: "Uma peça para guardar na coleção." },
+      "Pelúcia de cinema": { preco: 54.9, descricao: "Uma companhia macia para todas as idades." },
+      "Kit de adesivos": { preco: 14.9, descricao: "Adesivos temáticos para personalizar seus objetos." },
+      "Quebra-cabeça": { preco: 34.9, descricao: "Um desafio divertido para montar em casa." }
+    }
   }
 };

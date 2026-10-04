@@ -230,6 +230,15 @@
   object-fit: cover;
 }
 
+.menu-categoria-icone {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 130, 144, .24);
+  background: linear-gradient(135deg, #35151d, #171214);
+  color: #ff8290;
+  font-size: 42px;
+}
+
 .menu-categoria-titulo h2 {
   margin: 4px 0 6px;
   color: #fff;
