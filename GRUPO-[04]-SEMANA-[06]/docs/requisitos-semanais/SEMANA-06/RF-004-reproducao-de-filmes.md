@@ -8,6 +8,7 @@
 
 ## 1. IDENTIFICAÇÃO DO REQUISITO
 
+
 ### RF-004: Reprodução de Filmes
 
 **ID:** RF-004  
@@ -236,6 +237,14 @@ A página inicial e o catálogo atuais estão em `src/prototipos/SEMANA-06/index
 **Decisão:** Manter no registro do filme um endereço relativo ou HTTPS validado e permitir que o painel o mantenha.
 **Consequências:** A reprodução depende de um arquivo acessível na origem ou de um servidor HTTPS autorizado. O protótipo não fará upload nem hospedará vídeos.
 
+### ADR-003: Validação da fonte antes do carregamento
+
+**Status:** Implementado no cliente; validação de servidor não existe neste protótipo.
+**Contexto:** A fonte do vídeo é configurável localmente e não deve aceitar esquemas executáveis ou endereços fora dos formatos previstos.
+**Decisão:** Validar caminho relativo ou HTTPS no cadastro e novamente antes de atribuir a fonte ao elemento `<video>`.
+**Alternativa rejeitada:** confiar diretamente em qualquer valor fornecido pelo registro.
+**Consequências:** Reduz fontes obviamente inválidas no fluxo da interface, mas não substitui política de segurança, allowlist revisada nem validação de backend.
+
 ### Fluxo de dados proposto
 
 ```mermaid
@@ -281,6 +290,7 @@ Compra de lanches e brinquedos é complementar ao produto e deve ser descrita em
 - [x] Implementar tela de detalhes e player responsivo.
 - [ ] Revisar visualmente os breakpoints e testar controles, estados de erro e acessibilidade.
 - [ ] Definir com o professor se há exigência de login ou assinatura antes da reprodução.
+- [ ] Converter/validar protótipo no formato HTML único com CSS embutido se esse critério da validação da Semana 05 for obrigatório nesta entrega.
 
 ---
 
