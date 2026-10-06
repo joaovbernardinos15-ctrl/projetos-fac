@@ -347,3 +347,48 @@
   }
 }
 
+@media (max-width: 1199px) {
+  .cinemark-nav .container-fluid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    column-gap: 8px;
+  }
+
+  .cinemark-nav .navbar-brand,
+  .filmes-page .cinemark-nav .navbar-brand,
+  .contato-page .cinemark-nav .navbar-brand {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    margin: 0 !important;
+    transform: none !important;
+  }
+
+  .cinemark-nav .logo-navbar,
+  .filmes-page .cinemark-nav .logo-navbar,
+  .contato-page .cinemark-nav .logo-navbar {
+    top: 22px !important;
+  }
+
+  .cinemark-nav .navbar-toggler {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: end;
+    margin-right: 4px;
+  }
+
+  .cinemark-nav .navbar-collapse,
+  .filmes-page .cinemark-nav .navbar-collapse,
+  .contato-page .cinemark-nav .navbar-collapse {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    margin: 10px 0 0 !important;
+    padding: 10px !important;
+  }
+}
