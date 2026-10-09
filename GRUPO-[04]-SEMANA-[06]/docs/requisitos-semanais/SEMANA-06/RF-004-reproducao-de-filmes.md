@@ -29,9 +29,9 @@ O sistema permite que o visitante ou cliente consulte um filme disponível, veja
 
 O catálogo apresenta os filmes disponibilizados pela plataforma. Ao escolher um título, o usuário consulta os metadados cadastrados e pode iniciar a reprodução de seu conteúdo. A reprodução ocorre em um player de vídeo HTML5, com controles de iniciar, pausar, avançar, voltar, volume e tela cheia, conforme suporte do navegador e do arquivo.
 
-Cada filme precisa possuir uma fonte de vídeo válida, identificada por caminho relativo servido pelo próprio site ou por endereço HTTPS autorizado pelo projeto. A fonte deve ser mantida separada do pôster e da sinopse. O arquivo de vídeo não deve ser gravado no `localStorage`; no protótipo, o armazenamento local mantém somente os metadados e o endereço da mídia.
+Cada filme precisa possuir uma fonte de vídeo válida, identificada por caminho relativo servido pelo próprio site ou por endereço HTTPS autorizado pelo projeto. Fontes de arquivo são reproduzidas no player HTML5; links de vídeos do YouTube são incorporados pelo player oficial do YouTube. A fonte deve ser mantida separada do pôster e da sinopse. O arquivo de vídeo não deve ser gravado no `localStorage`; no protótipo, o armazenamento local mantém somente os metadados e o endereço da mídia.
 
-O protótipo oferece detalhes e player HTML5, e o painel permite cadastrar uma fonte relativa ou HTTPS. Os filmes iniciais ainda não possuem vídeos associados; por isso, eles exibem o estado de indisponibilidade até que uma fonte de demonstração autorizada seja cadastrada.
+O protótipo oferece detalhes e player HTML5 para arquivos, além de incorporação de vídeos do YouTube. O painel permite cadastrar uma fonte relativa ou HTTPS. O filme “(Des)Controle” possui o trailer oficial associado como demonstração; os demais filmes sem fonte exibem o estado de indisponibilidade.
 
 ### Atores do Sistema
 
@@ -117,6 +117,14 @@ O protótipo oferece detalhes e player HTML5, e o painel permite cadastrar uma f
 2. O player aplica a ação quando a mídia permite a operação.
 3. O sistema atualiza o estado visual dos controles.
 
+**A5: Consultar sessão presencial e reservar assentos demonstrativos**
+
+1. Na página do filme, o usuário escolhe um dia, aplica filtros por tipo de sessão e idioma e consulta cinemas, salas e horários demonstrativos.
+2. O usuário escolhe um horário, seleciona assentos livres e informa seu nome para o comprovante.
+3. O sistema grava uma compra demonstrativa local e apresenta um comprovante com código, nome, filme, cinema, sala, sessão e assentos, que pode ser impresso para visualização.
+4. Se a sessão estiver esgotada ou um assento tiver sido reservado antes da confirmação, o sistema informa a falha e permite escolher outro horário.
+5. Quando houver trailer autorizado associado ao filme, o usuário também pode optar por assisti-lo em casa; a interface o identifica como trailer, não como filme completo.
+
 ### Regras de Negócio (RN)
 
 **RN-01:** Somente filmes marcados como disponíveis podem ser apresentados como reproduzíveis.  
@@ -129,6 +137,11 @@ O protótipo oferece detalhes e player HTML5, e o painel permite cadastrar uma f
 **RN-08:** O player utiliza os recursos suportados pelo navegador e pelo formato fornecido; não promete compatibilidade com qualquer codec.  
 **RN-09:** Os arquivos de mídia não são armazenados em `localStorage`.  
 **RN-10:** Assinaturas, pagamentos, histórico de reprodução, retomada entre dispositivos e download offline estão fora do escopo deste requisito.
+**RN-11:** Cinemas, datas, salas, idiomas, horários e ocupação apresentados no protótipo são dados demonstrativos; não representam disponibilidade ou reserva real.
+**RN-12:** A compra e o comprovante demonstrativos não cobram, não emitem ingresso real e não garantem assento. O comprovante somente resume os dados para demonstração ao atendente; uma falha de compra não deve impedir a consulta a outro horário.
+**RN-13:** A opção de assistir em casa só é exibida quando houver fonte HTTPS válida de trailer; trailer não deve ser apresentado como filme completo.
+**RN-14:** A compra demonstrativa exige nome não vazio e gera comprovante com filme, cinema, sala, sessão, assentos e código de referência; nenhum preço é exibido nesta etapa.
+**RN-15:** Reservas demonstrativas ocupam assentos somente até o fim da sessão correspondente; durante a sessão não são aceitas novas compras e, após o encerramento, os assentos voltam a ser exibidos como livres. A duração usada para sessões de exemplo é de duas horas.
 
 ### Requisitos Não Funcionais
 
@@ -142,6 +155,9 @@ O protótipo oferece detalhes e player HTML5, e o painel permite cadastrar uma f
 | RNF-06 | A primeira reprodução deve depender de ação explícita do usuário; não deve iniciar automaticamente com áudio. | Critério definido; teste pendente |
 | RNF-07 | A aplicação deve aceitar somente caminhos relativos ou URLs HTTPS aprovadas para a fonte de mídia. | Validação no cadastro e antes do carregamento implementada; aprovação da URL é responsabilidade do projeto |
 | RNF-08 | O tempo de início depende do tamanho do arquivo, rede, codec e servidor; não há meta de streaming adaptativo neste protótipo. | Limitação documentada; CDN/streaming adaptativo fora do escopo |
+| RNF-09 | Horários, filtros e seleção de assentos devem permanecer utilizáveis em telas estreitas e por teclado. | Implementado; teste responsivo e de acessibilidade pendente |
+| RNF-10 | A reserva local deve impedir a duplicação de um assento na mesma sessão neste navegador e comunicar conflito sem declarar sucesso. | Validação demonstrativa no `Store`; teste de concorrência entre abas pendente |
+| RNF-11 | O comprovante deve identificar claramente que é demonstrativo e permitir imprimir os dados da sessão sem incluir o restante da página. | Implementado; revisão de impressão pendente |
 
 ---
 
@@ -183,10 +199,16 @@ A página inicial e o catálogo atuais estão em `src/prototipos/SEMANA-06/index
 │ └───────────────────────────────────────────────────────────────┘   │
 │ Título do filme · Gênero · Ano · Classificação indicativa           │
 │ Sinopse                                                             │
+│ HORÁRIOS · Dias · Tipo de sessão · Idioma                           │
+│ Cinema · Sala · [Horário] [Horário] · seleção de assentos           │
+│ Nome · [Confirmar compra demonstrativa]                             │
+│ Comprovante: código · cliente · filme · cinema · sessão · assentos  │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
 **Estado sem fonte ou com falha:** o player apresenta “Este filme está temporariamente indisponível” ou “Não foi possível carregar o vídeo”, preserva o título e oferece a ação **Voltar ao catálogo**.
+
+**Sessões presenciais:** a tela de detalhes também mostra horários demonstrativos, filtros de data/tipo/idioma e seleção de assentos. Após informar o nome, o usuário gera um comprovante demonstrativo com código, filme, cinema, sessão e assentos, que pode imprimir e apresentar ao atendente. Não há pagamento nem ingresso real. Para “(Des)Controle”, a opção em casa abre o trailer oficial do YouTube e permanece identificada como trailer.
 
 ### Fluxo de Navegação
 
@@ -206,13 +228,14 @@ A página inicial e o catálogo atuais estão em `src/prototipos/SEMANA-06/index
 ┌────────────────────────────────┐
 │ Navegador                      │
 │ home/index + catálogo + filme  │
-│ detalhes + player HTML5        │
+│ detalhes + sessões + player    │
 └──────────────┬─────────────────┘
-               │ consulta título e fonte
+               │ consulta título, sessões e fonte
                ▼
 ┌────────────────────────────────┐
 │ Store (store.js)               │
-│ metadados e endereço do vídeo  │
+│ catálogo, reservas locais e    │
+│ endereço do vídeo              │
 └──────────────┬─────────────────┘
                │ endereço da mídia
                ▼
@@ -245,6 +268,14 @@ A página inicial e o catálogo atuais estão em `src/prototipos/SEMANA-06/index
 **Alternativa rejeitada:** confiar diretamente em qualquer valor fornecido pelo registro.
 **Consequências:** Reduz fontes obviamente inválidas no fluxo da interface, mas não substitui política de segurança, allowlist revisada nem validação de backend.
 
+### ADR-004: Horários e reservas locais demonstrativos
+
+**Status:** Implementado no protótipo; dados reais e integração de bilheteria não fazem parte do escopo.
+**Contexto:** A página de detalhes precisa mostrar sessões presenciais e demonstrar um caminho alternativo quando uma sessão não puder ser reservada.
+**Decisão:** Gerar horários de demonstração na interface, manter compras e assentos no `localStorage`, solicitar o nome e apresentar um comprovante imprimível com os dados necessários para informar o atendente. Se houver trailer autorizado, oferecê-lo como opção em casa sem confundi-lo com o filme completo.
+**Alternativa rejeitada:** afirmar disponibilidade real de salas ou ingressos sem conexão com o serviço de bilheteria.
+**Consequências:** A confirmação e o comprovante valem apenas como demonstração neste navegador; não bloqueiam assentos reais, não emitem ingresso e não efetuam pagamento.
+
 ### Fluxo de dados proposto
 
 ```mermaid
@@ -272,8 +303,8 @@ Compra de lanches e brinquedos é complementar ao produto e deve ser descrita em
 |---|---|---|
 | Estrutura das telas | HTML | Catálogo, detalhes e player |
 | Estilos | CSS | Player responsivo e estados visuais |
-| Comportamento | JavaScript | Consulta de disponibilidade e mensagens de erro |
-| Metadados | `localStorage` via `Store` | Dados do filme e endereço da mídia no protótipo |
+| Comportamento | JavaScript | Consulta de sessões, seleção de assentos, comprovante e mensagens de estado |
+| Dados | `localStorage` via `Store` | Catálogo, endereço da mídia e compras demonstrativas locais |
 | Reprodução | Elemento HTML5 `<video>` | Controles nativos do navegador |
 | Mídia | Arquivo relativo ou URL HTTPS aprovada | Fonte de vídeo autorizada |
 
@@ -294,4 +325,4 @@ Compra de lanches e brinquedos é complementar ao produto e deve ser descrita em
 
 ---
 
-**Observação:** O protótipo implementa o fluxo de detalhes e player do RF-004, mas não inclui vídeos. A reprodução depende de uma fonte autorizada cadastrada pelo administrador. O documento não presume backend, assinatura, pagamento ou hospedagem de conteúdo.
+**Observação:** O protótipo implementa detalhes, player, sessões e reservas demonstrativas. A reprodução depende de uma fonte autorizada; o trailer de “(Des)Controle” não é o filme completo. Horários e reservas são locais e não substituem backend, bilheteria, assinatura, pagamento ou hospedagem de conteúdo.

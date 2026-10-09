@@ -21,7 +21,8 @@ const Store = (() => {
     usuarios: "cinemark:usuarios",
     filmes: "cinemark:filmes",
     sessao: "cinemark:sessao",
-    carrinho: "cinemark:carrinho"
+    carrinho: "cinemark:carrinho",
+    reservas: "cinemark:reservas"
   };
 
   /* ---------- utilitários ---------- */
@@ -83,26 +84,48 @@ const Store = (() => {
     return { ok: false, erro: "Use um caminho relativo ou um endereço HTTPS para o vídeo." };
   }
 
+  function obterIdYouTube(fonte) {
+    try {
+      const url = new URL(String(fonte ?? ""));
+      if (url.protocol !== "https:" || (url.port && url.port !== "443")) return null;
+
+      let id = null;
+      if (["youtube.com", "www.youtube.com", "m.youtube.com"].includes(url.hostname)) {
+        if (url.pathname === "/watch") {
+          id = url.searchParams.get("v");
+        } else {
+          id = url.pathname.match(/^\/(?:embed|shorts)\/([A-Za-z0-9_-]{11})\/?$/)?.[1] ?? null;
+        }
+      } else if (["youtu.be", "www.youtu.be"].includes(url.hostname)) {
+        id = url.pathname.slice(1).split("/")[0];
+      }
+
+      return id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null;
+    } catch {
+      return null;
+    }
+  }
+
   /* ---------- seed (dados iniciais) ---------- */
 
   const FILMES_INICIAIS = [
-    { titulo: "A Odisseia", genero: "Ação", ano: "2026", classificacao: "14", poster: "./img/MoviePoster-8ad878d5-f2a3-46d4-9f34-b07cf40b1541.png" },
-    { titulo: "Cansei de Ser Nerd", genero: "Comédia", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-7b391aed-202c-47c4-81f8-426cca8ff7d4.png" },
-    { titulo: "Colegas e o Herdeiro", genero: "Comédia", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-4b578907-005f-4257-9448-684e6f52b1c4.png" },
-    { titulo: "Coyote vs. Acme", genero: "Comédia", ano: "2026", classificacao: "L", poster: "./img/MoviePoster-908f3c4f-27e4-4e30-a057-ad6fb93992d5.png" },
-    { titulo: "Homem-Aranha: Um Novo Dia", genero: "Ação", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-11e62ed3-b0b0-42ae-97b8-54b881bc2bee.png" },
-    { titulo: "Michael", genero: "Drama", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-39a47201-3b75-4d07-b96a-02610d9885a9.png" },
-    { titulo: "Muito Prazer", genero: "Comédia", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-532e35b5-8c6a-4b0b-9f57-e40d06d35940.png" },
+    { titulo: "A Odisseia", genero: "Ação", ano: "2026", classificacao: "14", poster: "./img/MoviePoster-8ad878d5-f2a3-46d4-9f34-b07cf40b1541.png", fonteVideo: "https://youtu.be/fF9hQP0vht8" },
+    { titulo: "Cansei de Ser Nerd", genero: "Comédia", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-7b391aed-202c-47c4-81f8-426cca8ff7d4.png", fonteVideo: "https://youtu.be/kPZho9jxzu8" },
+    { titulo: "Colegas e o Herdeiro", genero: "Comédia", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-4b578907-005f-4257-9448-684e6f52b1c4.png", fonteVideo: "https://youtu.be/ceOilC14SSc" },
+    { titulo: "Coyote vs. Acme", genero: "Comédia", ano: "2026", classificacao: "L", poster: "./img/MoviePoster-908f3c4f-27e4-4e30-a057-ad6fb93992d5.png", fonteVideo: "https://youtu.be/0yGrVVFNKF4" },
+    { titulo: "Homem-Aranha: Um Novo Dia", genero: "Ação", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-11e62ed3-b0b0-42ae-97b8-54b881bc2bee.png", fonteVideo: "https://youtu.be/PlulyWs1kS4" },
+    { titulo: "Michael", genero: "Drama", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-39a47201-3b75-4d07-b96a-02610d9885a9.png", fonteVideo: "https://youtu.be/mbtgEE6rkxw" },
+    { titulo: "Muito Prazer", genero: "Comédia", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-532e35b5-8c6a-4b0b-9f57-e40d06d35940.png", fonteVideo: "https://youtu.be/bt9n5pL40QM" },
     { titulo: "O Advogado do Diabo", genero: "Drama", ano: "2026", classificacao: "16", poster: "./img/MoviePoster-4a554ccc-f36c-4236-9d02-90c364e40816.png" },
-    { titulo: "O Fim da Rua", genero: "Drama", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-6ae2213a-1124-4e3b-94c0-9b0480aa6b82.png" },
-    { titulo: "O Gênio do Crime", genero: "Comédia", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-1d439958-eb6d-4749-bd17-16e3caff4ce4.png" },
-    { titulo: "Ponto Sem Retorno", genero: "Ação", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-6bba3710-5068-4f38-8597-2271a4271b2a.png" },
-    { titulo: "Patrulha Canina: Uma Aventura Dino", genero: "Ficção", ano: "2026", classificacao: "L", poster: "./img/MoviePoster-94f73a7f-62a1-44cb-a01a-2e32eaa87efc.png" },
-    { titulo: "Só Por Uma Noite", genero: "Drama", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-75453a35-a69e-43bc-b312-b1d6a30cbfe7.png" },
-    { titulo: "Sobrenatural: Agora Entre Nós", genero: "Terror", ano: "2026", classificacao: "14", poster: "./img/MoviePoster-36bc59f8-4d4f-41c9-aee9-dc6cee2a9784.png" },
-    { titulo: "Túmulo dos Vagalumes", genero: "Animação", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-8270e450-9ede-4618-a15d-5f67292667cb.png" },
+    { titulo: "O Fim da Rua", genero: "Drama", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-6ae2213a-1124-4e3b-94c0-9b0480aa6b82.png", fonteVideo: "https://youtu.be/NtVXvlgaIUQ" },
+    { titulo: "O Gênio do Crime", genero: "Comédia", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-1d439958-eb6d-4749-bd17-16e3caff4ce4.png", fonteVideo: "https://youtu.be/fU7JkJyw4oo" },
+    { titulo: "Ponto Sem Retorno", genero: "Ação", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-6bba3710-5068-4f38-8597-2271a4271b2a.png", fonteVideo: "https://youtu.be/EpDrdWcksg4" },
+    { titulo: "Patrulha Canina: Uma Aventura Dino", genero: "Ficção", ano: "2026", classificacao: "L", poster: "./img/MoviePoster-94f73a7f-62a1-44cb-a01a-2e32eaa87efc.png", fonteVideo: "https://youtu.be/BID0gu1ROD8" },
+    { titulo: "Só Por Uma Noite", genero: "Drama", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-75453a35-a69e-43bc-b312-b1d6a30cbfe7.png", fonteVideo: "https://youtu.be/5QtZALyr3kw" },
+    { titulo: "Sobrenatural: Agora Entre Nós", genero: "Terror", ano: "2026", classificacao: "14", poster: "./img/MoviePoster-36bc59f8-4d4f-41c9-aee9-dc6cee2a9784.png", fonteVideo: "https://youtu.be/L8GzoyjEgwI" },
+    { titulo: "Túmulo dos Vagalumes", genero: "Animação", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-8270e450-9ede-4618-a15d-5f67292667cb.png", fonteVideo: "https://youtu.be/lhlh7JVcTt8" },
     { titulo: "Vingadores", genero: "Ação", ano: "2026", classificacao: "12", poster: "./img/MoviePoster-9acd854c-c1cd-43ab-a1ca-db1cebbcae2c.png" },
-    { titulo: "(Des)Controle", genero: "Drama", ano: "2026", classificacao: "14", poster: "./img/MoviePoster-a200868f-990a-4c7f-a725-c30d0a388997.png" }
+    { titulo: "(Des)Controle", genero: "Drama", ano: "2026", classificacao: "14", poster: "./img/MoviePoster-a200868f-990a-4c7f-a725-c30d0a388997.png", fonteVideo: "https://youtu.be/o_wJLMmqRt0" }
   ];
 
   const ADMIN_INICIAL = {
@@ -124,6 +147,20 @@ const Store = (() => {
         }))
       );
     }
+
+    const filmes = ler(CHAVES.filmes, []);
+    const trailersIniciais = new Map(FILMES_INICIAIS
+      .filter((filme) => filme.fonteVideo)
+      .map((filme) => [normalizar(filme.titulo), filme.fonteVideo]));
+    let catalogoAtualizado = false;
+    filmes.forEach((filme) => {
+      const fonteVideo = trailersIniciais.get(normalizar(filme.titulo));
+      if (fonteVideo && !filme.fonteVideo) {
+        filme.fonteVideo = fonteVideo;
+        catalogoAtualizado = true;
+      }
+    });
+    if (catalogoAtualizado) gravar(CHAVES.filmes, filmes);
 
     const usuarios = ler(CHAVES.usuarios, []);
     const temAdmin = usuarios.some((usuario) => usuario.perfil === "admin");
@@ -281,6 +318,7 @@ const Store = (() => {
     },
 
     validarFonteVideo,
+    obterIdYouTube,
 
     // CREATE
     criar({ titulo, genero, ano, classificacao, poster, sinopse = "", fonteVideo = "", emCartaz = true }) {
@@ -457,16 +495,91 @@ const Store = (() => {
     }
   };
 
+  const reservas = {
+    listar() {
+      return ler(CHAVES.reservas, []);
+    },
+
+    horarioFim(reserva) {
+      const horarioDefinido = reserva.terminaEm ? Date.parse(reserva.terminaEm) : NaN;
+      if (Number.isFinite(horarioDefinido)) return horarioDefinido;
+
+      const inicio = new Date(`${reserva.data}T${reserva.horario}:00`);
+      return Number.isNaN(inicio.getTime()) ? 0 : inicio.getTime() + 2 * 60 * 60 * 1000;
+    },
+
+    lugaresReservados(sessaoId) {
+      return this.listar()
+        .filter((reserva) => reserva.sessaoId === sessaoId && this.horarioFim(reserva) > Date.now())
+        .flatMap((reserva) => reserva.lugares);
+    },
+
+    reservar({ sessaoId, filmeId, filmeTitulo, clienteNome, cinema, sala, data, horario, terminaEm, lugares }) {
+      if (!sessaoId || !filmeId || !Array.isArray(lugares) || lugares.length === 0) {
+        return { ok: false, erro: "Selecione pelo menos um assento disponível." };
+      }
+      if (!String(clienteNome ?? "").trim()) {
+        return { ok: false, erro: "Informe o nome para o comprovante." };
+      }
+      if (!Number.isFinite(Date.parse(terminaEm)) || Date.parse(terminaEm) <= Date.now()) {
+        return { ok: false, erro: "Esta sessão já terminou. Os assentos foram liberados para outras sessões." };
+      }
+      const inicio = new Date(`${data}T${horario}:00`).getTime();
+      if (!Number.isFinite(inicio) || inicio <= Date.now()) {
+        return { ok: false, erro: "Esta sessão já começou e não aceita novas reservas." };
+      }
+
+      const lugaresValidos = lugares.every((lugar) => /^[A-E][1-8]$/.test(lugar));
+      if (!lugaresValidos || new Set(lugares).size !== lugares.length) {
+        return { ok: false, erro: "A seleção de assentos é inválida." };
+      }
+
+      const lista = this.listar();
+      const jaReservados = new Set(
+        lista
+          .filter((reserva) => reserva.sessaoId === sessaoId && this.horarioFim(reserva) > Date.now())
+          .flatMap((reserva) => reserva.lugares)
+      );
+      const indisponiveis = lugares.filter((lugar) => jaReservados.has(lugar));
+      if (indisponiveis.length) {
+        return {
+          ok: false,
+          erro: `Os assentos ${indisponiveis.join(", ")} acabaram de ser reservados. Escolha outros lugares ou horários.`
+        };
+      }
+
+      const reserva = {
+        id: gerarId(),
+        codigo: gerarId().slice(-8).toUpperCase(),
+        sessaoId,
+        filmeId,
+        filmeTitulo,
+        clienteNome: String(clienteNome).trim(),
+        cinema,
+        sala,
+        data,
+        horario,
+        terminaEm,
+        lugares,
+        criadaEm: new Date().toISOString()
+      };
+      lista.push(reserva);
+      gravar(CHAVES.reservas, lista);
+      return { ok: true, dado: reserva };
+    }
+  };
+
   /* ---------- reset (útil para apresentação/banca) ---------- */
 
   function restaurarPadrao() {
     localStorage.removeItem(CHAVES.filmes);
     localStorage.removeItem(CHAVES.usuarios);
     localStorage.removeItem(CHAVES.sessao);
+    localStorage.removeItem(CHAVES.reservas);
     semear();
   }
 
   semear();
 
-  return { usuarios, filmes, sessao, carrinho, restaurarPadrao, normalizar, CHAVES };
+  return { usuarios, filmes, sessao, carrinho, reservas, restaurarPadrao, normalizar, CHAVES };
 })();

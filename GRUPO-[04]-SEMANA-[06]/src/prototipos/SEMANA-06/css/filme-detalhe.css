@@ -64,14 +64,27 @@
   opacity: .55;
 }
 
-.filme-player-regiao video {
+.filme-player-regiao video,
+.filme-player-regiao iframe {
   position: relative;
   z-index: 1;
   display: block;
   width: 100%;
   max-height: 70vh;
   aspect-ratio: 16 / 9;
+  border: 0;
   background: #000;
+}
+
+.filme-player-regiao iframe[hidden] {
+  display: none;
+}
+
+.filme-youtube-link {
+  position: relative;
+  z-index: 1;
+  margin-top: 12px;
+  color: #fff;
 }
 
 .filme-player-regiao video[hidden],
@@ -203,6 +216,416 @@
   white-space: pre-line;
 }
 
+.filme-assistir-casa {
+  margin-top: 22px;
+}
+
+.horarios-filme {
+  padding: 30px 0;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+}
+
+.horarios-cabecalho {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.horarios-cabecalho h2,
+.painel-assentos h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(24px, 4vw, 34px);
+  font-weight: 800;
+}
+
+.horarios-demonstrativos {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, .2);
+  border-radius: 6px;
+  color: #d0d0d0;
+  font-size: 12px;
+}
+
+.dias-sessoes {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(90px, 1fr));
+  overflow: hidden;
+  border-radius: 12px;
+  background: #302e2e;
+}
+
+.dia-sessao {
+  min-height: 72px;
+  border: 0;
+  border-right: 1px solid #171616;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.dia-sessao[aria-selected="true"] {
+  background: #fff;
+  color: #141212;
+}
+
+.dia-sessao strong,
+.dia-sessao span {
+  display: block;
+}
+
+.dia-sessao strong {
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+
+.filtros-sessoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 22px 0 28px;
+}
+
+.filtros-sessoes label {
+  display: grid;
+  gap: 5px;
+  min-width: 170px;
+  color: #c8c8c8;
+  font-size: 13px;
+}
+
+.filtros-sessoes select {
+  min-height: 44px;
+  padding: 8px 34px 8px 12px;
+  border: 1px solid #4a4646;
+  border-radius: 7px;
+  background: #302e2e;
+  color: #fff;
+  font: inherit;
+}
+
+.cinema-sessoes {
+  margin: 0 0 30px;
+}
+
+.cinema-sessoes h3 {
+  margin: 0;
+  color: #ff4657;
+  font-size: clamp(20px, 3vw, 26px);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.cinema-sessoes > p {
+  margin: 2px 0 18px;
+  color: #aaa;
+  font-size: 12px;
+}
+
+.grupo-sessoes {
+  margin: 18px 0 24px;
+}
+
+.grupo-sessoes h4 {
+  margin: 0 0 12px;
+  color: #cbd7e7;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.horarios-botoes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  gap: 12px;
+}
+
+.horario-sessao {
+  min-height: 82px;
+  padding: 12px 15px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: #302e2e;
+  color: #fff;
+  text-align: left;
+  cursor: pointer;
+}
+
+.horario-sessao:hover,
+.horario-sessao:focus-visible {
+  border-color: #ff4657;
+  background: #3c3839;
+}
+
+.horario-sessao strong,
+.horario-sessao span {
+  display: block;
+}
+
+.horario-sessao strong {
+  margin-top: 4px;
+  font-size: 20px;
+}
+
+.horario-sessao.sessao-esgotada {
+  border-color: #83535a;
+}
+
+.horario-esgotado {
+  color: #ff9da5;
+  font-size: 12px;
+}
+
+.horario-encerrado {
+  color: #9de6bd;
+  font-size: 12px;
+}
+
+.horario-sessao.sessao-encerrada {
+  border-color: rgba(157, 230, 189, .4);
+}
+
+.sem-sessoes {
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 8px;
+  color: #ddd;
+}
+
+.painel-assentos {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  margin-top: 30px;
+  padding: clamp(18px, 4vw, 30px);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 14px;
+  background: #141313;
+}
+
+.painel-assentos > div:first-child {
+  justify-self: stretch;
+}
+
+.sessao-selecionada,
+.reserva-status {
+  margin: 8px 0 0;
+  color: #ccc;
+  text-align: center;
+}
+
+.painel-assentos > div:first-child .sessao-selecionada {
+  text-align: left;
+}
+
+.tela-cinema {
+  width: min(440px, 100%);
+  padding: 7px;
+  border-radius: 0 0 50% 50%;
+  background: #d8d8d8;
+  color: #242020;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-align: center;
+}
+
+.grade-assentos {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(28px, 40px));
+  gap: 8px;
+  justify-content: center;
+}
+
+.assento {
+  min-width: 28px;
+  min-height: 34px;
+  border: 1px solid #aeb6c1;
+  border-radius: 7px 7px 4px 4px;
+  background: #e7ebef;
+  color: #151515;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.assento[aria-pressed="true"] {
+  border-color: #ff4657;
+  background: #d91f2b;
+  color: #fff;
+}
+
+.assento:disabled {
+  border-color: #5c5656;
+  background: #5c5656;
+  color: #e4dede;
+  cursor: not-allowed;
+}
+
+.assento.assento-liberado:disabled {
+  border-color: #aeb6c1;
+  background: #e7ebef;
+  color: #151515;
+  cursor: default;
+}
+
+.legenda-assentos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  color: #ccc;
+  font-size: 12px;
+}
+
+.legenda-assentos span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.nome-comprador {
+  display: grid;
+  gap: 7px;
+  width: min(420px, 100%);
+  color: #e7e2e2;
+  font-weight: 700;
+}
+
+.nome-comprador input {
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid #625c5c;
+  border-radius: 7px;
+  background: #242121;
+  color: #fff;
+  font: inherit;
+}
+
+.nome-comprador input:disabled {
+  opacity: .75;
+}
+
+.comprovante-reserva {
+  width: min(620px, 100%);
+  padding: clamp(18px, 4vw, 28px);
+  border: 1px solid rgba(157, 230, 189, .55);
+  border-radius: 12px;
+  background: #102019;
+  color: #fff;
+}
+
+.comprovante-reserva[hidden] {
+  display: none;
+}
+
+.comprovante-reserva h3 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(22px, 4vw, 30px);
+}
+
+.comprovante-aviso {
+  margin: 10px 0 18px;
+  color: #bde6cd;
+  font-size: 14px;
+}
+
+.comprovante-dados {
+  display: grid;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+
+.comprovante-dados > div {
+  display: grid;
+  grid-template-columns: minmax(88px, .35fr) 1fr;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+}
+
+.comprovante-dados dt {
+  color: #bde6cd;
+}
+
+.comprovante-dados dd {
+  margin: 0;
+  color: #fff;
+  font-weight: 700;
+}
+
+.assento-legenda {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #aeb6c1;
+  border-radius: 4px;
+  background: #e7ebef;
+}
+
+.assento-legenda.selecionado {
+  border-color: #ff4657;
+  background: #d91f2b;
+}
+
+.assento-legenda.ocupado {
+  border-color: #5c5656;
+  background: #5c5656;
+}
+
+.reserva-status[data-erro="true"] {
+  color: #ff9da5;
+}
+
+.reserva-status[data-sucesso="true"] {
+  color: #9de6bd;
+}
+
+.imprimindo-comprovante {
+  background: #fff !important;
+  color: #111 !important;
+}
+
+.imprimindo-comprovante .cinemark-nav,
+.imprimindo-comprovante .filme-detalhe-main > :not(#horariosFilme),
+.imprimindo-comprovante #horariosFilme > :not(#painelAssentos),
+.imprimindo-comprovante #painelAssentos > :not(.comprovante-reserva),
+.imprimindo-comprovante #imprimirComprovante {
+  display: none !important;
+}
+
+.imprimindo-comprovante .filme-detalhe-main,
+.imprimindo-comprovante #horariosFilme,
+.imprimindo-comprovante #painelAssentos,
+.imprimindo-comprovante .comprovante-reserva {
+  display: block !important;
+  width: 100%;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: #fff !important;
+  color: #111 !important;
+  box-shadow: none;
+}
+
+.imprimindo-comprovante .comprovante-reserva h3,
+.imprimindo-comprovante .comprovante-dados dd {
+  color: #111 !important;
+}
+
+.imprimindo-comprovante .comprovante-aviso,
+.imprimindo-comprovante .comprovante-dados dt {
+  color: #333 !important;
+}
+
+.painel-assentos[hidden],
+.filme-assistir-casa[hidden],
+#reservaAssistirEmCasa[hidden] {
+  display: none;
+}
+
 .filme-detalhe-page :focus-visible {
   outline: 3px solid #ff9da5;
   outline-offset: 3px;
@@ -218,7 +641,35 @@
     padding: 16px;
   }
 
-  .filme-player-regiao video {
+  .horarios-cabecalho {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .dias-sessoes {
+    grid-template-columns: repeat(5, minmax(74px, 1fr));
+    overflow-x: auto;
+  }
+
+  .dia-sessao {
+    min-height: 68px;
+    padding: 7px 4px;
+    font-size: 12px;
+  }
+
+  .grade-assentos {
+    grid-template-columns: repeat(8, minmax(27px, 1fr));
+    gap: 5px;
+  }
+
+  .filme-player-regiao video,
+  .filme-player-regiao iframe {
     max-height: 52vh;
+  }
+}
+
+@media print {
+  body.imprimindo-comprovante {
+    min-width: 0;
   }
 }

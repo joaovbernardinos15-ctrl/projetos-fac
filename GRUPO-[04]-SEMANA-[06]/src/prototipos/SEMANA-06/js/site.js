@@ -96,12 +96,15 @@ function criarCardFilme(filme) {
   }[caractere]));
   const fonteVideoValida = Boolean(filme.fonteVideo) &&
     Store.filmes.validarFonteVideo(filme.fonteVideo).ok;
+  const rotuloVideo = Store.filmes.obterIdYouTube(filme.fonteVideo)
+    ? "TRAILER DISPONÍVEL"
+    : "VÍDEO CADASTRADO";
 
   return `
     <article class="movie-poster-card">
       <a class="movie-card-link" href="filme.html?id=${encodeURIComponent(filme.id)}"
         aria-label="Abrir tela de reprodução de ${escapar(filme.titulo)}">
-        <span class="watch-badge">${fonteVideoValida ? "VÍDEO CADASTRADO" : "SEM VÍDEO"}</span>
+        <span class="watch-badge">${fonteVideoValida ? rotuloVideo : "SEM VÍDEO"}</span>
 
         <img
           src="${escapar(filme.poster)}"
@@ -291,6 +294,9 @@ if (paginaFilmes) {
     }[caractere]));
     const fonteVideoValida = Boolean(filme.fonteVideo) &&
       Store.filmes.validarFonteVideo(filme.fonteVideo).ok;
+    const rotuloVideo = Store.filmes.obterIdYouTube(filme.fonteVideo)
+      ? "TRAILER DISPONÍVEL"
+      : "VÍDEO CADASTRADO";
 
     return `
       <article class="movie-poster-card">
@@ -298,7 +304,7 @@ if (paginaFilmes) {
           aria-label="Abrir tela de reprodução de ${escapar(filme.titulo)}">
           <img src="${escapar(filme.poster)}" alt="Pôster de ${escapar(filme.titulo)}" loading="lazy">
 
-          <div class="watch-badge">${fonteVideoValida ? "VÍDEO CADASTRADO" : "SEM VÍDEO"}</div>
+          <div class="watch-badge">${fonteVideoValida ? rotuloVideo : "SEM VÍDEO"}</div>
 
           <div class="movie-poster-info">
             <h5>${escapar(filme.titulo)}</h5>

@@ -65,9 +65,19 @@
         </div>
 
         <video id="filmeVideo" controls playsinline preload="metadata" aria-label="Player do filme" hidden></video>
+        <iframe
+          id="filmeYouTube"
+          title="Trailer do filme no YouTube"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+          hidden></iframe>
+        <a id="filmeYouTubeLink" class="filme-youtube-link" target="_blank" rel="noopener noreferrer" hidden>
+          Abrir trailer no YouTube
+        </a>
         <p id="filmePlayerStatus" class="filme-player-status" aria-live="polite" hidden></p>
         <button id="filmeCarregarVideo" class="filme-botao-principal" type="button" hidden>
-          <i class="fa-solid fa-play" aria-hidden="true"></i> Assistir
+          <i class="fa-solid fa-play" aria-hidden="true"></i> <span id="filmeAcaoTexto">Assistir</span>
         </button>
       </div>
 
@@ -80,7 +90,87 @@
           <h2>Sinopse</h2>
           <p id="filmeSinopse">Detalhes do filme.</p>
         </div>
+        <button id="filmeAssistirEmCasa" class="filme-botao-secundario filme-assistir-casa" type="button" hidden>
+          <i class="fa-solid fa-house" aria-hidden="true"></i> Assistir trailer em casa
+        </button>
       </div>
+    </section>
+
+    <section id="horariosFilme" class="horarios-filme" aria-labelledby="horariosTitulo">
+      <div class="horarios-cabecalho">
+        <div>
+          <p class="filme-detalhe-kicker">CINEMARK · SESSÕES</p>
+          <h2 id="horariosTitulo">Horários</h2>
+        </div>
+        <span class="horarios-demonstrativos">Demonstração — não são horários reais</span>
+      </div>
+
+      <div id="diasSessoes" class="dias-sessoes" role="tablist" aria-label="Dias disponíveis"></div>
+
+      <div class="filtros-sessoes">
+        <label>
+          <span>Tipo de sessão</span>
+          <select id="filtroTipoSessao">
+            <option value="Todos">Todos</option>
+            <option value="2D">2D</option>
+            <option value="3D">3D</option>
+          </select>
+        </label>
+        <label>
+          <span>Idioma</span>
+          <select id="filtroIdiomaSessao">
+            <option value="Todos">Todos</option>
+            <option value="Dublado">Dublado</option>
+            <option value="Original">Original</option>
+          </select>
+        </label>
+      </div>
+
+      <div id="listaSessoes" class="lista-sessoes" aria-live="polite"></div>
+
+      <section id="painelAssentos" class="painel-assentos" aria-labelledby="assentosTitulo" hidden>
+        <div>
+          <p class="filme-detalhe-kicker">COMPRA DEMONSTRATIVA</p>
+          <h3 id="assentosTitulo">Escolha seus assentos</h3>
+          <p id="sessaoSelecionada" class="sessao-selecionada"></p>
+        </div>
+        <div class="tela-cinema" aria-hidden="true">TELA</div>
+        <div id="gradeAssentos" class="grade-assentos" aria-label="Assentos disponíveis"></div>
+        <div class="legenda-assentos" aria-label="Legenda dos assentos">
+          <span><i class="assento-legenda"></i> Livre</span>
+          <span><i class="assento-legenda selecionado"></i> Selecionado</span>
+          <span><i class="assento-legenda ocupado"></i> Ocupado</span>
+        </div>
+        <label class="nome-comprador" for="nomeComprador">
+          Nome para o comprovante
+          <input id="nomeComprador" name="nomeComprador" type="text" maxlength="80" autocomplete="name" required>
+        </label>
+        <button id="confirmarReserva" class="filme-botao-principal" type="button" disabled>
+          Confirmar compra demonstrativa
+        </button>
+        <p id="reservaStatus" class="reserva-status" role="status" aria-live="polite"></p>
+        <button id="reservaAssistirEmCasa" class="filme-botao-secundario" type="button" hidden>
+          Assistir trailer em casa
+        </button>
+        <article id="comprovanteReserva" class="comprovante-reserva" aria-labelledby="comprovanteTitulo" hidden>
+          <p class="filme-detalhe-kicker">COMPROVANTE DEMONSTRATIVO</p>
+          <h3 id="comprovanteTitulo">Compra registrada</h3>
+          <p id="comprovanteAviso" class="comprovante-aviso">
+            Este comprovante é apenas uma demonstração. Não representa pagamento, ingresso ou reserva válida.
+          </p>
+          <dl class="comprovante-dados">
+            <div><dt>Código</dt><dd id="comprovanteCodigo"></dd></div>
+            <div><dt>Cliente</dt><dd id="comprovanteCliente"></dd></div>
+            <div><dt>Filme</dt><dd id="comprovanteFilme"></dd></div>
+            <div><dt>Cinema</dt><dd id="comprovanteCinema"></dd></div>
+            <div><dt>Sessão</dt><dd id="comprovanteSessao"></dd></div>
+            <div><dt>Assentos</dt><dd id="comprovanteAssentos"></dd></div>
+          </dl>
+          <button id="imprimirComprovante" class="filme-botao-secundario" type="button">
+            Imprimir comprovante
+          </button>
+        </article>
+      </section>
     </section>
   </main>
 
