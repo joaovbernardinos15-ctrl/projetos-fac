@@ -66,6 +66,7 @@ O administrador consulta, cadastra, edita e exclui filmes e usuários. O painel 
 **RN-08:** Ao editar um filme, o ID do registro é preservado e não podem ser criados títulos equivalentes duplicados.  
 **RN-09:** Cancelar confirmação de exclusão não pode modificar o registro selecionado.  
 **RN-10:** Indicadores devem refletir a quantidade de filmes, filmes em cartaz, usuários e administradores após alterações.
+**RN-11:** Um administrador só pode rebaixar um administrador que tenha cadastrado/promovido, e apenas quando há outro administrador no sistema.
 
 ### Requisitos não funcionais relacionados
 

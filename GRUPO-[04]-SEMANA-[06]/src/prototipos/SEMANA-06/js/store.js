@@ -24,6 +24,7 @@ const Store = (() => {
     carrinho: "cinemark:carrinho",
     reservas: "cinemark:reservas"
   };
+  const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   /* ---------- utilitários ---------- */
 
@@ -196,25 +197,37 @@ const Store = (() => {
     },
 
     // CREATE
-    criar({ nome, email, senha, perfil = "cliente" }) {
-      if (!nome || !email || !senha) {
+    criar({ nome, email, senha, perfil = "cliente", criadoPor = null }) {
+      const nomeLimpo = String(nome ?? "").trim();
+      const emailLimpo = String(email ?? "").trim().toLowerCase();
+
+      if (!nomeLimpo || !emailLimpo || !senha) {
         return { ok: false, erro: "Preencha nome, e-mail e senha." };
+      }
+
+      if (!EMAIL_VALIDO.test(emailLimpo)) {
+        return { ok: false, erro: "Informe um e-mail válido." };
+      }
+
+      if (!["cliente", "admin"].includes(perfil)) {
+        return { ok: false, erro: "O perfil informado é inválido." };
       }
 
       if (senha.length < 8) {
         return { ok: false, erro: "A senha precisa ter no mínimo 8 caracteres." };
       }
 
-      if (this.buscarPorEmail(email)) {
+      if (this.buscarPorEmail(emailLimpo)) {
         return { ok: false, erro: "Já existe uma conta com esse e-mail." };
       }
 
       const novo = {
         id: gerarId(),
-        nome: nome.trim(),
-        email: email.trim().toLowerCase(),
+        nome: nomeLimpo,
+        email: emailLimpo,
         senha,
         perfil,
+        criadoPor: perfil === "admin" ? criadoPor : null,
         criadoEm: new Date().toISOString()
       };
 
@@ -226,7 +239,7 @@ const Store = (() => {
     },
 
     // UPDATE
-    atualizar(id, dados) {
+    atualizar(id, dados, { atorId = null } = {}) {
       const lista = this.listar();
       const indice = lista.findIndex((usuario) => usuario.id === id);
 
@@ -234,10 +247,48 @@ const Store = (() => {
         return { ok: false, erro: "Usuário não encontrado." };
       }
 
-      if (dados.email) {
-        const existente = this.buscarPorEmail(dados.email);
-        if (existente && existente.id !== id) {
-          return { ok: false, erro: "Esse e-mail já está em uso por outra conta." };
+      const nomeLimpo = dados.nome === undefined
+        ? String(lista[indice].nome ?? "").trim()
+        : String(dados.nome ?? "").trim();
+      const emailLimpo = dados.email === undefined
+        ? String(lista[indice].email ?? "").trim().toLowerCase()
+        : String(dados.email ?? "").trim().toLowerCase();
+
+      if (!nomeLimpo || !emailLimpo) {
+        return { ok: false, erro: "Nome e e-mail são obrigatórios." };
+      }
+
+      if (!EMAIL_VALIDO.test(emailLimpo)) {
+        return { ok: false, erro: "Informe um e-mail válido." };
+      }
+
+      const existente = lista.find(
+        (usuario) => normalizar(usuario.email) === normalizar(emailLimpo) && usuario.id !== id
+      );
+      if (existente) {
+        return { ok: false, erro: "Esse e-mail já está em uso por outra conta." };
+      }
+
+      const usuarioAtual = lista[indice];
+      const ator = lista.find((usuario) => usuario.id === atorId && usuario.perfil === "admin");
+      const promovendoAdministrador = usuarioAtual.perfil !== "admin" && dados.perfil === "admin";
+      const rebaixandoAdministrador = usuarioAtual.perfil === "admin" && dados.perfil === "cliente";
+
+      if (dados.perfil !== undefined && !["cliente", "admin"].includes(dados.perfil)) {
+        return { ok: false, erro: "O perfil informado é inválido." };
+      }
+
+      if (promovendoAdministrador && !ator) {
+        return { ok: false, erro: "Somente um administrador pode promover uma conta." };
+      }
+
+      if (rebaixandoAdministrador) {
+        if (lista.filter((usuario) => usuario.perfil === "admin").length <= 1) {
+          return { ok: false, erro: "Não é possível rebaixar o último administrador do sistema." };
+        }
+
+        if (!ator || atorId === id || usuarioAtual.criadoPor !== atorId) {
+          return { ok: false, erro: "Somente o administrador que cadastrou esta conta pode rebaixá-la." };
         }
       }
 
@@ -247,10 +298,12 @@ const Store = (() => {
 
       const atualizado = { ...lista[indice] };
 
-      if (dados.nome !== undefined) atualizado.nome = dados.nome.trim();
-      if (dados.email !== undefined) atualizado.email = dados.email.trim().toLowerCase();
+      if (dados.nome !== undefined) atualizado.nome = nomeLimpo;
+      if (dados.email !== undefined) atualizado.email = emailLimpo;
       if (dados.perfil !== undefined) atualizado.perfil = dados.perfil;
       if (dados.senha) atualizado.senha = dados.senha;
+      if (promovendoAdministrador) atualizado.criadoPor = atorId;
+      if (rebaixandoAdministrador) atualizado.criadoPor = null;
 
       atualizado.atualizadoEm = new Date().toISOString();
 

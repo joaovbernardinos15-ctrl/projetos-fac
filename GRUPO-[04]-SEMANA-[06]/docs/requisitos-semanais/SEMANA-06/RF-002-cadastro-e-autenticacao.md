@@ -67,7 +67,7 @@ O sistema permite cadastrar uma conta de cliente, autenticar um usuário previam
 **RN-02:** Nome, e-mail e senha são obrigatórios; o e-mail deve ser válido e não pode estar duplicado.  
 **RN-03:** A senha deve possuir ao menos oito caracteres e a confirmação deve coincidir com ela.  
 **RN-04:** Mensagens de erro não devem indicar autenticação bem-sucedida quando as credenciais forem inválidas.  
-**RN-05:** Links com ícones de Google, Facebook ou Apple não representam login social implementado.  
+**RN-05:** Ícones de Google, Facebook ou Apple podem exibir animação demonstrativa e aviso de indisponibilidade; não iniciam login social nem navegam para terceiros.
 **RN-06:** Uma sessão de administrador deve direcionar ao painel; uma sessão de cliente deve direcionar à página inicial.  
 **RN-07:** Solicitação de recuperação só confirma localmente se o e-mail existe; não deve ser considerada troca de senha ou envio de mensagem efetivo.
 

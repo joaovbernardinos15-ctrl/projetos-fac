@@ -6,6 +6,7 @@ const passwordToggles = document.querySelectorAll('.toggle-password');
 const cadastroToast = document.querySelector('#toastCadastro');
 const loginToast = document.querySelector('#toastLogin');
 const recuperacaoToast = document.querySelector('#toastRecuperacao');
+const socialToast = document.querySelector('#toastSocial');
 
 const toastTimeouts = new WeakMap();
 
@@ -35,11 +36,22 @@ function mostrarToastRecuperacao() {
 }
 
 // Botão de fechar de cada toast
-[cadastroToast, loginToast, recuperacaoToast].forEach((toastEl) => {
+[cadastroToast, loginToast, recuperacaoToast, socialToast].forEach((toastEl) => {
   const closeButton = toastEl?.querySelector('.fechar-toast');
   closeButton?.addEventListener('click', () => {
     toastEl.classList.remove('visivel');
     clearTimeout(toastTimeouts.get(toastEl));
+  });
+});
+
+document.querySelectorAll('[data-social-provider]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    link.classList.remove('animando');
+    void link.offsetWidth;
+    link.classList.add('animando');
+    mostrarToast(socialToast);
+    window.setTimeout(() => link.classList.remove('animando'), 450);
   });
 });
 

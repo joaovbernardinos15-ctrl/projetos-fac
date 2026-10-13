@@ -139,6 +139,15 @@ function dividirEmPaginas(lista, tamanho) {
 function renderizarFilmes() {
   if (!filmesCarouselInner) return;
 
+  const estadoVazio = document.getElementById("filmesHomeVazio");
+  const semFilmes = filmes.length === 0;
+  if (filmesCarousel) filmesCarousel.hidden = semFilmes;
+  if (estadoVazio) estadoVazio.hidden = !semFilmes;
+  if (semFilmes) {
+    filmesCarouselInner.replaceChildren();
+    return;
+  }
+
   const paginas = dividirEmPaginas(filmes, FILMES_POR_PAGINA);
 
   filmesCarouselInner.innerHTML = paginas.map((pagina, index) => `

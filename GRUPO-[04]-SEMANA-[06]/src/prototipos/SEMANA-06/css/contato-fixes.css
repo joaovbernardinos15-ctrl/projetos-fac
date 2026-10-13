@@ -643,6 +643,14 @@
     line-height: 1.5;
 }
 
+.contato-form-nota {
+    margin: 12px 0 0;
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
 @media (max-width: 560px) {
     .contato-page .contato-canais .contato-info-list {
         grid-template-columns: 1fr;

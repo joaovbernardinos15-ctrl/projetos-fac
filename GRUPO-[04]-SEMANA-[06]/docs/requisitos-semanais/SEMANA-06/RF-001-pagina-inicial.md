@@ -15,7 +15,7 @@
 **Título:** Apresentar destaques e atalhos da plataforma  
 **Prioridade:** Alta — é o ponto inicial de navegação do visitante.  
 **Complexidade:** 3 story points — estimativa sujeita à revisão da equipe.  
-**Status:** Implementado parcialmente no protótipo.  
+**Status:** Implementado no protótipo local; validação de acessibilidade e compatibilidade entre navegadores pendente.
 **Tipo:** Requisito Funcional
 
 **Breve descrição:**  

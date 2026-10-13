@@ -283,6 +283,8 @@
     $("usuarioEmail").value = usuario ? usuario.email : "";
     $("usuarioPerfil").value = usuario ? usuario.perfil : "cliente";
     $("usuarioSenha").value = "";
+    $("ajudaHierarquiaAdmin").textContent =
+      "Você só pode rebaixar administradores cadastrados por você, desde que outro administrador permaneça.";
     $("ajudaSenha").textContent = usuario
       ? "Deixe em branco para manter a senha atual."
       : "Obrigatória, mínimo 8 caracteres.";
@@ -305,8 +307,9 @@
     if (id) {
       // No UPDATE a senha em branco significa "não mexer".
       if (!dados.senha) delete dados.senha;
-      resultado = Store.usuarios.atualizar(id, dados);
+      resultado = Store.usuarios.atualizar(id, dados, { atorId: logado.id });
     } else {
+      if (dados.perfil === "admin") dados.criadoPor = logado.id;
       resultado = Store.usuarios.criar(dados);
     }
 
@@ -316,6 +319,12 @@
     }
 
     modalUsuario.hide();
+
+    if (id === logado.id && resultado.dado.perfil !== "admin") {
+      window.location.href = "index.html";
+      return;
+    }
+
     renderizarUsuarios();
 
     // Se o admin editou a si mesmo, o nome no topo precisa acompanhar.

@@ -41,13 +41,17 @@
                     <div class="divisor">ou entre com:</div>
 
                     <div class="icones-sociais">
-                        <a href="https://www.google.com" target="_blank" aria-label="Entrar com Google"><i
-                                class="fa-brands fa-google"></i></a>
-                        <a href="https://www.facebook.com" target="_blank" aria-label="Entrar com Facebook"><i
-                                class="fa-brands fa-facebook"></i></a>
-                        <a href="https://www.apple.com" target="_blank" aria-label="Entrar com Apple"><i
-                                class="fa-brands fa-apple"></i></a>
+                        <a href="#" data-social-provider="Google" aria-label="Animação demonstrativa de login com Google">
+                            <i class="fa-brands fa-google" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" data-social-provider="Facebook" aria-label="Animação demonstrativa de login com Facebook">
+                            <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" data-social-provider="Apple" aria-label="Animação demonstrativa de login com Apple">
+                            <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                        </a>
                     </div>
+                    <p class="social-prototype-notice">Ícones demonstrativos; autenticação social não está conectada.</p>
 
                     <a href="#" class="link-vermelho" data-show-panel="recover">Esqueceu sua senha?</a>
 
@@ -100,13 +104,17 @@
                     <div class="divisor">ou cadastre-se com:</div>
 
                     <div class="icones-sociais">
-                        <a href="https://www.google.com" target="_blank" aria-label="Cadastrar com Google"><i
-                                class="fa-brands fa-google"></i></a>
-                        <a href="https://www.facebook.com" target="_blank" aria-label="Cadastrar com Facebook"><i
-                                class="fa-brands fa-facebook"></i></a>
-                        <a href="https://www.apple.com" target="_blank" aria-label="Cadastrar com Apple"><i
-                                class="fa-brands fa-apple"></i></a>
+                        <a href="#" data-social-provider="Google" aria-label="Animação demonstrativa de cadastro com Google">
+                            <i class="fa-brands fa-google" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" data-social-provider="Facebook" aria-label="Animação demonstrativa de cadastro com Facebook">
+                            <i class="fa-brands fa-facebook" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" data-social-provider="Apple" aria-label="Animação demonstrativa de cadastro com Apple">
+                            <i class="fa-brands fa-apple" aria-hidden="true"></i>
+                        </a>
                     </div>
+                    <p class="social-prototype-notice">Ícones demonstrativos; autenticação social não está conectada.</p>
 
                     <p class="erro-auth" role="alert" hidden></p>
 
@@ -122,7 +130,7 @@
                 <h3 class="titulo-card">Esqueci minha Senha</h3>
 
                 <p class="texto-explicacao">
-                    Digite seu e-mail cadastrado que enviaremos um link para você criar uma nova senha.
+                    A recuperação por e-mail ainda não está conectada. Este formulário apenas verifica se a conta existe; nenhum link é enviado nem senha alterada.
                 </p>
 
                 <form class="auth-form">
@@ -133,7 +141,7 @@
 
                     <p class="erro-auth" role="alert" hidden></p>
 
-                    <button type="submit" class="btn-vermelho">ENVIAR LINK</button>
+                    <button type="submit" class="btn-vermelho">VERIFICAR E-MAIL</button>
                 </form>
 
                 <p class="texto-rodape">
@@ -143,6 +151,9 @@
                     <p class="texto-rodape">
                 <a href="index.html">&larr; Voltar para o site</a>
             </p>
+                    <p class="auth-prototype-notice" role="note">
+                        Protótipo local: os dados ficam neste navegador. Não use senhas reais.
+                    </p>
         </section>
     </main>
 
@@ -160,7 +171,13 @@
 
     <div id="toastRecuperacao" class="toast-cadastro" role="status" aria-live="polite">
         <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-        <span>Link de recuperação enviado! Verifique seu e-mail.</span>
+        <span>Verificação demonstrativa concluída. Nenhum e-mail foi enviado.</span>
+        <button type="button" class="fechar-toast" aria-label="Fechar mensagem">&times;</button>
+    </div>
+
+    <div id="toastSocial" class="toast-cadastro" role="status" aria-live="polite">
+        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+        <span>Esta animação é demonstrativa; login social ainda não está conectado.</span>
         <button type="button" class="fechar-toast" aria-label="Fechar mensagem">&times;</button>
     </div>
 

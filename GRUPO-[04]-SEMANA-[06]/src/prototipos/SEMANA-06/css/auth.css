@@ -166,25 +166,66 @@ body {
 }
 
 .icones-sociais a {
+  display: flex;
   width: 45px;
   height: 45px;
-  background-color: var(--branco);
-  border-radius: 50%;
-  display: flex;
   align-items: center;
   justify-content: center;
+  background-color: var(--branco);
+  border-radius: 50%;
   font-size: 20px;
   text-decoration: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.icones-sociais a:hover {
+.icones-sociais a:hover,
+.icones-sociais a:focus-visible {
   transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .24);
+}
+
+.icones-sociais a.animando {
+  animation: social-feedback .45s ease;
+}
+
+@keyframes social-feedback {
+  50% { transform: scale(1.12); }
+}
+
+.icones-sociais a:focus-visible {
+  outline: 2px solid #ff8290;
+  outline-offset: 3px;
+}
+
+.social-prototype-notice {
+  margin: -10px 0 16px;
+  color: #a9a3a5;
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: center;
 }
 
 .icones-sociais .fa-google { color: #ea4335; }
 .icones-sociais .fa-facebook { color: #1877f2; }
 .icones-sociais .fa-apple { color: #000; }
+
+.auth-prototype-notice {
+  margin: 14px 0 0;
+  color: #a9a3a5;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icones-sociais a {
+    transition: none;
+  }
+
+  .icones-sociais a.animando {
+    animation: none;
+  }
+}
 
 .link-vermelho {
   display: block;
