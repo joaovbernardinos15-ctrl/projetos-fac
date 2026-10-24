@@ -81,12 +81,12 @@ Não há backend, armazenamento de mensagens, protocolo de confirmação, acompa
 
 ### Rastreabilidade
 
-**Tela/arquivo:** `src/prototipos/SEMANA-06/contato.html`.  
+**Tela/arquivo:** `src/prototipos/SEMANA-08/contato.html`.  
 **Critério de aceite:** campos vazios ou e-mail inválido não passam pela validação do navegador; com dados válidos, a página aciona o destino `mailto` sem declarar que recebeu ou processou a mensagem.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-06/contato.html`; estilos em `css/contato-fixes.css`, `css/style.css` e `css/navbar.css`.
+**Tela existente:** `src/prototipos/SEMANA-08/contato.html`; estilos em `css/contato-fixes.css`, `css/style.css` e `css/navbar.css`.
 
 ```text
 ┌─────────────────────────────────────────────┐

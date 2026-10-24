@@ -87,12 +87,12 @@ O painel não sincroniza entre usuários ou dispositivos e não substitui autent
 
 ### Rastreabilidade
 
-**Telas/arquivos:** `src/prototipos/SEMANA-06/admin.html`, `src/prototipos/SEMANA-06/js/admin.js`, `src/prototipos/SEMANA-06/js/store.js`.  
+**Telas/arquivos:** `src/prototipos/SEMANA-08/admin.html`, `src/prototipos/SEMANA-08/js/admin.js`, `src/prototipos/SEMANA-08/js/store.js`.  
 **Critério de aceite:** um administrador consegue manter filmes e usuários válidos; operações proibidas são recusadas sem alterar o registro.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-06/admin.html`; estilos em `css/admin.css`; comportamento em `js/admin.js`.
+**Tela existente:** `src/prototipos/SEMANA-08/admin.html`; estilos em `css/admin.css`; comportamento em `js/admin.js`.
 
 ```text
 ┌──────────────────────────────────────────────────────────┐

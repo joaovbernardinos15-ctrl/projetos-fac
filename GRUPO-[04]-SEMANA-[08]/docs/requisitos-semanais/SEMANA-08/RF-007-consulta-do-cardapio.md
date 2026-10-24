@@ -78,12 +78,12 @@ O catálogo não é editável pelo cliente, não informa estoque e não possui i
 
 ### Rastreabilidade
 
-**Telas/arquivos:** `src/prototipos/SEMANA-06/lanches.html`, `src/prototipos/SEMANA-06/js/lanches.js`, `src/prototipos/SEMANA-06/js/menu-data.js`, `src/prototipos/SEMANA-06/comprar.html`.  
+**Telas/arquivos:** `src/prototipos/SEMANA-08/lanches.html`, `src/prototipos/SEMANA-08/js/lanches.js`, `src/prototipos/SEMANA-08/js/menu-data.js`, `src/prototipos/SEMANA-08/comprar.html`.  
 **Critério de aceite:** o cardápio apresenta os dados cadastrados e cada produto válido abre a tela de pedido com categoria e item corretos.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-06/lanches.html`; conteúdo montado por `js/lanches.js` a partir de `js/menu-data.js`; estilos em `css/lanches.css`.
+**Tela existente:** `src/prototipos/SEMANA-08/lanches.html`; conteúdo montado por `js/lanches.js` a partir de `js/menu-data.js`; estilos em `css/lanches.css`.
 
 ```text
 ┌───────────────────────────────────────────────┐

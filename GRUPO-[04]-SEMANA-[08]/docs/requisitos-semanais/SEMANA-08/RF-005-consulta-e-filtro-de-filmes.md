@@ -80,12 +80,12 @@ O catálogo depende dos dados existentes no navegador. Não há paginação, pes
 
 ### Rastreabilidade
 
-**Telas/arquivos:** `src/prototipos/SEMANA-06/filmes.html`, `src/prototipos/SEMANA-06/js/site.js`, `src/prototipos/SEMANA-06/js/store.js`.  
+**Telas/arquivos:** `src/prototipos/SEMANA-08/filmes.html`, `src/prototipos/SEMANA-08/js/site.js`, `src/prototipos/SEMANA-08/js/store.js`.  
 **Critério de aceite:** buscar, filtrar por gênero e letra em combinação, limpar critérios e abrir um filme devem produzir resultados coerentes com os registros locais.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-06/filmes.html`; estilos em `css/filmes.css`; comportamento em `js/site.js`.
+**Tela existente:** `src/prototipos/SEMANA-08/filmes.html`; estilos em `css/filmes.css`; comportamento em `js/site.js`.
 
 ```text
 ┌─────────────────────────────────────────────────┐

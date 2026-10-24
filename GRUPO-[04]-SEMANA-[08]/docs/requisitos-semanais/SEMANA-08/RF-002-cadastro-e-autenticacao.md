@@ -89,12 +89,12 @@ Os dados usam `localStorage`; não há backend, envio de e-mail, OAuth, recupera
 
 ### Rastreabilidade
 
-**Telas/arquivos:** `src/prototipos/SEMANA-06/login.html`, `src/prototipos/SEMANA-06/js/auth.js`, `src/prototipos/SEMANA-06/js/store.js`, `src/prototipos/SEMANA-06/js/nav.js`.  
+**Telas/arquivos:** `src/prototipos/SEMANA-08/login.html`, `src/prototipos/SEMANA-08/js/auth.js`, `src/prototipos/SEMANA-08/js/store.js`, `src/prototipos/SEMANA-08/js/nav.js`.  
 **Critério de aceite:** cadastro válido cria cliente local; login válido abre a sessão e o destino correspondente ao perfil; credenciais inválidas não abrem sessão; sair encerra a sessão.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-06/login.html`; estilos em `css/auth.css`; lógica em `js/auth.js`.
+**Tela existente:** `src/prototipos/SEMANA-08/login.html`; estilos em `css/auth.css`; lógica em `js/auth.js`.
 
 ```text
 ┌─────────────────────────────┐

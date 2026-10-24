@@ -165,7 +165,7 @@ O protótipo oferece detalhes e player HTML5 para arquivos, além de incorporaç
 
 ### Protótipo Existente
 
-A página inicial e o catálogo atuais estão em `src/prototipos/SEMANA-06/index.html` e `filmes.html`. A imagem de destaque e cada card de filme na home e no catálogo são links para a tela `filme.html`, que apresenta metadados, classificação indicativa e player HTML5. O painel administrativo permite manter a fonte de vídeo. Como os filmes sem fonte não são reproduzíveis, a tela informa a indisponibilidade e permite voltar ao catálogo.
+A página inicial e o catálogo atuais estão em `src/prototipos/SEMANA-08/index.html` e `filmes.html`. A imagem de destaque e cada card de filme na home e no catálogo são links para a tela `filme.html`, que apresenta metadados, classificação indicativa e player HTML5. O painel administrativo permite manter a fonte de vídeo. Como os filmes sem fonte não são reproduzíveis, a tela informa a indisponibilidade e permite voltar ao catálogo.
 
 ### Mockups das Telas
 

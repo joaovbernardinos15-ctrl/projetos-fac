@@ -90,12 +90,12 @@ O armazenamento é local ao navegador. Não há fluxo de confirmação por e-mai
 
 ### Rastreabilidade
 
-**Telas/arquivos:** `src/prototipos/SEMANA-06/perfil.html`, `src/prototipos/SEMANA-06/js/perfil.js`, `src/prototipos/SEMANA-06/js/store.js`.  
+**Telas/arquivos:** `src/prototipos/SEMANA-08/perfil.html`, `src/prototipos/SEMANA-08/js/perfil.js`, `src/prototipos/SEMANA-08/js/store.js`.  
 **Critério de aceite:** o titular atualiza os próprios dados com validação, mantém a senha ao deixar o campo em branco e não consegue excluir o último administrador.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-06/perfil.html`; estilos em `css/admin.css`; lógica em `js/perfil.js`.
+**Tela existente:** `src/prototipos/SEMANA-08/perfil.html`; estilos em `css/admin.css`; lógica em `js/perfil.js`.
 
 ```text
 ┌──────────────────────────────────────┐

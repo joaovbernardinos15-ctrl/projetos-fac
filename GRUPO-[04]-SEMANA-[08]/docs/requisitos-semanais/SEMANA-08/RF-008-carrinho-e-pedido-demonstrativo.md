@@ -84,12 +84,12 @@ Não há checkout real, cálculo de taxas, identificação do comprador, gestão
 
 ### Rastreabilidade
 
-**Telas/arquivos:** `src/prototipos/SEMANA-06/comprar.html`, `src/prototipos/SEMANA-06/js/comprar.js`, `src/prototipos/SEMANA-06/js/store.js`.  
+**Telas/arquivos:** `src/prototipos/SEMANA-08/comprar.html`, `src/prototipos/SEMANA-08/js/comprar.js`, `src/prototipos/SEMANA-08/js/store.js`.  
 **Critério de aceite:** adicionar, atualizar e remover itens recalcula o carrinho; a finalização está indisponível sem itens e, quando acionada, informa claramente que é demonstrativa.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-06/comprar.html`; lógica em `js/comprar.js`; persistência em `js/store.js`; estilos em `css/comprar.css`.
+**Tela existente:** `src/prototipos/SEMANA-08/comprar.html`; lógica em `js/comprar.js`; persistência em `js/store.js`; estilos em `css/comprar.css`.
 
 ```text
 ┌────────────────────────────────────────────────────┐

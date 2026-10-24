@@ -79,12 +79,12 @@ A página usa dados do protótipo, sem serviço remoto de recomendação ou pers
 
 ### Rastreabilidade
 
-**Telas/arquivos:** `src/prototipos/SEMANA-06/index.html`, `src/prototipos/SEMANA-06/js/site.js`.  
+**Telas/arquivos:** `src/prototipos/SEMANA-08/index.html`, `src/prototipos/SEMANA-08/js/site.js`.  
 **Critério de aceite:** ao abrir a página inicial, o usuário visualiza os destaques disponíveis e consegue navegar para catálogo, detalhe de filme e loja pelos controles apresentados.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-06/index.html`; estilos em `css/home.css`, `css/style.css` e `css/navbar.css`; comportamento em `js/site.js`.
+**Tela existente:** `src/prototipos/SEMANA-08/index.html`; estilos em `css/home.css`, `css/style.css` e `css/navbar.css`; comportamento em `js/site.js`.
 
 ```text
 ┌─────────────────────────────────────────────┐
