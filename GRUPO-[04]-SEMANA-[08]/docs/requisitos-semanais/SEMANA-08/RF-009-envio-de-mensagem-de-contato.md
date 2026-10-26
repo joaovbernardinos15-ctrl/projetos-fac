@@ -77,7 +77,7 @@ O visitante preenche nome, e-mail, assunto e mensagem e solicita o envio pelo fo
 
 ### Escopo e limitações
 
-Não há backend, armazenamento de mensagens, protocolo de confirmação, acompanhamento de solicitações ou garantia de entrega. A seção de informações complementares está oculta na versão atual da página.
+Não há backend, armazenamento de mensagens, protocolo de confirmação, acompanhamento de solicitações ou garantia de entrega. A página apresenta canais complementares demonstrativos (e-mail, telefone, redes sociais e mapa); confirme os dados oficiais antes de publicação.
 
 ### Rastreabilidade
 
@@ -101,7 +101,7 @@ Não há backend, armazenamento de mensagens, protocolo de confirmação, acompa
 └─────────────────────────────────────────────┘
 ```
 
-O `action` atual usa `mailto`; informações complementares aparecem ocultas no HTML atual e não foram consideradas um fluxo funcional.
+O `action` atual usa `mailto`; os canais complementares (e-mail, telefone, redes sociais e mapa) também aparecem na página, mas são demonstrativos e devem ser confirmados antes da publicação.
 
 ## 5. ARQUITETURA E DECISÕES TÉCNICAS
 

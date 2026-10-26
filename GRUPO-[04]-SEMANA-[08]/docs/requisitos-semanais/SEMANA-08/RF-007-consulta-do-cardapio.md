@@ -23,7 +23,8 @@ O visitante ou cliente consulta categorias de produtos, descrições e preços d
 
 ## 2. DESCRIÇÃO E ATORES
 
-- **Visitante ou cliente (ator principal):** pode navegar por categorias, consultar produtos/preços e escolher item; não edita catálogo ou estoque.
+- **Visitante (ator principal):** pode navegar por categorias e consultar produtos/preços.
+- **Cliente ou administrador autenticado (ator principal):** pode consultar produtos, escolher suas variantes e seguir para o pedido; não edita catálogo ou estoque por esta tela.
 - **Sistema (ator automático):** apresenta os dados locais, formata preços e encaminha ao pedido apenas a identificação do item selecionado.
 
 ## 3. ESPECIFICAÇÃO DE CASOS DE USO
@@ -43,22 +44,26 @@ O visitante ou cliente consulta categorias de produtos, descrições e preços d
 
 1. O usuário abre `lanches.html`.
 2. O sistema apresenta atalhos e seções de categorias.
-3. O usuário consulta nome, descrição e preço de um produto.
+3. O usuário consulta nome, tamanho/quantidade, descrição e preço demonstrativos de um produto.
 4. O usuário seleciona o produto.
-5. O sistema abre `comprar.html` com a categoria e o item selecionados.
+5. O sistema abre `comprar.html` com a categoria e o item selecionados. Se houver opções de tamanho, o cliente autenticado escolhe uma variante e vê o preço correspondente.
 
 ### Fluxos alternativos
 
 - **Categoria sem produtos:** não há produto para selecionar; os atalhos permanecem conforme os dados disponíveis.
 - **Item inválido ou inexistente:** a tela do pedido informa que o produto não foi encontrado e desativa a inclusão no carrinho.
+- **Visitante ou administrador sem perfil de cliente:** pode consultar o catálogo, mas a escolha de variantes, inclusão e conclusão do pedido ficam desabilitadas e a tela oferece acesso ao login/cadastro.
 
 **RN-01:** Categorias, descrições e preços vêm do catálogo local `menu-data.js`.  
 **RN-02:** Preços devem ser apresentados em moeda brasileira (BRL).  
 **RN-03:** A escolha deve transferir a identificação do produto à tela de pedido; o dado recebido deve corresponder a um item cadastrado.  
 **RN-04:** Os preços são demonstrativos e não constituem cobrança ou oferta comercial efetiva.  
 **RN-05:** A página deve permitir navegar às categorias por atalhos e retornar ao início da loja.  
-**RN-06:** Produtos devem apresentar nome, descrição e preço; imagens de categoria, quando presentes, devem identificar o conteúdo.  
+**RN-06:** Produtos devem apresentar nome, tamanho ou quantidade quando aplicável, descrição e preço; imagens de categoria, quando presentes, devem identificar o conteúdo. Medidas e especificações sem fonte oficial devem ser identificadas como demonstrativas.
 **RN-07:** Uma categoria ou item sem cadastro não pode ser apresentado como produto válido para compra.
+**RN-08:** A seleção de tamanhos e a realização do pedido na loja são permitidas a qualquer conta autenticada (`cliente` ou `admin`); visitantes continuam podendo consultar o cardápio.
+**RN-09:** Produtos com variantes devem atualizar descrição, preço e identificação do item no carrinho conforme a opção escolhida pelo cliente.
+**RN-10:** Preços e quantidades são estimativas demonstrativas do protótipo, não valores oficiais da Cinemark.
 
 ### Requisitos não funcionais relacionados
 
@@ -92,8 +97,8 @@ O catálogo não é editável pelo cliente, não informa estoque e não possui i
 ├───────────────────────────────────────────────┤
 │ Categoria: Pipoca                             │
 │ [Imagem] Descrição da categoria               │
-│ [Produto · descrição · preço] [Comprar →]     │
-│ [Produto · descrição · preço] [Comprar →]     │
+│ [Produto · tamanho · descrição · preço]       │
+│ [Produto · tamanho · descrição · preço]       │
 └───────────────────────────────────────────────┘
 ```
 

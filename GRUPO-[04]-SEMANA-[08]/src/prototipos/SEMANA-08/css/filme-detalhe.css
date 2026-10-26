@@ -369,6 +369,12 @@
   font-size: 20px;
 }
 
+.horario-sessao .preco-sessao {
+  margin-top: 6px;
+  color: #c8c8c8;
+  font-size: 12px;
+}
+
 .horario-sessao.sessao-esgotada {
   border-color: #83535a;
 }
@@ -463,11 +469,31 @@
   cursor: not-allowed;
 }
 
+.assento.assento-ocupado-admin {
+  border-color: #b87536;
+  background: #73502f;
+  color: #fff;
+  cursor: pointer;
+}
+
+.assento.assento-ocupado-admin:hover,
+.assento.assento-ocupado-admin:focus-visible {
+  border-color: #ffc078;
+  background: #8c6035;
+}
+
 .assento.assento-liberado:disabled {
   border-color: #aeb6c1;
   background: #e7ebef;
   color: #151515;
   cursor: default;
+}
+
+.admin-assentos-ajuda {
+  margin: 0;
+  color: #ffc078;
+  font-size: 13px;
+  text-align: center;
 }
 
 .legenda-assentos {
@@ -483,6 +509,45 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
+}
+
+.resumo-ingresso {
+  display: grid;
+  gap: 8px;
+  width: min(420px, 100%);
+}
+
+.resumo-ingresso label {
+  display: grid;
+  gap: 7px;
+  color: #e7e2e2;
+  font-weight: 700;
+}
+
+.resumo-ingresso select {
+  min-height: 44px;
+  padding: 9px 12px;
+  border: 1px solid #625c5c;
+  border-radius: 7px;
+  background: #242121;
+  color: #fff;
+  font: inherit;
+}
+
+.preco-ingressos,
+.preco-aviso {
+  margin: 0;
+}
+
+.preco-ingressos {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.preco-aviso {
+  color: #aaa;
+  font-size: 12px;
 }
 
 .nome-comprador {

@@ -22,9 +22,11 @@ const Store = (() => {
     filmes: "cinemark:filmes",
     sessao: "cinemark:sessao",
     carrinho: "cinemark:carrinho",
-    reservas: "cinemark:reservas"
+    reservas: "cinemark:reservas",
+    assentosLiberados: "cinemark:assentosLiberados"
   };
   const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const PRECOS_INGRESSO_DEMONSTRATIVOS = Object.freeze({ inteira: 3000, meia: 1500 });
 
   /* ---------- utilitários ---------- */
 
@@ -549,8 +551,49 @@ const Store = (() => {
   };
 
   const reservas = {
+    precosDemonstrativos() {
+      return { ...PRECOS_INGRESSO_DEMONSTRATIVOS };
+    },
+
     listar() {
       return ler(CHAVES.reservas, []);
+    },
+
+    assentosLiberados(sessaoId) {
+      const registros = ler(CHAVES.assentosLiberados, []);
+      return (Array.isArray(registros) ? registros : [])
+        .filter((registro) => registro && registro.sessaoId === sessaoId)
+        .map((registro) => registro.lugar);
+    },
+
+    liberarAssento({ sessaoId, lugar, data, horario }) {
+      const administrador = sessao.atual();
+      if (!administrador || administrador.perfil !== "admin") {
+        return { ok: false, erro: "Somente um administrador pode liberar assentos." };
+      }
+      if (!sessaoId || !/^[A-E][1-8]$/.test(lugar)) {
+        return { ok: false, erro: "Sessão ou assento inválido." };
+      }
+      const inicio = new Date(`${data}T${horario}:00`).getTime();
+      if (!Number.isFinite(inicio) || inicio <= Date.now()) {
+        return { ok: false, erro: "Só é possível liberar assentos antes do início da sessão." };
+      }
+
+      const registros = ler(CHAVES.assentosLiberados, []);
+      const liberados = Array.isArray(registros) ? registros : [];
+      if (liberados.some((registro) =>
+        registro && registro.sessaoId === sessaoId && registro.lugar === lugar
+      )) {
+        return { ok: true };
+      }
+      liberados.push({
+        sessaoId,
+        lugar,
+        liberadoEm: new Date().toISOString(),
+        liberadoPor: administrador.id
+      });
+      gravar(CHAVES.assentosLiberados, liberados);
+      return { ok: true };
     },
 
     horarioFim(reserva) {
@@ -562,14 +605,20 @@ const Store = (() => {
     },
 
     lugaresReservados(sessaoId) {
+      const liberados = new Set(this.assentosLiberados(sessaoId));
       return this.listar()
         .filter((reserva) => reserva.sessaoId === sessaoId && this.horarioFim(reserva) > Date.now())
-        .flatMap((reserva) => reserva.lugares);
+        .flatMap((reserva) => reserva.lugares.filter((lugar) => !liberados.has(lugar)));
     },
 
-    reservar({ sessaoId, filmeId, filmeTitulo, clienteNome, cinema, sala, data, horario, terminaEm, lugares }) {
+    reservar({
+      sessaoId, filmeId, filmeTitulo, clienteNome, cinema, sala, data, horario, terminaEm, lugares, tipoIngresso
+    }) {
       if (!sessaoId || !filmeId || !Array.isArray(lugares) || lugares.length === 0) {
         return { ok: false, erro: "Selecione pelo menos um assento disponível." };
+      }
+      if (!Object.prototype.hasOwnProperty.call(PRECOS_INGRESSO_DEMONSTRATIVOS, tipoIngresso)) {
+        return { ok: false, erro: "Selecione um tipo de ingresso válido." };
       }
       if (!String(clienteNome ?? "").trim()) {
         return { ok: false, erro: "Informe o nome para o comprovante." };
@@ -588,11 +637,7 @@ const Store = (() => {
       }
 
       const lista = this.listar();
-      const jaReservados = new Set(
-        lista
-          .filter((reserva) => reserva.sessaoId === sessaoId && this.horarioFim(reserva) > Date.now())
-          .flatMap((reserva) => reserva.lugares)
-      );
+      const jaReservados = new Set(this.lugaresReservados(sessaoId));
       const indisponiveis = lugares.filter((lugar) => jaReservados.has(lugar));
       if (indisponiveis.length) {
         return {
@@ -614,8 +659,17 @@ const Store = (() => {
         horario,
         terminaEm,
         lugares,
+        tipoIngresso,
+        valorIngressoCentavos: PRECOS_INGRESSO_DEMONSTRATIVOS[tipoIngresso],
+        valorTotalCentavos: PRECOS_INGRESSO_DEMONSTRATIVOS[tipoIngresso] * lugares.length,
         criadaEm: new Date().toISOString()
       };
+      const liberados = ler(CHAVES.assentosLiberados, []);
+      if (Array.isArray(liberados)) {
+        gravar(CHAVES.assentosLiberados, liberados.filter((registro) =>
+          !registro || registro.sessaoId !== sessaoId || !lugares.includes(registro.lugar)
+        ));
+      }
       lista.push(reserva);
       gravar(CHAVES.reservas, lista);
       return { ok: true, dado: reserva };
@@ -629,6 +683,7 @@ const Store = (() => {
     localStorage.removeItem(CHAVES.usuarios);
     localStorage.removeItem(CHAVES.sessao);
     localStorage.removeItem(CHAVES.reservas);
+    localStorage.removeItem(CHAVES.assentosLiberados);
     semear();
   }
 

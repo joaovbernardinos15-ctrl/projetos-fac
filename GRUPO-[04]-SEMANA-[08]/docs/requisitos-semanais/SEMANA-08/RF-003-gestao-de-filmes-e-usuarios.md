@@ -19,11 +19,11 @@
 **Tipo:** Requisito Funcional
 
 **Breve descrição:**  
-O administrador consulta, cadastra, edita e exclui filmes e usuários. O painel oferece busca, filtros, indicadores e confirmação para exclusões.
+O administrador consulta, cadastra, edita e exclui filmes e usuários. Também pode liberar manualmente um assento ocupado em sessão futura, caso a liberação automática não tenha ocorrido como esperado. O painel oferece busca, filtros, indicadores e confirmação para exclusões.
 
 ## 2. DESCRIÇÃO E ATORES
 
-- **Administrador (ator principal):** pode consultar, criar, editar e excluir filmes/usuários conforme as regras do painel; não pode remover ou rebaixar o último administrador.
+- **Administrador (ator principal):** pode consultar, criar, editar e excluir filmes/usuários conforme as regras do painel; também pode liberar assentos ocupados em sessões futuras. Não pode remover ou rebaixar o último administrador.
 - **Sistema (ator automático):** verifica a sessão administrativa, valida operações, atualiza listas/indicadores e persiste registros localmente.
 
 ## 3. ESPECIFICAÇÃO DE CASOS DE USO
@@ -67,6 +67,7 @@ O administrador consulta, cadastra, edita e exclui filmes e usuários. O painel 
 **RN-09:** Cancelar confirmação de exclusão não pode modificar o registro selecionado.  
 **RN-10:** Indicadores devem refletir a quantidade de filmes, filmes em cartaz, usuários e administradores após alterações.
 **RN-11:** Um administrador só pode rebaixar um administrador que tenha cadastrado/promovido, e apenas quando há outro administrador no sistema.
+**RN-12:** Apenas um administrador autenticado pode liberar manualmente um assento ocupado, e a ação só é permitida antes do início da sessão.
 
 ### Requisitos não funcionais relacionados
 
@@ -87,12 +88,12 @@ O painel não sincroniza entre usuários ou dispositivos e não substitui autent
 
 ### Rastreabilidade
 
-**Telas/arquivos:** `src/prototipos/SEMANA-08/admin.html`, `src/prototipos/SEMANA-08/js/admin.js`, `src/prototipos/SEMANA-08/js/store.js`.  
+**Telas/arquivos:** `src/prototipos/SEMANA-08/admin.html`, `src/prototipos/SEMANA-08/js/admin.js`, `src/prototipos/SEMANA-08/filme.html`, `src/prototipos/SEMANA-08/js/filme.js` e `src/prototipos/SEMANA-08/js/store.js`.
 **Critério de aceite:** um administrador consegue manter filmes e usuários válidos; operações proibidas são recusadas sem alterar o registro.
 
 ## 4. PROTÓTIPOS / TELAS
 
-**Tela existente:** `src/prototipos/SEMANA-08/admin.html`; estilos em `css/admin.css`; comportamento em `js/admin.js`.
+**Telas existentes:** `src/prototipos/SEMANA-08/admin.html`; estilos em `css/admin.css`; comportamento em `js/admin.js`. A liberação manual de assentos é oferecida na tela do filme para administradores autenticados.
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
@@ -108,7 +109,7 @@ O HTML e CSS são arquivos separados conforme a organização atual do protótip
 
 ## 5. ARQUITETURA E DECISÕES TÉCNICAS
 
-**Fluxo de dados:** ação na interface (`admin.html`) → evento em `admin.js` → validação/operação em `Store` (`store.js`) → serialização no `localStorage` → nova renderização da tabela e dos indicadores.
+**Fluxo de dados:** ações de filmes/usuários em `admin.html` → eventos em `admin.js` → validação/operação em `Store` (`store.js`) → serialização no `localStorage` → nova renderização. A liberação de assentos segue `filme.html` → `filme.js` → validação de administrador em `Store` → persistência local.
 
 | Camada | Tecnologia | Uso |
 |---|---|---|

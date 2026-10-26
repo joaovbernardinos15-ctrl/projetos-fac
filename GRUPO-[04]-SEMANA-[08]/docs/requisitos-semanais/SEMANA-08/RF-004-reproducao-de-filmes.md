@@ -120,10 +120,17 @@ O protótipo oferece detalhes e player HTML5 para arquivos, além de incorporaç
 **A5: Consultar sessão presencial e reservar assentos demonstrativos**
 
 1. Na página do filme, o usuário escolhe um dia, aplica filtros por tipo de sessão e idioma e consulta cinemas, salas e horários demonstrativos.
-2. O usuário escolhe um horário, seleciona assentos livres e informa seu nome para o comprovante.
-3. O sistema grava uma compra demonstrativa local e apresenta um comprovante com código, nome, filme, cinema, sala, sessão e assentos, que pode ser impresso para visualização.
+2. O usuário escolhe um horário, seleciona assentos livres, escolhe ingresso inteiro ou meia-entrada e informa seu nome para o comprovante.
+3. O sistema exibe o valor unitário e o total demonstrativos, grava a compra local e apresenta um comprovante com código, nome, filme, cinema, sala, sessão, assentos e valores, que pode ser impresso para visualização.
 4. Se a sessão estiver esgotada ou um assento tiver sido reservado antes da confirmação, o sistema informa a falha e permite escolher outro horário.
 5. Quando houver trailer autorizado associado ao filme, o usuário também pode optar por assisti-lo em casa; a interface o identifica como trailer, não como filme completo.
+
+### A6: Liberar manualmente assento ocupado
+
+1. O administrador autenticado consulta uma sessão futura com assentos ocupados.
+2. O administrador aciona um assento ocupado para liberá-lo naquela sessão.
+3. O sistema registra a liberação local e volta a oferecer o assento para compra demonstrativa.
+4. O sistema recusa a ação para visitantes, clientes e sessões que já começaram.
 
 ### Regras de Negócio (RN)
 
@@ -137,11 +144,12 @@ O protótipo oferece detalhes e player HTML5 para arquivos, além de incorporaç
 **RN-08:** O player utiliza os recursos suportados pelo navegador e pelo formato fornecido; não promete compatibilidade com qualquer codec.  
 **RN-09:** Os arquivos de mídia não são armazenados em `localStorage`.  
 **RN-10:** Assinaturas, pagamentos, histórico de reprodução, retomada entre dispositivos e download offline estão fora do escopo deste requisito.
-**RN-11:** Cinemas, datas, salas, idiomas, horários e ocupação apresentados no protótipo são dados demonstrativos; não representam disponibilidade ou reserva real.
+**RN-11:** Cinemas, datas, salas, idiomas, horários, ocupação e preços apresentados no protótipo são dados demonstrativos; não representam disponibilidade, preço real ou reserva válida. Os preços de exemplo são R$ 30,00 para inteira e R$ 15,00 para meia-entrada.
 **RN-12:** A compra e o comprovante demonstrativos não cobram, não emitem ingresso real e não garantem assento. O comprovante somente resume os dados para demonstração ao atendente; uma falha de compra não deve impedir a consulta a outro horário.
 **RN-13:** A opção de assistir em casa só é exibida quando houver fonte HTTPS válida de trailer; trailer não deve ser apresentado como filme completo.
-**RN-14:** A compra demonstrativa exige nome não vazio e gera comprovante com filme, cinema, sala, sessão, assentos e código de referência; nenhum preço é exibido nesta etapa.
+**RN-14:** A compra demonstrativa exige nome não vazio, tipo de ingresso e ao menos um assento; calcula o total pela quantidade de assentos e gera comprovante com filme, cinema, sala, sessão, assentos, tipo de ingresso, valor unitário, total demonstrativo e código de referência.
 **RN-15:** Reservas demonstrativas ocupam assentos somente até o fim da sessão correspondente; durante a sessão não são aceitas novas compras e, após o encerramento, os assentos voltam a ser exibidos como livres. A duração usada para sessões de exemplo é de duas horas.
+**RN-16:** A liberação automática ao fim da sessão permanece ativa. Como contingência para assentos ocupados incorretamente em sessões futuras, somente um administrador autenticado pode liberá-los manualmente antes do início; a liberação fica persistida no navegador e o assento pode ser reservado novamente.
 
 ### Requisitos Não Funcionais
 
@@ -198,17 +206,20 @@ A página inicial e o catálogo atuais estão em `src/prototipos/SEMANA-08/index
 │ │ [Reproduzir] ────────────────●────────── 00:00 / 00:00   [⛶]  │   │
 │ └───────────────────────────────────────────────────────────────┘   │
 │ Título do filme · Gênero · Ano · Classificação indicativa           │
+│ [Ver sessões e comprar ingresso]                                     │
 │ Sinopse                                                             │
 │ HORÁRIOS · Dias · Tipo de sessão · Idioma                           │
-│ Cinema · Sala · [Horário] [Horário] · seleção de assentos           │
-│ Nome · [Confirmar compra demonstrativa]                             │
-│ Comprovante: código · cliente · filme · cinema · sessão · assentos  │
+│ Cinema · Sala · [Horário + preços] · seleção de assentos            │
+│ Tipo · preço unitário · total · Nome · [Confirmar compra demo]      │
+│ Comprovante: código · cliente · filme · sessão · assentos · total   │
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
 **Estado sem fonte ou com falha:** o player apresenta “Este filme está temporariamente indisponível” ou “Não foi possível carregar o vídeo”, preserva o título e oferece a ação **Voltar ao catálogo**.
 
-**Sessões presenciais:** a tela de detalhes também mostra horários demonstrativos, filtros de data/tipo/idioma e seleção de assentos. Após informar o nome, o usuário gera um comprovante demonstrativo com código, filme, cinema, sessão e assentos, que pode imprimir e apresentar ao atendente. Não há pagamento nem ingresso real. Para “(Des)Controle”, a opção em casa abre o trailer oficial do YouTube e permanece identificada como trailer.
+**Sessões presenciais:** a tela de detalhes também mostra horários e preços demonstrativos, filtros de data/tipo/idioma, seleção de assentos e escolha entre ingresso inteiro e meia-entrada. O total é calculado pelos assentos selecionados e registrado no comprovante demonstrativo, que pode ser impresso. Não há pagamento nem ingresso real. Para “(Des)Controle”, a opção em casa abre o trailer oficial do YouTube e permanece identificada como trailer.
+
+**Acesso às sessões:** cada filme em cartaz no catálogo oferece um atalho para consultar sessões e comprar ingresso na própria página de detalhes. O player e a opção de trailer permanecem disponíveis nessa página.
 
 ### Fluxo de Navegação
 

@@ -19,11 +19,12 @@
 **Tipo:** Requisito Funcional
 
 **Breve descrição:**  
-O usuário escolhe a quantidade de um produto, adiciona-o ao carrinho, altera ou remove itens, consulta a soma demonstrativa e conclui uma simulação de pedido.
+Um usuário autenticado escolhe o tamanho e a quantidade de um produto, adiciona-o ao carrinho, altera ou remove itens, consulta a soma demonstrativa e conclui uma simulação de pedido.
 
 ## 2. DESCRIÇÃO E ATORES
 
-- **Visitante ou cliente (ator principal):** pode montar, alterar e limpar o carrinho demonstrativo; autenticação não é exigida e não há compra real.
+- **Cliente ou administrador autenticado (ator principal):** pode escolher variantes de produto, montar, alterar e limpar o carrinho demonstrativo; não há compra ou pagamento real.
+- **Visitante (ator secundário):** pode consultar produtos e preços, mas precisa entrar ou criar uma conta de cliente para escolher tamanhos e usar o carrinho.
 - **Sistema (ator automático):** valida produto/quantidade, mantém o carrinho no navegador, calcula total e informa explicitamente o resultado simulado.
 
 ## 3. ESPECIFICAÇÃO DE CASOS DE USO
@@ -31,6 +32,7 @@ O usuário escolhe a quantidade de um produto, adiciona-o ao carrinho, altera ou
 ### Pré-condições
 
 - O produto foi selecionado a partir do catálogo válido.
+- O usuário possui uma sessão autenticada com perfil `cliente` ou `admin`.
 - O navegador permite acesso ao armazenamento local.
 
 ### Pós-condições
@@ -42,9 +44,9 @@ O usuário escolhe a quantidade de um produto, adiciona-o ao carrinho, altera ou
 
 ### Fluxo principal
 
-1. O usuário consulta o produto e informa uma quantidade entre 1 e 99.
-2. O sistema adiciona o item ao carrinho; inclusões repetidas do mesmo item são somadas.
-3. O usuário revisa quantidades, remove itens ou altera quantidades.
+1. Um usuário autenticado consulta o produto, escolhe uma variante de tamanho quando disponível e informa uma quantidade entre 1 e 99.
+2. O sistema adiciona ao carrinho a variante e o preço escolhidos; inclusões repetidas da mesma variante são somadas.
+3. O cliente revisa quantidades, remove itens ou altera quantidades.
 4. O sistema atualiza subtotal por item, total de unidades e total demonstrativo.
 5. Com carrinho não vazio, o usuário seleciona **Comprar agora**.
 6. O sistema limpa o carrinho e apresenta a confirmação de simulação concluída.
@@ -52,6 +54,7 @@ O usuário escolhe a quantidade de um produto, adiciona-o ao carrinho, altera ou
 ### Fluxos alternativos
 
 - **Produto não encontrado:** desativar a inclusão do item.
+- **Visitante ou usuário sem perfil de cliente:** impedir alterações e conclusão do carrinho e oferecer login/cadastro.
 - **Quantidade zero no carrinho:** remover o item da lista.
 - **Carrinho vazio:** informar que não há itens e manter a conclusão desabilitada.
 - **Quantidade fora dos limites:** limitar o valor ao intervalo permitido pela interface.
@@ -64,6 +67,8 @@ O usuário escolhe a quantidade de um produto, adiciona-o ao carrinho, altera ou
 **RN-06:** Alterar a quantidade para zero remove o item; carrinho vazio deve desabilitar a ação de conclusão.  
 **RN-07:** A quantidade individual informada deve ser limitada ao intervalo de 1 a 99; não há garantia de estoque.  
 **RN-08:** O preço usado no carrinho deve vir do produto validado no catálogo local, não de texto arbitrário recebido na URL.
+**RN-09:** Somente uma sessão autenticada com perfil `cliente` ou `admin` pode alterar o carrinho ou concluir o pedido demonstrativo.
+**RN-10:** Variantes de tamanho do mesmo produto são itens distintos no carrinho e mantêm o tamanho selecionado junto ao preço correspondente.
 
 ### Requisitos não funcionais relacionados
 
@@ -94,7 +99,7 @@ Não há checkout real, cálculo de taxas, identificação do comprador, gestão
 ```text
 ┌────────────────────────────────────────────────────┐
 │ Seu pedido                                         │
-│ Categoria · Produto · descrição · preço demonstrativo│
+│ Cliente: Produto · tamanho selecionado · preço      │
 │ Quantidade [ 1 ] [Adicionar ao carrinho]           │
 │                                                    │
 │ Seu carrinho (N itens)                             │

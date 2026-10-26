@@ -43,8 +43,16 @@
       <p class="produto-categoria" id="produtoCategoria">Bomboniere</p>
       <h2 id="produtoNome">Carregando produto</h2>
       <p class="produto-descricao" id="produtoDescricao"></p>
+      <label id="varianteCompraGrupo" for="varianteCompra" hidden>
+        Escolha o tamanho
+        <select id="varianteCompra"></select>
+      </label>
       <p class="produto-preco" id="produtoPreco"></p>
-      <p class="preco-nota">Valor demonstrativo do protótipo.</p>
+      <p class="preco-nota">Preços e tamanhos demonstrativos do protótipo.</p>
+      <p class="login-compra-aviso" id="loginCompraAviso" role="status" hidden>
+        Entre em uma conta de cliente ou crie uma conta para escolher tamanhos e fazer pedidos.
+        <a href="login.html">Entrar ou criar conta</a>
+      </p>
       <label for="quantidade">Quantidade</label>
       <input id="quantidade" type="number" min="1" max="99" value="1" inputmode="numeric">
       <button class="acao-principal" id="adicionarCarrinho" type="button"><i class="fa-solid fa-cart-plus"></i> Adicionar ao carrinho</button>
@@ -56,6 +64,10 @@
         <h2 id="tituloCarrinho">Seu carrinho</h2>
         <span id="quantidadeCarrinho">0 itens</span>
       </div>
+      <p class="login-compra-aviso" id="loginCarrinhoAviso" hidden>
+        Entre em uma conta de cliente para alterar o carrinho ou concluir o pedido.
+        <a href="login.html">Entrar ou criar conta</a>
+      </p>
       <ul class="itens-carrinho" id="itensCarrinho"></ul>
       <p class="carrinho-vazio" id="carrinhoVazio">Seu carrinho ainda está vazio.</p>
       <div class="carrinho-total"><span>Total</span><strong id="totalCarrinho">R$ 0,00</strong></div>

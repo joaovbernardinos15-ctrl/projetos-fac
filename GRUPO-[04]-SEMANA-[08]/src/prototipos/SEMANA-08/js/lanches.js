@@ -61,13 +61,25 @@
     produtos.className = "menu-produtos";
 
     Object.entries(dados.itens).forEach(([nome, produto]) => {
+      const opcoes = Array.isArray(produto.opcoes) ? produto.opcoes : [];
+      const precoInicial = opcoes[0]?.preco ?? produto.preco;
+      const tamanhos = opcoes.length
+        ? opcoes.map((opcao) => opcao.tamanho).join(" · ")
+        : produto.tamanho;
+      const precoAcessivel = opcoes.length
+        ? `a partir de ${moeda.format(precoInicial)}`
+        : moeda.format(precoInicial);
       const link = document.createElement("a");
       link.className = "menu-produto";
       link.href = `comprar.html?${new URLSearchParams({ categoria, item: nome })}`;
-      link.setAttribute("aria-label", `Comprar ${nome}, ${moeda.format(produto.preco)}`);
+      link.setAttribute("aria-label", `Ver ${nome}, ${tamanhos}, ${precoAcessivel}`);
 
       const nomeProduto = document.createElement("h3");
       nomeProduto.textContent = nome;
+
+      const tamanhoProduto = document.createElement("span");
+      tamanhoProduto.className = "menu-produto-tamanho";
+      tamanhoProduto.textContent = tamanhos;
 
       const descricaoProduto = document.createElement("p");
       descricaoProduto.textContent = produto.descricao;
@@ -76,14 +88,16 @@
       rodape.className = "menu-produto-rodape";
 
       const preco = document.createElement("strong");
-      preco.textContent = moeda.format(produto.preco);
+      preco.textContent = opcoes.length
+        ? `A partir de ${moeda.format(precoInicial)}`
+        : moeda.format(precoInicial);
 
       const chamada = document.createElement("span");
       chamada.className = "menu-produto-comprar";
       chamada.append(document.createTextNode("Comprar "), criarIcone("fa-arrow-right"));
 
       rodape.append(preco, chamada);
-      link.append(nomeProduto, descricaoProduto, rodape);
+      link.append(nomeProduto, tamanhoProduto, descricaoProduto, rodape);
       produtos.append(link);
     });
 

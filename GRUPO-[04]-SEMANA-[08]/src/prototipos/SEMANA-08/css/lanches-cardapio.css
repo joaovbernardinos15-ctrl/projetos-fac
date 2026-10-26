@@ -156,6 +156,13 @@
   font-weight: 800;
 }
 
+.menu-produto .menu-produto-tamanho {
+  margin-bottom: 7px;
+  color: #ffb2bc;
+  font-size: .82rem;
+  font-weight: 800;
+}
+
 .menu-produto > p {
   margin: 0 0 16px;
   color: #c8bfc0;

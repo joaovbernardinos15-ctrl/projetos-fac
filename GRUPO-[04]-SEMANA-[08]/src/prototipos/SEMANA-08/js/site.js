@@ -102,8 +102,8 @@ function criarCardFilme(filme) {
 
   return `
     <article class="movie-poster-card">
-      <a class="movie-card-link" href="filme.html?id=${encodeURIComponent(filme.id)}"
-        aria-label="Abrir tela de reprodução de ${escapar(filme.titulo)}">
+      <a class="movie-card-link" href="filme.html?id=${encodeURIComponent(filme.id)}#horariosFilme"
+        aria-label="Consultar sessões e comprar ingresso para ${escapar(filme.titulo)}">
         <span class="watch-badge">${fonteVideoValida ? rotuloVideo : "SEM VÍDEO"}</span>
 
         <img
@@ -309,8 +309,8 @@ if (paginaFilmes) {
 
     return `
       <article class="movie-poster-card">
-        <a class="movie-card-link" href="filme.html?id=${encodeURIComponent(filme.id)}"
-          aria-label="Abrir tela de reprodução de ${escapar(filme.titulo)}">
+        <a class="movie-card-link" href="filme.html?id=${encodeURIComponent(filme.id)}#horariosFilme"
+          aria-label="Consultar sessões e comprar ingresso para ${escapar(filme.titulo)}">
           <img src="${escapar(filme.poster)}" alt="Pôster de ${escapar(filme.titulo)}" loading="lazy">
 
           <div class="watch-badge">${fonteVideoValida ? rotuloVideo : "SEM VÍDEO"}</div>
@@ -324,7 +324,7 @@ if (paginaFilmes) {
                 ${escapar(filme.classificacao)}
               </span>
             </div>
-            <span class="filme-detalhes-link">Assistir / detalhes</span>
+            <span class="filme-detalhes-link">Ver sessões e comprar ingresso</span>
           </div>
         </a>
       </article>

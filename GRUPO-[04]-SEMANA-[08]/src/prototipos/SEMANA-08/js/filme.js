@@ -18,6 +18,7 @@
   const carregarVideo = document.getElementById("filmeCarregarVideo");
   const acaoTexto = document.getElementById("filmeAcaoTexto");
   const assistirEmCasa = document.getElementById("filmeAssistirEmCasa");
+  const verSessoes = document.getElementById("verSessoesFilme");
   const video = document.getElementById("filmeVideo");
   const youtubeFrame = document.getElementById("filmeYouTube");
   const youtubeLink = document.getElementById("filmeYouTubeLink");
@@ -60,6 +61,8 @@
     document.getElementById("horariosFilme").hidden = true;
     return;
   }
+
+  verSessoes.hidden = false;
 
   const idYouTube = Store.filmes.obterIdYouTube(filme.fonteVideo);
   const validacaoFonte = Store.filmes.validarFonteVideo(filme.fonteVideo);
@@ -140,16 +143,34 @@
   const painelAssentos = document.getElementById("painelAssentos");
   const sessaoSelecionada = document.getElementById("sessaoSelecionada");
   const gradeAssentos = document.getElementById("gradeAssentos");
+  const adminAssentosAjuda = document.getElementById("adminAssentosAjuda");
+  const tipoIngresso = document.getElementById("tipoIngresso");
+  const precoIngressos = document.getElementById("precoIngressos");
   const confirmarReserva = document.getElementById("confirmarReserva");
   const reservaStatus = document.getElementById("reservaStatus");
   const reservaAssistirEmCasa = document.getElementById("reservaAssistirEmCasa");
   const nomeComprador = document.getElementById("nomeComprador");
   const comprovanteReserva = document.getElementById("comprovanteReserva");
   const imprimirComprovante = document.getElementById("imprimirComprovante");
+  const ehAdmin = Store.sessao.ehAdmin();
   const assentosSelecionados = new Set();
   const sessoesPorId = new Map();
+  const precosIngressos = Store.reservas.precosDemonstrativos();
+  const formatarPreco = (centavos) => new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  }).format(centavos / 100);
   let diaSelecionado = 0;
   let sessaoAtual = null;
+
+  function atualizarResumoIngresso() {
+    const valorUnitario = precosIngressos[tipoIngresso.value];
+    const quantidade = assentosSelecionados.size;
+    const total = valorUnitario * quantidade;
+    precoIngressos.textContent = quantidade
+      ? `${quantidade} ${quantidade === 1 ? "ingresso" : "ingressos"} × ${formatarPreco(valorUnitario)} = ${formatarPreco(total)}`
+      : `Ingresso ${tipoIngresso.value === "meia" ? "meia-entrada" : "inteira"}: ${formatarPreco(valorUnitario)} · selecione assentos para ver o total.`;
+  }
 
   function dataLocal(data) {
     const ano = data.getFullYear();
@@ -256,6 +277,7 @@
                     data-sessao-id="${encodeURIComponent(sessao.id)}">
                     <span>${diaSelecionado === 0 ? "Hoje" : datas[diaSelecionado].dia}, ${datas[diaSelecionado].dataCurta}</span>
                     <strong>${sessao.horario}</strong>
+                    <span class="preco-sessao">Inteira ${formatarPreco(precosIngressos.inteira)} · Meia ${formatarPreco(precosIngressos.meia)}</span>
                     ${sessao.encerrada ? '<span class="horario-encerrado">Sessão encerrada · assentos liberados</span>' : ""}
                     ${sessao.emAndamento ? '<span class="horario-encerrado">Sessão em andamento</span>' : ""}
                     ${sessao.esgotada ? '<span class="horario-esgotado">Sessão esgotada</span>' : ""}
@@ -318,6 +340,8 @@
     reservaAssistirEmCasa.hidden = true;
     confirmarReserva.disabled = true;
     confirmarReserva.hidden = sessao.esgotada;
+    adminAssentosAjuda.hidden = true;
+    atualizarResumoIngresso();
 
     const dataFormatada = new Intl.DateTimeFormat("pt-BR", {
       weekday: "long",
@@ -365,20 +389,27 @@
     }
 
     const lugaresReservados = new Set(Store.reservas.lugaresReservados(sessao.id));
+    const assentosLiberados = new Set(Store.reservas.assentosLiberados(sessao.id));
     const ocupadosDemo = new Set(["A1", "A2", "B4"]);
+    adminAssentosAjuda.hidden = !ehAdmin;
     const assentos = [];
     for (const fila of ["A", "B", "C", "D", "E"]) {
       for (let numero = 1; numero <= 8; numero += 1) {
         const lugar = `${fila}${numero}`;
-        const ocupado = ocupadosDemo.has(lugar) || lugaresReservados.has(lugar);
+        const ocupado = !assentosLiberados.has(lugar) &&
+          (ocupadosDemo.has(lugar) || lugaresReservados.has(lugar));
         const botao = document.createElement("button");
-        botao.className = "assento";
+        botao.className = `assento ${ocupado && ehAdmin ? "assento-ocupado-admin" : ""}`;
         botao.type = "button";
         botao.textContent = lugar;
-        botao.setAttribute("aria-label", `Assento ${lugar}${ocupado ? ", ocupado" : ", livre"}`);
+        botao.setAttribute("aria-label", `Assento ${lugar}${ocupado
+          ? ehAdmin ? ", ocupado, clique para liberar" : ", ocupado"
+          : ", livre"}`);
         botao.setAttribute("aria-pressed", "false");
-        botao.disabled = ocupado;
+        botao.disabled = ocupado && !ehAdmin;
         botao.dataset.lugar = lugar;
+        botao.dataset.ocupado = String(ocupado);
+        if (ocupado && ehAdmin) botao.title = "Liberar este assento para a sessão";
         assentos.push(botao);
       }
     }
@@ -404,6 +435,7 @@
 
   filtroTipo.addEventListener("change", aplicarFiltros);
   filtroIdioma.addEventListener("change", aplicarFiltros);
+  tipoIngresso.addEventListener("change", atualizarResumoIngresso);
 
   listaSessoes.addEventListener("click", (event) => {
     const botao = event.target.closest("[data-sessao-id]");
@@ -418,6 +450,22 @@
     if (!botao || botao.disabled) return;
 
     const lugar = botao.dataset.lugar;
+    if (botao.dataset.ocupado === "true") {
+      const resultado = Store.reservas.liberarAssento({
+        sessaoId: sessaoAtual.id,
+        lugar,
+        data: sessaoAtual.data,
+        horario: sessaoAtual.horario
+      });
+      if (!resultado.ok) {
+        mostrarStatus(resultado.erro, "erro");
+        return;
+      }
+      renderizarAssentos(sessaoAtual);
+      mostrarStatus(`Assento ${lugar} liberado pelo administrador para esta sessão.`, "sucesso");
+      return;
+    }
+
     if (assentosSelecionados.has(lugar)) {
       assentosSelecionados.delete(lugar);
       botao.setAttribute("aria-pressed", "false");
@@ -425,6 +473,7 @@
       assentosSelecionados.add(lugar);
       botao.setAttribute("aria-pressed", "true");
     }
+    atualizarResumoIngresso();
     confirmarReserva.disabled = assentosSelecionados.size === 0 || !nomeComprador.value.trim();
     mostrarStatus(
       assentosSelecionados.size
@@ -462,7 +511,8 @@
       data: alvo.data,
       horario: alvo.horario,
       terminaEm: alvo.terminaEm,
-      lugares: [...assentosSelecionados]
+      lugares: [...assentosSelecionados],
+      tipoIngresso: tipoIngresso.value
     });
 
     if (!resultado.ok) {
@@ -486,9 +536,16 @@
     document.getElementById("comprovanteSessao").textContent =
       `${new Intl.DateTimeFormat("pt-BR", { weekday: "long", day: "2-digit", month: "long" }).format(new Date(`${resultado.dado.data}T12:00:00`))} às ${resultado.dado.horario} · ${alvo.tipo} ${alvo.idioma}`;
     document.getElementById("comprovanteAssentos").textContent = resultado.dado.lugares.join(", ");
+    document.getElementById("comprovanteTipoIngresso").textContent =
+      resultado.dado.tipoIngresso === "meia" ? "Meia-entrada" : "Inteira";
+    document.getElementById("comprovanteValorIngresso").textContent =
+      formatarPreco(resultado.dado.valorIngressoCentavos);
+    document.getElementById("comprovanteValorTotal").textContent =
+      formatarPreco(resultado.dado.valorTotalCentavos);
     comprovanteReserva.hidden = false;
     mostrarStatus("Compra demonstrativa registrada. Apresente os dados abaixo ao atendente; não houve cobrança e isto não é um ingresso real.", "sucesso");
     assentosSelecionados.clear();
+    atualizarResumoIngresso();
   });
 
   imprimirComprovante.addEventListener("click", () => {
