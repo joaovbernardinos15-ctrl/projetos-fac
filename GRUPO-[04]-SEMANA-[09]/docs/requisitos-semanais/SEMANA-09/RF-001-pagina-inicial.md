@@ -1,6 +1,6 @@
 # ENTREGA SEMANAL DE REQUISITOS
 
-**Data de referência:** 09/10/2026  
+**Data de referência:** 05/10/2026  
 **Grupo:** Grupo 04 - Cinemark
 
 **Integrantes:** Fabrício Aguiar (fabricio62258946@edu.df.senac.br); João Silva (joao61806466@edu.df.senac.br); Natanael Souza (natanael61421786@edu.df.senac.br)
