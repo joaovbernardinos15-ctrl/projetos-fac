@@ -9,6 +9,7 @@ const Pages = {};
 
 const App = (() => {
   const $ = (id) => document.getElementById(id);
+  const assetBase = new URL("../img/", document.currentScript.src);
 
   function esc(texto) {
     return String(texto ?? "").replace(/[&<>"']/g, (c) => ({
@@ -18,6 +19,13 @@ const App = (() => {
       '"': "&quot;",
       "'": "&#39;"
     }[c]));
+  }
+
+  function assetUrl(caminho) {
+    const valor = String(caminho ?? "").trim().replace(/\\/g, "/");
+    if (!valor || /^(?:[a-z][a-z\d+.-]*:|\/\/)/i.test(valor)) return valor;
+    const arquivo = valor.replace(/^(?:\.\/|\/)?(?:src\/)?img\//i, "");
+    return new URL(arquivo, assetBase).href;
   }
 
   const fmtBRL = (centavos) => new Intl.NumberFormat("pt-BR", {
@@ -224,7 +232,7 @@ const App = (() => {
   }
 
   return {
-    $, esc, fmtBRL, fmtMoeda, formatarData, parseHash, nav,
+    $, esc, assetUrl, fmtBRL, fmtMoeda, formatarData, parseHash, nav,
     toast, qr, exigirLogin, exigirAdmin, renderNavConta, marcarNavAtivo,
     fecharMenuMobile, route, start
   };

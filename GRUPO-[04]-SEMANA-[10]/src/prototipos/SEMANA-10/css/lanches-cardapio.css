@@ -30,7 +30,7 @@
   backdrop-filter: blur(14px);
 }
 
-.cardapio-categorias a {
+.cardapio-categorias button {
   display: inline-flex;
   flex: 0 0 auto;
   align-items: center;
@@ -38,26 +38,28 @@
   padding: 10px 14px;
   border: 1px solid transparent;
   border-radius: 10px;
+  background: transparent;
   color: #d8d0d1;
   font-size: .94rem;
   font-weight: 700;
-  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
   transition: color .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease;
 }
 
-.cardapio-categorias a i {
+.cardapio-categorias button i {
   color: #ff8290;
 }
 
-.cardapio-categorias a:hover,
-.cardapio-categorias a:focus-visible {
+.cardapio-categorias button:hover,
+.cardapio-categorias button:focus-visible {
   transform: translateY(-1px);
   border-color: rgba(255, 130, 144, .18);
   background: rgba(230, 57, 80, .13);
   color: #fff;
 }
 
-.cardapio-categorias a:focus-visible,
+.cardapio-categorias button:focus-visible,
 .menu-produto:focus-visible {
   outline: 2px solid #ff8290;
   outline-offset: 4px;
@@ -276,7 +278,7 @@
     border-radius: 13px;
   }
 
-  .cardapio-categorias a {
+  .cardapio-categorias button {
     padding: 9px 11px;
     font-size: .86rem;
   }

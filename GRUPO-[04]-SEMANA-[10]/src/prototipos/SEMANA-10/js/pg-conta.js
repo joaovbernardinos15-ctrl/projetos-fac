@@ -808,7 +808,7 @@
       const lista = filmesFiltrados();
       $("tabelaFilmes").innerHTML = lista.map((f) =>
         "<tr><td>" + (f.poster
-          ? '<img class="adm-poster" src="' + escapar(f.poster) + '" alt="Pôster de ' + escapar(f.titulo) + '">'
+          ? '<img class="adm-poster" src="' + escapar(App.assetUrl(f.poster)) + '" alt="Pôster de ' + escapar(f.titulo) + '">'
           : '<div class="adm-poster"></div>') + "</td>" +
         "<td><strong>" + escapar(f.titulo) + "</strong></td>" +
         "<td>" + escapar(f.genero) + "</td><td>" + escapar(f.ano) + "</td><td>" + escapar(f.classificacao) + "</td>" +

@@ -60,7 +60,7 @@
       secao.id = idCategoria;
 
       const imagemHtml = dados.imagem
-        ? '<img class="menu-categoria-imagem" src="' + App.esc(dados.imagem) + '" alt="' + App.esc(dados.alt) + '" loading="lazy">'
+        ? '<img class="menu-categoria-imagem" src="' + App.esc(App.assetUrl(dados.imagem)) + '" alt="' + App.esc(dados.alt) + '" loading="lazy">'
         : '<div class="menu-categoria-imagem menu-categoria-icone" aria-hidden="true"><i class="fa-solid ' + dados.icone + '"></i></div>';
 
       let produtosHtml = "";

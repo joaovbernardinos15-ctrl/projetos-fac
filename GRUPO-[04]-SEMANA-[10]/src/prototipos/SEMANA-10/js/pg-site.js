@@ -26,7 +26,7 @@
       '<a class="movie-card-link" href="#/filme?id=' + encodeURIComponent(filme.id) + '&sessoes=1" ' +
       'aria-label="Consultar sessões e comprar ingresso para ' + App.esc(filme.titulo) + '">' +
       '<span class="watch-badge">' + (video.valida ? video.rotulo : "SEM VÍDEO") + "</span>" +
-      '<img src="' + App.esc(filme.poster || "src/img/Logo.jpeg") + '" ' +
+      '<img src="' + App.esc(App.assetUrl(filme.poster || "img/Logo.jpeg")) + '" ' +
       'alt="Pôster de ' + App.esc(filme.titulo) + '" loading="lazy">' +
       '<div class="movie-poster-info">' +
       "<h5>" + App.esc(titulo) + "</h5>" +
@@ -48,7 +48,7 @@
       '<main class="streaming-home">' +
       '<section class="streaming-hero" aria-labelledby="destaqueTitulo">' +
       '<a class="streaming-hero-poster-link" id="destaquePosterLink" href="#/filmes" aria-label="Abrir tela de reprodução do destaque">' +
-      '<img class="streaming-hero-poster" id="destaquePoster" src="src/img/Logo.jpeg" alt="" fetchpriority="high">' +
+      '<img class="streaming-hero-poster" id="destaquePoster" src="img/Logo.jpeg" alt="" fetchpriority="high">' +
       "</a>" +
       '<div class="streaming-hero-content">' +
       '<p class="streaming-kicker"><span></span> CINEMARK · EM DESTAQUE</p>' +
@@ -105,7 +105,7 @@
       const link = App.$("destaquePosterLink");
       link.href = "#/filme?id=" + encodeURIComponent(destaque.id);
       link.setAttribute("aria-label", "Abrir tela de reprodução de " + destaque.titulo);
-      poster.src = destaque.poster || "src/img/Logo.jpeg";
+      poster.src = App.assetUrl(destaque.poster || "img/Logo.jpeg");
       poster.alt = "Pôster de " + destaque.titulo;
       App.$("destaqueTitulo").textContent = destaque.titulo;
       App.$("destaqueDescricao").textContent =
@@ -426,7 +426,7 @@
     classificacao.textContent = "Classificação indicativa: " + classificacaoTexto;
     sinopse.textContent = filme.sinopse || "Sinopse não informada.";
     if (filme.poster) {
-      playerPoster.src = filme.poster;
+      playerPoster.src = App.assetUrl(filme.poster);
       playerPoster.alt = "Pôster de " + filme.titulo;
       playerPoster.hidden = false;
     }

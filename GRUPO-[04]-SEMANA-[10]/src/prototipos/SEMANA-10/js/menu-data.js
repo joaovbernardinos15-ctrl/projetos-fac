@@ -1,7 +1,7 @@
 window.CATALOGO_LANCHES = {
   Pipoca: {
     icone: "fa-bowl-food",
-    imagem: "src/img/categoria-pipoca.png",
+    imagem: "img/categoria-pipoca.png",
     alt: "Pipocas clássica e caramelizada",
     descricao: "O clássico da sessão em versões para todos os gostos.",
     itens: {
@@ -41,7 +41,7 @@ window.CATALOGO_LANCHES = {
   },
   Bebidas: {
     icone: "fa-mug-hot",
-    imagem: "src/img/categoria-bebidas.png",
+    imagem: "img/categoria-bebidas.png",
     alt: "Bebidas variadas",
     descricao: "Opções geladas e quentes para acompanhar seu filme.",
     itens: {
@@ -75,7 +75,7 @@ window.CATALOGO_LANCHES = {
   },
   Salgados: {
     icone: "fa-hotdog",
-    imagem: "src/img/categoria-salgados.png",
+    imagem: "img/categoria-salgados.png",
     alt: "Hot dog e snacks",
     descricao: "Clássicos quentinhos e porções para compartilhar.",
     itens: {
@@ -108,7 +108,7 @@ window.CATALOGO_LANCHES = {
   },
   Doces: {
     icone: "fa-candy-cane",
-    imagem: "src/img/categoria-doces.png",
+    imagem: "img/categoria-doces.png",
     alt: "Seleção de doces e chocolates",
     descricao: "Um toque doce para deixar a sessão ainda melhor.",
     itens: {
@@ -120,7 +120,7 @@ window.CATALOGO_LANCHES = {
   },
   Combos: {
     icone: "fa-box-open",
-    imagem: "src/img/categoria-combos.png",
+    imagem: "img/categoria-combos.png",
     alt: "Combo família para compartilhar",
     descricao: "Combinações prontas para aproveitar sozinho ou com a turma.",
     itens: {
@@ -132,7 +132,7 @@ window.CATALOGO_LANCHES = {
   },
   Brinquedos: {
     icone: "fa-puzzle-piece",
-    imagem: "src/img/brinquedos-categoria.jpg",
+    imagem: "img/brinquedos-categoria.jpg",
     alt: "Brinquedos, jogos de tabuleiro e bichos de pelúcia em uma brinquedoteca",
     descricao: "Brinquedos e lembranças para levar a diversão para casa.",
     itens: {
