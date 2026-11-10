@@ -39,11 +39,11 @@
   box-shadow: inset 0 -70px 70px rgba(12, 10, 11, .45);
 }
 
-body:has(.fa-bowl-food) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_36.png"); }
-body:has(.fa-mug-hot) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_25.png"); }
-body:has(.fa-hotdog) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_40.png"); }
-body:has(.fa-candy-cane) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_04_29.png"); }
-body:has(.fa-box-open) .lanche-detalhe::before { background-image: url("../img/ChatGPT%20Image%2017%20de%20set.%20de%202026,%2016_03_56.png"); }
+body:has(.fa-bowl-food) .lanche-detalhe::before { background-image: url("../img/categoria-pipoca.png"); }
+body:has(.fa-mug-hot) .lanche-detalhe::before { background-image: url("../img/categoria-bebidas.png"); }
+body:has(.fa-hotdog) .lanche-detalhe::before { background-image: url("../img/categoria-salgados.png"); }
+body:has(.fa-candy-cane) .lanche-detalhe::before { background-image: url("../img/categoria-doces.png"); }
+body:has(.fa-box-open) .lanche-detalhe::before { background-image: url("../img/categoria-combos.png"); }
 
 .lanche-detalhe-cabecalho,
 .lanche-opcoes,

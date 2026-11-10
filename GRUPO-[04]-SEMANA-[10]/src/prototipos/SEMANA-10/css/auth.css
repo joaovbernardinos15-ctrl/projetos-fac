@@ -240,21 +240,23 @@ body {
   color: var(--vermelho);
 }
 
-.btn-vermelho {
+button.btn-vermelho {
   width: 100%;
-  background-color: transparent;
-  border: 1px solid var(--vermelho);
-  color: var(--vermelho);
+  background-color: #ff3b4e;
+  border: 1px solid #ff3b4e;
+  color: #ffffff;
   font-weight: bold;
   padding: 12px;
   border-radius: 8px;
   margin-bottom: 15px;
-  transition: all 0.2s ease;
+  transition: none;
+  animation: none;
 }
 
-.btn-vermelho:hover {
-  background-color: var(--vermelho);
-  color: var(--branco);
+button.btn-vermelho:hover {
+  background-color: #ff3b4e;
+  color: #ffffff;
+  border-color: #ff3b4e;
 }
 
 .texto-rodape {
@@ -382,12 +384,15 @@ body {
 .btn-vermelho,
 .toggle-password,
 .fechar-toast {
-  transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+  transition: none;
 }
 
-.btn-vermelho:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(255, 59, 78, .18);
+button.btn-vermelho:hover {
+  transform: none;
+  box-shadow: none;
+  background-color: #ff3b4e;
+  color: #ffffff;
+  border-color: #ff3b4e;
 }
 
 .btn-vermelho:focus-visible,

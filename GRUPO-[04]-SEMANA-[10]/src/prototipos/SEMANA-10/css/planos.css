@@ -88,6 +88,12 @@ Planos pagos para o cinemark atualmente focado no site e não no streaming*/
     cursor: pointer;
     transition: all 0.3s ease;
 }
+a.btn-assinar,
+a.btn-assinar:hover {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
 .btn-lite {
     border: 1px solid #718096;
     color: #ffffff;

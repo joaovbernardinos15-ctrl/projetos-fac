@@ -1,0 +1,646 @@
+/* =========================================================
+   CINEMARK — SPA (app.css)
+   Ajustes próprios do gerador: casca de página única e a
+   caixa de entrada de mensagens do admin (RF-009).
+   Não altera os arquivos originais do protótipo.
+   ========================================================= */
+
+body {
+  text-align: left;
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+#app {
+  min-height: 60vh;
+}
+
+.app-carregando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 80px 16px;
+  color: #fff;
+}
+
+.app-carregando i {
+  font-size: 28px;
+  color: #e63950;
+}
+
+.toast-global {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 3000;
+  display: none;
+  max-width: min(520px, calc(100vw - 32px));
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: #101010;
+  border: 1px solid #2f2628;
+  color: #fff;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .45);
+  font-size: 14px;
+}
+
+.toast-global.visivel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toast-global i {
+  color: #2ecc71;
+}
+
+/* ---------- aba de mensagens (admin) ---------- */
+
+.adm-aba .etiqueta-msg {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  margin-left: 6px;
+  border-radius: 999px;
+  background: #e63950;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.adm-aba .etiqueta-msg.zero {
+  background: #3a3335;
+  color: #9c9494;
+}
+
+.msg-status {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.msg-status-nova {
+  background: rgba(230, 57, 80, .18);
+  color: #ff8fa0;
+  border: 1px solid rgba(230, 57, 80, .5);
+}
+
+.msg-status-lida {
+  background: rgba(241, 196, 15, .14);
+  color: #f1c40f;
+  border: 1px solid rgba(241, 196, 15, .4);
+}
+
+.msg-status-respondida {
+  background: rgba(46, 204, 113, .14);
+  color: #2ecc71;
+  border: 1px solid rgba(46, 204, 113, .4);
+}
+
+.msg-assunto-cell strong {
+  display: block;
+}
+
+.msg-assunto-cell small {
+  color: var(--adm-texto-fraco);
+}
+
+.msg-nao-lida td {
+  font-weight: 600;
+}
+
+.msg-preview {
+  max-width: 340px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--adm-texto-fraco);
+  font-weight: 400;
+}
+
+.msg-detalhe-bloco {
+  margin-bottom: 14px;
+}
+
+.msg-detalhe-bloco small {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--adm-texto-fraco);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+
+.msg-detalhe-texto {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--adm-superficie-2);
+  border: 1px solid var(--adm-borda);
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.msg-resposta-anterior {
+  border-left: 3px solid var(--adm-verde);
+}
+
+/* ---------- contato: envio + minhas mensagens ---------- */
+
+.contato-sucesso {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(46, 204, 113, .12);
+  border: 1px solid rgba(46, 204, 113, .45);
+  color: #d9f7e6;
+  font-size: 14px;
+}
+
+.contato-sucesso i {
+  color: #2ecc71;
+  margin-top: 2px;
+}
+
+.contato-erro {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(230, 57, 80, .12);
+  border: 1px solid rgba(230, 57, 80, .5);
+  color: #ffd4da;
+  font-size: 14px;
+}
+
+.minhas-msgs {
+  margin-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  padding-top: 16px;
+}
+
+.minhas-msgs h3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.minhas-msgs > p {
+  font-size: 13px;
+  opacity: .8;
+  margin-bottom: 12px;
+}
+
+.minha-msg {
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: rgba(0, 0, 0, .25);
+  font-size: 14px;
+}
+
+.minha-msg header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+.minha-msg header strong {
+  font-size: 14px;
+}
+
+.minha-msg .msg-data {
+  font-size: 12px;
+  opacity: .7;
+}
+
+.minha-msg p {
+  margin: 0 0 6px;
+}
+
+.minha-msg-resposta {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(46, 204, 113, .1);
+  border: 1px solid rgba(46, 204, 113, .35);
+  font-size: 13px;
+}
+
+.minha-msg-resposta strong {
+  color: #2ecc71;
+}
+
+/* ---------- login: botões com aparência de link ---------- */
+
+button.link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+button.link-vermelho.link-btn {
+  width: 100%;
+}
+
+button.link-rodape {
+  color: var(--vermelho);
+  text-decoration: none;
+}
+
+button.link-rodape:hover {
+  text-decoration: underline;
+}
+
+.icones-sociais .social-login-btn {
+  display: flex;
+  width: 45px;
+  height: 45px;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--branco);
+  border: 0;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.icones-sociais .social-login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, .24);
+}
+
+button.nav-conta-logado {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ---------- loja: atalhos como botões (sem conflito de rota) ---------- */
+
+.cardapio-categorias button {
+  cursor: pointer;
+}
+
+/* ---------- perfil: mensagens ---------- */
+
+.perfil-msgs {
+  margin-top: 26px;
+  text-align: left;
+}
+
+.perfil-msgs h2 {
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.perfil-msgs > p {
+  color: var(--adm-texto-fraco);
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 575px) {
+  .msg-preview {
+    max-width: 160px;
+  }
+}
+
+/* ---------- FAQ (contato + ajuda) ---------- */
+
+.contato-faq {
+  margin-top: 0;
+}
+
+.faq-item {
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 12px 16px;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--vermelho, #ff3b4e);
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  padding: 0 16px 14px;
+  margin: 0;
+  color: var(--adm-texto-fraco, #c9c9c9);
+  font-size: 14px;
+}
+
+.faq-ver-mais {
+  margin-top: 12px;
+}
+
+/* ---------- recuperação de senha: e-mail simulado ---------- */
+
+.email-simulado {
+  border: 1px dashed rgba(255, 255, 255, .35);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 0 0 16px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.email-simulado strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.codigo-simulado {
+  display: inline-block;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: var(--vermelho, #ff3b4e);
+}
+
+.email-simulado small {
+  display: block;
+  margin-top: 8px;
+  color: var(--texto-cinza, #b3b3b3);
+}
+
+/* ---------- ingressos ---------- */
+
+.ingressos-conteudo h2 {
+  margin: 26px 0 12px;
+  font-size: 19px;
+}
+
+.ingressos-lista {
+  display: grid;
+  gap: 14px;
+}
+
+.ingresso-card {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, .04);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.ingresso-qr {
+  flex: 0 0 auto;
+  background: #fff;
+  border-radius: 8px;
+  padding: 6px;
+  min-width: 132px;
+  min-height: 132px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ingresso-qr img,
+.ingresso-qr canvas,
+.comprovante-qr img,
+.comprovante-qr canvas {
+  display: block;
+}
+
+.ingresso-info h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.ingresso-info p {
+  margin: 3px 0;
+  font-size: 13.5px;
+  color: var(--adm-texto-fraco, #d4d4d4);
+}
+
+.ingresso-info p strong {
+  color: #fff;
+}
+
+.ingresso-cancelado,
+.ingresso-passado {
+  opacity: .75;
+}
+
+.comprovante-qr {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.comprovante-qr > div,
+.comprovante-qr .qr-alternativo {
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+.comprovante-acoes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.qr-alternativo {
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #111;
+}
+
+/* ---------- checkout / pagamento ---------- */
+
+.checkout-bloco {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+}
+
+.pag-opcoes {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.pag-opcao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #f2f2f2;
+}
+
+.pag-opcao i {
+  color: #9aa3b2;
+}
+
+.pag-opcao:has(input:checked) {
+  border-color: #ff3b4e;
+  background: rgba(255, 59, 78, .08);
+  color: #fff;
+}
+
+.pag-opcao:has(input:checked) i {
+  color: #ff8290;
+}
+
+.pag-opcao input {
+  accent-color: #ff3b4e;
+}
+
+.pag-aviso {
+  font-size: 12.5px;
+  color: var(--adm-texto-fraco, #c9c9c9);
+}
+
+.carrinho-desconto {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #7ee2a8;
+  margin: 4px 0 0;
+}
+
+.pedido-sucesso {
+  text-align: center;
+}
+
+.pedido-sucesso-icone {
+  font-size: 46px;
+  color: #42d392;
+  margin-bottom: 8px;
+}
+
+.pedido-codigo {
+  font-size: 17px;
+}
+
+.pedido-itens {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+  text-align: left;
+  font-size: 14px;
+}
+
+.pedido-itens li {
+  padding: 4px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, .12);
+}
+
+/* ---------- assinatura ---------- */
+
+.assinar-layout .plano-resumo-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 14px;
+}
+
+.assinar-layout .plano-resumo-lista li {
+  padding: 5px 0;
+  font-size: 14px;
+}
+
+.assinar-layout .plano-resumo-lista i {
+  color: #42d392;
+  margin-right: 8px;
+}
+
+.preco-periodo {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ---------- status de pedidos ---------- */
+
+.etiqueta-pedido-confirmado {
+  background: rgba(66, 211, 146, .15);
+  color: #7ee2a8;
+  border: 1px solid rgba(66, 211, 146, .4);
+}
+
+.etiqueta-pedido-pronto {
+  background: rgba(255, 193, 7, .15);
+  color: #ffd54f;
+  border: 1px solid rgba(255, 193, 7, .4);
+}
+
+.etiqueta-pedido-entregue {
+  background: rgba(255, 255, 255, .08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .25);
+}
+
+.etiqueta-pedido-cancelado {
+  background: rgba(255, 59, 78, .12);
+  color: #ff9aa7;
+  border: 1px solid rgba(255, 59, 78, .4);
+}
+
+.adm-select-status {
+  max-width: 190px;
+}
+
+/* ---------- rodapé ---------- */
+
+.rodape-links {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.rodape-links a {
+  margin: 0 8px;
+}
+
+@media (max-width: 640px) {
+  .ingresso-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
