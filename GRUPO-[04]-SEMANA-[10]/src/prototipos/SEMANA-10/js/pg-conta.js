@@ -1406,7 +1406,7 @@
   function renderAjuda() {
     App.$("app").innerHTML =
       '<header class="contato-hero"><h1>Ajuda</h1><p>Dúvidas frequentes, termos de uso e privacidade.</p></header>' +
-      '<main class="contato-wrap">' +
+      '<main class="contato-wrap ajuda-wrap">' +
       '<section class="contato-card contato-faq" aria-labelledby="tituloAjudaFaq"><h2 id="tituloAjudaFaq">Dúvidas frequentes</h2>' +
       '<details class="faq-item" open><summary>Quem tem direito à meia-entrada?</summary><p>Estudantes com CIE válida, idosos a partir de 60 anos, crianças de 3 a 12 anos, doadores de sangue e demais casos previstos na legislação. Apresente o documento na bilheteria junto com o código da reserva.</p></details>' +
       '<details class="faq-item"><summary>Como compro ingressos pelo site?</summary><p>Abra a página do filme, clique em "Ver sessões e comprar ingresso", escolha o dia e o horário, selecione os assentos e confirme a reserva com sua conta. O pagamento é feito na bilheteria, na retirada.</p></details>' +

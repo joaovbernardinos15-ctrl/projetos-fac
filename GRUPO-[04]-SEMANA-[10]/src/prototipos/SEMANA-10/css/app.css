@@ -372,6 +372,36 @@ button.nav-conta-logado {
   margin-top: 12px;
 }
 
+/* ---------- legibilidade da página de ajuda ---------- */
+
+.ajuda-wrap .contato-card,
+.contato-page .contato-faq {
+  color: #eae6e6;
+  background: linear-gradient(145deg, #211b1d, #181415);
+}
+
+.ajuda-wrap .faq-item,
+.contato-page .contato-faq .faq-item {
+  background: #171314;
+  border-color: rgba(255, 255, 255, .18);
+}
+
+.ajuda-wrap .faq-item summary,
+.contato-page .contato-faq .faq-item summary {
+  color: #f4eeee;
+}
+
+.ajuda-wrap .faq-item p,
+.contato-page .contato-faq .faq-item p {
+  color: #d5ced0;
+  line-height: 1.6;
+}
+
+.ajuda-wrap .contato-card a,
+.contato-page .contato-faq a {
+  color: #ff8290;
+}
+
 /* ---------- recuperação de senha: e-mail simulado ---------- */
 
 .email-simulado {
