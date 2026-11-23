@@ -415,6 +415,7 @@
       const pagamentoTexto = pedido.pagamento.metodo === "balcao" ? "Pagar na retirada"
         : pedido.pagamento.metodo === "pix" ? "Pix"
         : "Cartão •• " + pedido.pagamento.ultimos4;
+      App.$("mensagemFinalizacao").textContent = "";
       App.$("checkoutBox").innerHTML =
         '<div class="pedido-sucesso"><i class="fa-solid fa-circle-check pedido-sucesso-icone" aria-hidden="true"></i>' +
         "<h2>Pedido confirmado!</h2>" +
@@ -431,7 +432,6 @@
         "<p>Retire no balcão do cinema apresentando este código.</p>" +
         '<p class="comprovante-acoes"><a class="filme-botao-principal" href="#/perfil">Ver meus pedidos</a></p>' +
         '<p><a href="#/loja">Continuar comprando</a></p></div>';
-      App.$("mensagemFinalizacao").textContent = "";
       App.$("mensagemCompra").textContent = "";
       App.toast("Pedido " + pedido.codigo + " confirmado!");
     });

@@ -578,6 +578,19 @@ button.nav-conta-logado {
 
 .pedido-sucesso {
   text-align: center;
+  color: #f1eaea;
+}
+
+.pedido-sucesso h2 {
+  color: #fff;
+}
+
+.pedido-sucesso a:not(.filme-botao-principal) {
+  color: #ff9eaa;
+}
+
+.pedido-sucesso a:not(.filme-botao-principal):hover {
+  color: #fff;
 }
 
 .pedido-sucesso-icone {
